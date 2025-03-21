@@ -52,7 +52,7 @@ public class Entity : MonoBehaviour
         }
         if (entityMovement)
         {
-            entityMovement.canMove = false;
+            entityMovement.SetLockMovement(dieDestroyTime, overridesCurrent: true);
         }
         foreach (GameObject go in enableOnDie)
         {
@@ -75,9 +75,9 @@ public class Entity : MonoBehaviour
         Destroy(dieDestroyObj);
     }
 
-    public virtual void ApplyKnockback(Vector2 kb)
-    {
-        rb.AddForce(kb, ForceMode.Impulse);
-    }
+    // public virtual void ApplyKnockback(Vector2 kb)
+    // {
+    //     rb.AddForce(kb, ForceMode.Impulse);
+    // }
 
 }
