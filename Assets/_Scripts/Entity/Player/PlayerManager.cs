@@ -27,7 +27,7 @@ public class PlayerManager : MonoBehaviour
             Destroy(gameObject);
         }
         // lock cursor
-        Cursor.lockState = CursorLockMode.Locked;
+        // Cursor.lockState = CursorLockMode.Locked;
 
         // get inputs
         movementAction = playerInput.actions.FindAction("Move");

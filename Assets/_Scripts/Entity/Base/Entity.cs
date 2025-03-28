@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Entity : MonoBehaviour
@@ -14,7 +15,7 @@ public class Entity : MonoBehaviour
     public Collider hitBox;
     public Animator animator;
 
-    // [Header("Status")]
+    // [Header("Status")] 
     [Header("Die")]
     public GameObject dieDestroyObj;
     public float dieDestroyTime = 3f;
