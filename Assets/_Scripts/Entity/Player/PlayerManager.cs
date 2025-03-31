@@ -9,11 +9,17 @@ public class PlayerManager : MonoBehaviour
     public PlayerInput playerInput;
     private InputAction movementAction;
     private InputAction lookAction;
-    private InputAction dashAction;
-    private InputAction sprintAction;
-    [SerializeField] private float sprintMult = 1.75f;
-    private const string SPRINT_SPEED_MULT_ID = "sprint";
+    [Header("Look")]
     public PlayerCameraControl playerCameraControl;
+    private InputAction dashAction;
+    [Header("Sprint")]
+    [SerializeField] private float sprintMult = 1.75f;
+    private InputAction sprintAction;
+    private const string SPRINT_SPEED_MULT_ID = "sprint";
+
+    [Header("Inventory")]
+    [SerializeField] ItemUIInventoryController inventoryUI;
+    private InputAction inventoryAction;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -27,18 +33,20 @@ public class PlayerManager : MonoBehaviour
             Destroy(gameObject);
         }
         // lock cursor
-        // Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
 
         // get inputs
         movementAction = playerInput.actions.FindAction("Move");
         lookAction = playerInput.actions.FindAction("Look");
         dashAction = playerInput.actions.FindAction("Dash");
         sprintAction = playerInput.actions.FindAction("Sprint");
+        inventoryAction = playerInput.actions.FindAction("Inventory");
         // lookAction.performed += context => { playerCameraControl.AddRotation(context.ReadValue<Vector2>()); };
         lookAction.performed += Look;
         dashAction.started += Dash;
         sprintAction.started += StartSprint;
         sprintAction.canceled += EndSprint;
+        inventoryAction.started += ToggleInventory;
     }
 
 
@@ -49,6 +57,7 @@ public class PlayerManager : MonoBehaviour
         lookAction.Enable();
         dashAction.Enable();
         sprintAction.Enable();
+        inventoryAction.Enable();
     }
 
     private void OnDisable()
@@ -57,6 +66,7 @@ public class PlayerManager : MonoBehaviour
         lookAction.Disable();
         dashAction.Disable();
         sprintAction.Disable();
+        inventoryAction.Disable();
     }
 
     void OnDestroy()
@@ -65,6 +75,7 @@ public class PlayerManager : MonoBehaviour
         dashAction.started -= Dash;
         sprintAction.started -= StartSprint;
         sprintAction.canceled -= EndSprint;
+        inventoryAction.started -= ToggleInventory;
     }
 
     // Update is called once per frame 
@@ -98,6 +109,22 @@ public class PlayerManager : MonoBehaviour
     public void EndSprint(InputAction.CallbackContext context)
     {
         entity.entityMovement.RemoveTargetSpeedMult(SPRINT_SPEED_MULT_ID);
+    }
+
+    public void ToggleInventory(InputAction.CallbackContext context)
+    {
+        inventoryUI.gameObject.SetActive(!inventoryUI.gameObject.activeInHierarchy);
+        if (inventoryUI.gameObject.activeInHierarchy)
+        {
+            inventoryUI.OpenInventory();
+            Cursor.lockState = CursorLockMode.None;
+            lookAction.Disable();
+        }
+        else
+        {
+            lookAction.Enable();
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 
 }

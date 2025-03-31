@@ -21,8 +21,20 @@ PrefabInstance:
       value: Player Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3544298994352336445, guid: 127f4ffb360f7064b8b9c1f7e8a5ac8a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 3544298994352336445, guid: 127f4ffb360f7064b8b9c1f7e8a5ac8a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 3544298994352336445, guid: 127f4ffb360f7064b8b9c1f7e8a5ac8a, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3544298994352336445, guid: 127f4ffb360f7064b8b9c1f7e8a5ac8a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6566278120438861516, guid: 127f4ffb360f7064b8b9c1f7e8a5ac8a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -77,7 +89,7 @@ PrefabInstance:
       addedObject: {fileID: 3214970950770636684}
     - targetCorrespondingSourceObject: {fileID: 1858288228154479931, guid: 127f4ffb360f7064b8b9c1f7e8a5ac8a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1704507567704876940}
+      addedObject: {fileID: 8799104530862113081}
   m_SourcePrefab: {fileID: 100100000, guid: 127f4ffb360f7064b8b9c1f7e8a5ac8a, type: 3}
 --- !u!1 &1935929800497013255 stripped
 GameObject:
@@ -102,7 +114,7 @@ MonoBehaviour:
   dashForce: 20
   dashMovementMult: 0.2
   entity: {fileID: 7213735928535696153}
---- !u!114 &1704507567704876940
+--- !u!114 &8799104530862113081
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,10 +123,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1935929800497013255}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe5b437e52465074dbcae158548b1e88, type: 3}
+  m_Script: {fileID: 11500000, guid: 74048ab386a305246ad58a4f39ec5c50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entity: {fileID: 7213735928535696153}
 --- !u!114 &7213735928535696153 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7424302950510523429, guid: 127f4ffb360f7064b8b9c1f7e8a5ac8a, type: 3}

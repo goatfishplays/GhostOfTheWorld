@@ -12,7 +12,7 @@ public class TestItemAdder : MonoBehaviour
         {
             ItemManager.instance.AddItem(item);
         }
-        Destroy(gameObject);
+        // Destroy(gameObject); 
     }
 
 }

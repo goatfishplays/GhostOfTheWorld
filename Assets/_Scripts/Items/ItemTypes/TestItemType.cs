@@ -5,7 +5,7 @@ public class TestItemType : Item
 {
     public int healAmount;
 
-    public TestItemType(string itemName, string description, bool consumeOnUse, Sprite sprite, int healAmount) : base(itemName, description, consumeOnUse, sprite)
+    public TestItemType(string itemName, string description = "no desc", bool consumeOnUse = true, Sprite sprite = null, int healAmount = 5) : base(itemName, description, consumeOnUse, sprite)
     {
         this.healAmount = healAmount;
     }
