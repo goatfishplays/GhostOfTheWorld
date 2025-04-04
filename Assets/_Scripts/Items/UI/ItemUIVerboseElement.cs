@@ -7,12 +7,12 @@ public class ItemUIVerboseElement : ItemUICountElement
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI descText;
 
-    public override void SetItem(Item item, int amt = 1)
+    public override void SetItem(ItemSO item, int amt = 1)
     {
         base.SetItem(item, amt);
         if (nameText != null)
         {
-            nameText.text = item.itemName;
+            nameText.text = item.name;
         }
         if (descText != null)
         {

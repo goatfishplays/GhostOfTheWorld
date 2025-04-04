@@ -5,7 +5,11 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
     [Header("Entity")]
-    public int id = 0;
+    // Key:
+    //      Other : -1
+    //      Player : 0
+    //      Enemy : 1
+    public int id = -1;
 
     public EntityHealth entityHealth;
     public EntityMovement entityMovement;

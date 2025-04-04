@@ -8,7 +8,7 @@ public class ItemUIInventoryController : MonoBehaviour
 {
     public Inventory inventory;
     [Header("Top Bar")]
-    [SerializeField] private int curTab = 0;
+    [SerializeField] public int curTab = 0;
     [SerializeField] private TextMeshProUGUI tabText;
 
     [Header("Item Icons")]
@@ -18,7 +18,7 @@ public class ItemUIInventoryController : MonoBehaviour
     private List<ItemUICountElement> itemIcons = new List<ItemUICountElement>();
 
     [Header("Selected Item")]
-    [SerializeField] private Item selectedItem;
+    [SerializeField] private ItemSO selectedItem;
     [SerializeField] private ItemUICountElement selectedItemIcon;
     [SerializeField] private ItemUIVerboseElement selectedDisplay;
     [SerializeField] private GameObject dropButton;
@@ -33,6 +33,7 @@ public class ItemUIInventoryController : MonoBehaviour
     {
         inventory.Drop(selectedItem);
         int amtLeft = inventory.GetItemCount(selectedItem);
+        // Debug.Log(amtLeft);
         if (amtLeft > 0)
         {
             selectedDisplay.SetCount(amtLeft);
@@ -40,7 +41,7 @@ public class ItemUIInventoryController : MonoBehaviour
         }
         else
         {
-            UpdateScreen(inventory.GetTab(curTab));
+            UpdateScreen(inventory.GetTabItems(curTab), inventory.GetTabName(curTab));
         }
     }
 
@@ -75,33 +76,39 @@ public class ItemUIInventoryController : MonoBehaviour
     public void FetchNextScreen()
     {
         curTab++;
-        UpdateScreen(inventory.GetTab(curTab));
+        UpdateScreen(inventory.GetTabItems(curTab), inventory.GetTabName(curTab));
     }
 
     public void FetchPrevScreen()
     {
         curTab--;
-        UpdateScreen(inventory.GetTab(curTab));
+        UpdateScreen(inventory.GetTabItems(curTab), inventory.GetTabName(curTab));
     }
 
     public void OpenInventory(int tab = 0)
     {
         curTab = tab;
-        UpdateScreen(inventory.GetTab(tab));
+        UpdateScreen(inventory.GetTabItems(tab), inventory.GetTabName(tab));
     }
 
-    public void UpdateScreen(InventoryTab tab)
+    public void UpdateScreen(HashSet<ItemSO> tab, string tabName, bool wipeSelected = true)
     {
         // reset screen
         foreach (ItemUICountElement item in itemIcons)
         {
             item.gameObject.SetActive(false);
         }
-        selectedDisplay.ClearItem();
-        ResetSelected();
+        if (wipeSelected)
+        {
+            ResetSelected();
+        }
+        else
+        {
+            SetSelected(selectedItemIcon);
+        }
 
         // add extra icons if needed
-        while (tab.itemCounts.Count > itemIcons.Count)
+        while (tab.Count > itemIcons.Count)
         {
             Debug.Log("New Item Icon Slot Added");
             GameObject newIcon = Instantiate(itemIconPrefab, itemIconsHolder);
@@ -111,15 +118,15 @@ public class ItemUIInventoryController : MonoBehaviour
 
         // set new icons 
         int i = 0;
-        foreach (var (item, count) in tab.itemCounts)
+        foreach (ItemSO item in tab)
         {
-            itemIcons[i].SetItem(item, count);
+            itemIcons[i].SetItem(item, inventory.GetItemCount(item));
             itemIcons[i].gameObject.SetActive(true);
             i++;
         }
 
         // set tab name
-        tabText.text = tab.tabName;
+        tabText.text = tabName;
 
         // resize holder
         // itemIconsHolderGLG.SetLayoutVertical();

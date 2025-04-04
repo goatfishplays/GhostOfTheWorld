@@ -21,6 +21,7 @@ public class HierarchyGroups : MonoBehaviour
         else
         {
             Debug.LogWarning("Two Hierarchy Groupers Detected Deleting Second");
+            Destroy(gameObject);
         }
     }
 }

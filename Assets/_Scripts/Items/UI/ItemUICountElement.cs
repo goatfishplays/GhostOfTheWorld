@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class ItemUICountElement : MonoBehaviour
 {
-    [SerializeField] protected Item _item;
-    public Item item => _item;
+    [SerializeField] protected ItemSO _item;
+    public ItemSO item => _item;
     [SerializeField] protected Image icon;
     [SerializeField] protected TextMeshProUGUI countText;
 
@@ -22,7 +22,7 @@ public class ItemUICountElement : MonoBehaviour
         icon.color = amt > 0 ? Color.white : Color.gray;
     }
 
-    public virtual void SetItem(Item item, int amt = 1)
+    public virtual void SetItem(ItemSO item, int amt = 1)
     {
         this._item = item;
         icon.sprite = item.sprite;

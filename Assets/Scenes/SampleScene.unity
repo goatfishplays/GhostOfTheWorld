@@ -576,6 +576,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 88344696}
   m_CullTransparentMesh: 1
+--- !u!4 &134769007 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8078149036084665713, guid: 40e804cf1e1184e4788d54ef455b964b, type: 3}
+  m_PrefabInstance: {fileID: 277721562}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &139188508
 GameObject:
   m_ObjectHideFlags: 0
@@ -779,6 +784,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 155647341}
   m_CullTransparentMesh: 1
+--- !u!1001 &277721562
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 689201999}
+    m_Modifications:
+    - target: {fileID: 4190531096405861094, guid: 40e804cf1e1184e4788d54ef455b964b, type: 3}
+      propertyPath: m_Name
+      value: Drop
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078149036084665713, guid: 40e804cf1e1184e4788d54ef455b964b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.54331684
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078149036084665713, guid: 40e804cf1e1184e4788d54ef455b964b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078149036084665713, guid: 40e804cf1e1184e4788d54ef455b964b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.5088401
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078149036084665713, guid: 40e804cf1e1184e4788d54ef455b964b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078149036084665713, guid: 40e804cf1e1184e4788d54ef455b964b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078149036084665713, guid: 40e804cf1e1184e4788d54ef455b964b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078149036084665713, guid: 40e804cf1e1184e4788d54ef455b964b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078149036084665713, guid: 40e804cf1e1184e4788d54ef455b964b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078149036084665713, guid: 40e804cf1e1184e4788d54ef455b964b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078149036084665713, guid: 40e804cf1e1184e4788d54ef455b964b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 40e804cf1e1184e4788d54ef455b964b, type: 3}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1530,7 +1592,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 134769007}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &720217699
@@ -1706,7 +1769,7 @@ MonoBehaviour:
   m_FillMethod: 4
   m_FillAmount: 0
   m_FillClockwise: 1
-  m_FillOrigin: 1
+  m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &731735515
@@ -1799,6 +1862,10 @@ MonoBehaviour:
   playerCameraControl: {fileID: 757180562}
   sprintMult: 1.75
   inventoryUI: {fileID: 1055962307}
+  inventory: {fileID: 401279048}
+  itemUseTime: 0
+  itemUsed: 0
+  primaryItemFill: {fileID: 731735514}
 --- !u!114 &757180562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1864,87 +1931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items:
-  - itemName: Test1
-    tab: Items
-    description: This is test item 1
-    consumeOnUse: 1
-    dropable: 1
-    equipable: 1
-    dropPrefab: {fileID: 4190531096405861094, guid: 40e804cf1e1184e4788d54ef455b964b, type: 3}
-    sprite: {fileID: 21300000, guid: 366b426a458e962498b3161f445b9e84, type: 3}
-    healAmount: 5
-  - itemName: Test2
-    tab: Key Items
-    description: This is test item 2
-    consumeOnUse: 0
-    dropable: 0
-    equipable: 1
-    dropPrefab: {fileID: 0}
-    sprite: {fileID: 21300000, guid: 251044319e629b148b1322f50eb95ab9, type: 3}
-    healAmount: -5
-  - itemName: Test3
-    tab: Key Items
-    description: 
-    consumeOnUse: 1
-    dropable: 1
-    equipable: 1
-    dropPrefab: {fileID: 5296703560612228501, guid: 18e9096bc86ec1b4381e3a8c409ec5b7, type: 3}
-    sprite: {fileID: 21300000, guid: 929298a5840a9a240ae019dad280a2e2, type: 3}
-    healAmount: -5
-  - itemName: Test4
-    tab: Key Items
-    description: 
-    consumeOnUse: 0
-    dropable: 0
-    equipable: 1
-    dropPrefab: {fileID: 0}
-    sprite: {fileID: 21300000, guid: 6ebe03cb4e606ab42a682326660f84f7, type: 3}
-    healAmount: -5
-  - itemName: Test5
-    tab: Key Items
-    description: 
-    consumeOnUse: 0
-    dropable: 0
-    equipable: 0
-    dropPrefab: {fileID: 0}
-    sprite: {fileID: 21300000, guid: 03a252800f273fe42b94024039c5bc39, type: 3}
-    healAmount: -5
-  - itemName: Test6
-    tab: Beings
-    description: 
-    consumeOnUse: 0
-    dropable: 0
-    equipable: 0
-    dropPrefab: {fileID: 0}
-    sprite: {fileID: 21300000, guid: 0549cfff8819a1c4d841bba5d69f93ca, type: 3}
-    healAmount: -5
-  - itemName: Test7
-    tab: Beings
-    description: 
-    consumeOnUse: 0
-    dropable: 0
-    equipable: 0
-    dropPrefab: {fileID: 0}
-    sprite: {fileID: 21300000, guid: bedf9fb01ae6fca45bba7691427880bb, type: 3}
-    healAmount: -5
-  - itemName: Test8
-    tab: Key Items
-    description: 
-    consumeOnUse: 0
-    dropable: 0
-    equipable: 0
-    dropPrefab: {fileID: 0}
-    sprite: {fileID: 21300000, guid: 961bb3c066543614bae9f88649609710, type: 3}
-    healAmount: -5
-  - itemName: Test9
-    tab: Missing
-    description: 
-    consumeOnUse: 0
-    dropable: 0
-    equipable: 0
-    dropPrefab: {fileID: 0}
-    sprite: {fileID: 21300000, guid: d440f020279144e4ba7f10b21cafbfc1, type: 3}
-    healAmount: -5
+  - {fileID: 11400000, guid: 0492e1ac43b04814e84649a15256cf55, type: 2}
 --- !u!1 &812020053
 GameObject:
   m_ObjectHideFlags: 0
@@ -2332,15 +2319,7 @@ MonoBehaviour:
   itemIconsHolder: {fileID: 875210790}
   itemIconsHolderGLG: {fileID: 875210791}
   itemIconPrefab: {fileID: 7197010661181942787, guid: cca83d03a9624c94ab6f779be262d988, type: 3}
-  selectedItem:
-    itemName: 
-    tab: 
-    description: 
-    consumeOnUse: 0
-    dropable: 0
-    equipable: 0
-    dropPrefab: {fileID: 0}
-    sprite: {fileID: 0}
+  selectedItem: {fileID: 0}
   selectedItemIcon: {fileID: 0}
   selectedDisplay: {fileID: 1277304543}
   dropButton: {fileID: 1521404447}
@@ -3279,15 +3258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5146f7397aa6b924fac609c8e4163e02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _item:
-    itemName: 
-    tab: 
-    description: 
-    consumeOnUse: 0
-    dropable: 0
-    equipable: 0
-    dropPrefab: {fileID: 0}
-    sprite: {fileID: 0}
+  _item: {fileID: 0}
   icon: {fileID: 1277258492}
   countText: {fileID: 2076069382}
   nameText: {fileID: 1070134322}
@@ -3759,6 +3730,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1433151310}
   - component: {fileID: 1433151311}
+  - component: {fileID: 1433151312}
   m_Layer: 0
   m_Name: HierarchyGroups
   m_TagString: Untagged
@@ -3797,6 +3769,20 @@ MonoBehaviour:
   _entities: {fileID: 2130340024}
   _drops: {fileID: 689201999}
   _attacks: {fileID: 152559937}
+--- !u!114 &1433151312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433151309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37e82e98ca92ef46b1e47b481e07271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holder: {fileID: 689201999}
+  dropBase: {fileID: 4190531096405861094, guid: 40e804cf1e1184e4788d54ef455b964b, type: 3}
 --- !u!1 &1444317014
 GameObject:
   m_ObjectHideFlags: 0
@@ -4277,8 +4263,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1348660292}
-  - {fileID: 155647342}
   - {fileID: 731735513}
+  - {fileID: 155647342}
   m_Father: {fileID: 554473710}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
@@ -4336,15 +4322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c81bade7670548c41b75a882a172c000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _item:
-    itemName: 
-    tab: 
-    description: 
-    consumeOnUse: 0
-    dropable: 0
-    equipable: 0
-    dropPrefab: {fileID: 0}
-    sprite: {fileID: 0}
+  _item: {fileID: 0}
   icon: {fileID: 1348660293}
   countText: {fileID: 155647343}
 --- !u!1 &1735788390
@@ -5200,6 +5178,14 @@ PrefabInstance:
       propertyPath: entity
       value: 
       objectReference: {fileID: 401279020}
+    - target: {fileID: 8799104530862113081, guid: 2d20492db1c3462429d63463d4819c01, type: 3}
+      propertyPath: dropOffset
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8799104530862113081, guid: 2d20492db1c3462429d63463d4819c01, type: 3}
+      propertyPath: controllerUI
+      value: 
+      objectReference: {fileID: 1055962307}
     - target: {fileID: 8799104530862113081, guid: 2d20492db1c3462429d63463d4819c01, type: 3}
       propertyPath: primaryItemUI
       value: 

@@ -30,22 +30,22 @@ public class ItemManager : MonoBehaviour
 
 
     private Dictionary<string, int> nameToInd = new Dictionary<string, int>();
-    private List<Item> itemCatalogue = new List<Item>();
+    private List<ItemSO> itemCatalogue = new List<ItemSO>();
 
-    public void AddItem(Item item)
+    public void AddItem(ItemSO item)
     {
-        if (nameToInd.ContainsKey(item.itemName))
+        if (nameToInd.ContainsKey(item.name))
         {
-            Debug.LogError($"Attempted to add '{item.itemName}' to Item Manager where '{item.itemName}' already exists");
+            Debug.LogError($"Attempted to add '{item.name}' to Item Manager where '{item.name}' already exists");
             return;
         }
         int newInd = nameToInd.Count;
-        nameToInd.Add(item.itemName, newInd);
+        nameToInd.Add(item.name, newInd);
         itemCatalogue.Add(item);
-        Debug.Log($"Initial Task: Added item: '{item.itemName}' with item index: {newInd}");
+        Debug.Log($"Initial Task: Added item: '{item.name}' with item index: {newInd}");
     }
 
-    public Item GetItem(string name)
+    public ItemSO GetItem(string name)
     {
         int id = -1;
         if (nameToInd.TryGetValue(name, out id))
@@ -56,7 +56,7 @@ public class ItemManager : MonoBehaviour
         return null;
     }
 
-    public Item GetItem(int id)
+    public ItemSO GetItem(int id)
     {
         if (id >= 0 && id < itemCatalogue.Count)
         {

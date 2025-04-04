@@ -12,16 +12,16 @@ public class RonanTempThing : MonoBehaviour
     {
         // Debug.Log(inventory == null);
 
-        inventory.AddItem(ItemManager.instance.GetItem("Test1"));
-        inventory.AddItem(ItemManager.instance.GetItem("Test2"));
-        inventory.AddItem(ItemManager.instance.GetItem("Test3"));
-        inventory.AddItem(ItemManager.instance.GetItem("Test4"));
-        inventory.AddItem(ItemManager.instance.GetItem("Test5"));
-        inventory.AddItem(ItemManager.instance.GetItem("Test6"));
-        inventory.AddItem(ItemManager.instance.GetItem("Test7"));
-        inventory.AddItem(ItemManager.instance.GetItem("Test8"));
-        inventory.AddItem(ItemManager.instance.GetItem("Test9"));
-        inventory.AddItem(ItemManager.instance.GetItem("Test3"), 99);
+        inventory.AddItem(ItemManager.instance.GetItem("Test1"), 3);
+        // inventory.AddItem(ItemManager.instance.GetItem("Test2"));
+        // inventory.AddItem(ItemManager.instance.GetItem("Test3"));
+        // inventory.AddItem(ItemManager.instance.GetItem("Test4"));   
+        // inventory.AddItem(ItemManager.instance.GetItem("Test5"));
+        // inventory.AddItem(ItemManager.instance.GetItem("Test6"));
+        // inventory.AddItem(ItemManager.instance.GetItem("Test7"));
+        // inventory.AddItem(ItemManager.instance.GetItem("Test8"));
+        // inventory.AddItem(ItemManager.instance.GetItem("Test9"));
+        // inventory.AddItem(ItemManager.instance.GetItem("Test3"), 99);
         for (int i = 0; i < 30; i++)
         {
             ItemManager.instance.AddItem(new TestItemType(i.ToString()));

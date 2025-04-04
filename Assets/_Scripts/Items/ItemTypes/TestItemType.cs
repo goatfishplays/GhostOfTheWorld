@@ -1,7 +1,8 @@
 using UnityEngine;
 
-[System.Serializable]
-public class TestItemType : Item
+
+[CreateAssetMenu(fileName = "ItemSO", menuName = "Items/Test")]
+public class TestItemType : ItemSO
 {
     public int healAmount;
 
@@ -12,7 +13,7 @@ public class TestItemType : Item
 
     public override bool AttemptUse(Entity user)
     {
-        Debug.Log($"{user.gameObject.name} used {itemName} to change health by {healAmount}");
+        Debug.Log($"{user.gameObject.name} used {name} to change health by {healAmount}");
         user.entityHealth.ChangeHealth(healAmount, 0f, true);
         return true;
     }
