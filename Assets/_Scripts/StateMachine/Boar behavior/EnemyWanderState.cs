@@ -19,10 +19,12 @@ namespace PlatformerAI
         public override void OnEnter()
         {
             Debug.Log("Wander");
+            
         }
 
         public override void Update()
         {
+            agent.isStopped = false;
            if (HasReachedDestination())
             {
                 //find a new destination
