@@ -24,7 +24,7 @@ namespace PlatformerAI
 
 
         public EnemyAttackStateBoar(
-            Enemy enemy,
+            BaseEnemy enemy,
             NavMeshAgent agent,
             PlayerDectector playerDetector,
             float attackRange = 5f,
@@ -88,7 +88,7 @@ namespace PlatformerAI
 
                 if (canDamage && Vector3.Distance(enemy.transform.position, player.position) < 1.5f)
                 {
-                    enemy.attack(); // Damage once
+                    enemy.Attack(); // Damage once
                     canDamage = false; // Prevent multiple hits
                     Debug.Log("Boar HIT the player!");
                 }
