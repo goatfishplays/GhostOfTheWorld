@@ -29,9 +29,14 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private bool itemUsed = false;
     [SerializeField] private Image primaryItemFill;
     private const string ITEM_USE_SPEED_MULT_ID = "ItemUse";
+    private InputAction itemAction;
+    [Header("Interact")]
+    [SerializeField] private PlayerInteracter playerInteracter;
+    private InputAction interactAction;
+    private InputAction shiftAction;
+
 
     // private Coroutine co_itemDelay = null;
-    private InputAction itemAction;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -54,6 +59,8 @@ public class PlayerManager : MonoBehaviour
         sprintAction = playerInput.actions.FindAction("Sprint");
         itemAction = playerInput.actions.FindAction("Item");
         inventoryAction = playerInput.actions.FindAction("Inventory");
+        interactAction = playerInput.actions.FindAction("Interact");
+        shiftAction = playerInput.actions.FindAction("Shift");
         // lookAction.performed += context => { playerCameraControl.AddRotation(context.ReadValue<Vector2>()); };
         lookAction.performed += Look;
         dashAction.started += Dash;
@@ -62,6 +69,9 @@ public class PlayerManager : MonoBehaviour
         itemAction.performed += ProgressItemUse;
         itemAction.canceled += ItemKeyRelease;
         inventoryAction.started += ToggleInventory;
+        interactAction.started += StartInteract;
+        interactAction.canceled += EndInteract;
+
     }
 
 
@@ -74,6 +84,8 @@ public class PlayerManager : MonoBehaviour
         sprintAction.Enable();
         itemAction.Enable();
         inventoryAction.Enable();
+        interactAction.Enable();
+        shiftAction.Enable();
     }
 
     private void OnDisable()
@@ -84,6 +96,8 @@ public class PlayerManager : MonoBehaviour
         sprintAction.Disable();
         itemAction.Disable();
         inventoryAction.Disable();
+        interactAction.Disable();
+        shiftAction.Disable();
     }
 
     void OnDestroy()
@@ -95,6 +109,8 @@ public class PlayerManager : MonoBehaviour
         itemAction.performed -= ProgressItemUse;
         itemAction.canceled -= ItemKeyRelease;
         inventoryAction.started -= ToggleInventory;
+        interactAction.started -= StartInteract;
+        interactAction.canceled -= EndInteract;
     }
 
     // Update is called once per frame 
@@ -194,6 +210,16 @@ public class PlayerManager : MonoBehaviour
         }
         entity.entityMovement.AddTargetSpeedMult(ITEM_USE_SPEED_MULT_ID, inventory.primaryItem.useMovementSpeedMult);
 
+    }
+
+    public void StartInteract(InputAction.CallbackContext context)
+    {
+        playerInteracter.interactionHeld = true;
+        playerInteracter.areaToggle = shiftAction.IsPressed();
+    }
+    public void EndInteract(InputAction.CallbackContext context)
+    {
+        playerInteracter.interactionHeld = false;
     }
 
     // public void StartItemUse(InputAction.CallbackContext context)

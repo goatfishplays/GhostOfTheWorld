@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class Drop : Interactable
 {
-    [SerializeField] private ItemSO item;
-    [SerializeField] private int count = 1;
-    private Coroutine co_pickupLock = null;
+    [SerializeField] protected ItemSO item;
+    [SerializeField] protected int count = 1;
+    protected Coroutine co_pickupLock = null;
 
     public void Initailize(ItemSO item, int count = 1, float pickupLockTime = 0f)
     {

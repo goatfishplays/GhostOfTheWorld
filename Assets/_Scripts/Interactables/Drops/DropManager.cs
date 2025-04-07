@@ -25,4 +25,10 @@ public class DropManager : MonoBehaviour
         GameObject spawned = Instantiate(item.dropPrefab, pos, rot, holder);
         spawned.GetComponentInChildren<Drop>().Initailize(item, count, lockTime);
     }
+
+    public void CreateEctoplasmDrop(Vector3 pos, Quaternion rot, ItemSO item, int count = 1, float lockTime = 0.1f)
+    {
+        GameObject spawned = Instantiate(item.dropPrefab, pos, rot, holder);
+        spawned.GetComponentInChildren<EctoplasmDrop>().Initailize(item, count, lockTime);
+    }
 }
