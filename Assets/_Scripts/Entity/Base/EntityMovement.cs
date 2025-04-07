@@ -115,6 +115,8 @@ public class EntityMovement : MonoBehaviour
     {
         if (targetSpeedMultComponents.ContainsKey(id))
         {
+            float idSpeed = targetSpeedMultComponents[id];
+
             if (removeID)
             {
                 targetSpeedMultComponents.Remove(id);
@@ -124,7 +126,15 @@ public class EntityMovement : MonoBehaviour
                 targetSpeedMultComponents[id] = 1f;
             }
 
-            RecomputeTargetSpeedMult();
+            if (idSpeed == 0f)
+            {
+                RecomputeTargetSpeedMult();
+            }
+            else
+            {
+                targetSpeedMult /= idSpeed;
+            }
+
         }
     }
 
@@ -175,6 +185,8 @@ public class EntityMovement : MonoBehaviour
     {
         if (compiledSpeedMultComponents.ContainsKey(id))
         {
+            float idSpeed = compiledSpeedMultComponents[id];
+
             if (removeID)
             {
                 compiledSpeedMultComponents.Remove(id);
@@ -184,7 +196,14 @@ public class EntityMovement : MonoBehaviour
                 compiledSpeedMultComponents[id] = 1f;
             }
 
-            RecomputeCompiledSpeedMult();
+            if (idSpeed == 0f)
+            {
+                RecomputeCompiledSpeedMult();
+            }
+            else
+            {
+                compiledSpeedMult /= idSpeed;
+            }
         }
     }
 
