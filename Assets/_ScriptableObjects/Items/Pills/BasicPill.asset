@@ -22,3 +22,4 @@ MonoBehaviour:
   dropPrefab: {fileID: 4190531096405861094, guid: 40e804cf1e1184e4788d54ef455b964b, type: 3}
   sprite: {fileID: 21300000, guid: 366b426a458e962498b3161f445b9e84, type: 3}
   healAmount: 10
+  toleranceAmount: 20
