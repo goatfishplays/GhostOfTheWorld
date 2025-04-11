@@ -1,9 +1,4 @@
-using JetBrains.Annotations;
-using NUnit.Framework.Internal.Filters;
-using System;
-using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class Attack : MonoBehaviour
 {
@@ -13,7 +8,7 @@ public class Attack : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // If the object hits an object and is destroyable.
+        // If the object hits a world object and is destroyable.
         if (destroyOnHit == true && ((1 << other.gameObject.layer) & LayerMask.GetMask("World")) != 0)
         {
             Destroy(gameObject);
@@ -30,6 +25,5 @@ public class Attack : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        
     }
 }
