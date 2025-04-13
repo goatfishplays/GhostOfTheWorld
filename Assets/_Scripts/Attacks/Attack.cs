@@ -3,8 +3,16 @@ using UnityEngine;
 public class Attack : MonoBehaviour
 {
     public int ownerId = 0;
+    public float attackLifetime = 1000f;
     public float damage = 1f;
+    public float iFramesAddTime = 0.2f;
+    public bool ignoresIFrames = false;
     public bool destroyOnHit = false;
+
+    private void Awake()
+    {
+        Destroy(gameObject, attackLifetime);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -18,7 +26,8 @@ public class Attack : MonoBehaviour
         // Only deal damage if the entity is not the cause of the attack.
         if (entity != null && ownerId != entity.id)
         {
-            other.GetComponentInParent<EntityHealth>().ChangeHealth(-damage);
+            // TODO: Make this use a proper hit function instead of directly changing health.
+            other.GetComponentInParent<EntityHealth>().ChangeHealth(-damage, iFramesAddTime, ignoresIFrames);
 
             if (destroyOnHit == true)
             {
