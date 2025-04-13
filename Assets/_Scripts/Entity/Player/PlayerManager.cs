@@ -1,3 +1,4 @@
+using UnityEditor.Build.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,10 +8,14 @@ public class PlayerManager : MonoBehaviour
     public Entity entity;
     public DashController dashController;
     public PlayerInput playerInput;
+    public ProjectileSpawner projectileSpawner;
+
     private InputAction movementAction;
     private InputAction lookAction;
     private InputAction dashAction;
     private InputAction sprintAction;
+    private InputAction shootAction;
+
     [SerializeField] private float sprintMult = 1.75f;
     private const string SPRINT_SPEED_MULT_ID = "sprint";
     public PlayerCameraControl playerCameraControl;
@@ -34,11 +39,13 @@ public class PlayerManager : MonoBehaviour
         lookAction = playerInput.actions.FindAction("Look");
         dashAction = playerInput.actions.FindAction("Dash");
         sprintAction = playerInput.actions.FindAction("Sprint");
+        shootAction = playerInput.actions.FindAction("Shoot");
         // lookAction.performed += context => { playerCameraControl.AddRotation(context.ReadValue<Vector2>()); };
         lookAction.performed += Look;
         dashAction.started += Dash;
         sprintAction.started += StartSprint;
         sprintAction.canceled += EndSprint;
+        shootAction.started += Shoot;
     }
 
 
@@ -99,5 +106,9 @@ public class PlayerManager : MonoBehaviour
     {
         entity.entityMovement.RemoveTargetSpeedMult(SPRINT_SPEED_MULT_ID);
     }
-
+    
+    public void Shoot(InputAction.CallbackContext context)
+    {
+        projectileSpawner.Shoot();
+    }
 }
