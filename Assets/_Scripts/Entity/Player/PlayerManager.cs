@@ -39,13 +39,18 @@ public class PlayerManager : MonoBehaviour
         lookAction = playerInput.actions.FindAction("Look");
         dashAction = playerInput.actions.FindAction("Dash");
         sprintAction = playerInput.actions.FindAction("Sprint");
-        shootAction = playerInput.actions.FindAction("Shoot");
+        if (projectileSpawner != null)
+        {
+            shootAction = playerInput.actions.FindAction("Shoot");
+            shootAction.started += Shoot;
+        }
+        
         // lookAction.performed += context => { playerCameraControl.AddRotation(context.ReadValue<Vector2>()); };
         lookAction.performed += Look;
         dashAction.started += Dash;
         sprintAction.started += StartSprint;
         sprintAction.canceled += EndSprint;
-        shootAction.started += Shoot;
+        
     }
 
 
