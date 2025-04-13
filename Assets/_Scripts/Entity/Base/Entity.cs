@@ -1,10 +1,15 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
     [Header("Entity")]
-    public int id = 0;
+    // Key:
+    //      Other : -1
+    //      Player : 0
+    //      Enemy : 1
+    public int id = -1;
 
     public EntityHealth entityHealth;
     public EntityMovement entityMovement;
@@ -14,7 +19,7 @@ public class Entity : MonoBehaviour
     public Collider hitBox;
     public Animator animator;
 
-    // [Header("Status")]
+    // [Header("Status")] 
     [Header("Die")]
     public GameObject dieDestroyObj;
     public float dieDestroyTime = 3f;

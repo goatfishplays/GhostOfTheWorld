@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DashController : MonoBehaviour
 {
+    [SerializeField] private float dashCost = 5;
     [SerializeField] private float dashTime = .2f;
     [SerializeField] private float dashCooldownTime = 1f;
     [SerializeField] private float iFrameTime = .2f;
@@ -32,6 +33,7 @@ public class DashController : MonoBehaviour
         //     co_dashcooldown = null;   
         //     yield break;
         // }
+        entity.entityHealth.ChangeHealth(-dashCost, 0f, true);
         entity.rb.AddRelativeForce(new Vector3(dir.x, 0.0f, dir.y).normalized * dashForce, ForceMode.Impulse);
         entity.entityHealth.SetIFrames(iFrameTime, true);
         // entity.entityMovement.SetLockMovement(dashTime);
