@@ -568,13 +568,6 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Shoot",
-
-                    "id": "1340f883-11d0-4e91-b1fc-93d84e7ab9ca",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Item",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
