@@ -1,3 +1,4 @@
+using UnityEditor.Build.Player;
 using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
@@ -10,11 +11,14 @@ public class PlayerManager : MonoBehaviour
     public Entity entity;
     public DashController dashController;
     public PlayerInput playerInput;
+    public ProjectileSpawner projectileSpawner;
+
     private InputAction movementAction;
     private InputAction lookAction;
     [Header("Look")]
     public PlayerCameraControl playerCameraControl;
     private InputAction dashAction;
+    
     [Header("Sprint")]
     [SerializeField] private float sprintMult = 1.75f;
     private InputAction sprintAction;
@@ -34,6 +38,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private PlayerInteracter playerInteracter;
     private InputAction interactAction;
     private InputAction shiftAction;
+    
+    private InputAction shootAction;
 
 
     // private Coroutine co_itemDelay = null;
@@ -57,6 +63,12 @@ public class PlayerManager : MonoBehaviour
         lookAction = playerInput.actions.FindAction("Look");
         dashAction = playerInput.actions.FindAction("Dash");
         sprintAction = playerInput.actions.FindAction("Sprint");
+        if (projectileSpawner != null)
+        {
+            shootAction = playerInput.actions.FindAction("Shoot");
+            shootAction.started += Shoot;
+        }
+        
         itemAction = playerInput.actions.FindAction("Item");
         inventoryAction = playerInput.actions.FindAction("Inventory");
         interactAction = playerInput.actions.FindAction("Interact");
@@ -71,7 +83,6 @@ public class PlayerManager : MonoBehaviour
         inventoryAction.started += ToggleInventory;
         interactAction.started += StartInteract;
         interactAction.canceled += EndInteract;
-
     }
 
 
@@ -168,6 +179,11 @@ public class PlayerManager : MonoBehaviour
     public void EndSprint(InputAction.CallbackContext context)
     {
         entity.entityMovement.RemoveTargetSpeedMult(SPRINT_SPEED_MULT_ID);
+    }
+    
+    public void Shoot(InputAction.CallbackContext context)
+    {
+        projectileSpawner.Shoot();
     }
 
     public void ToggleInventory(InputAction.CallbackContext context)

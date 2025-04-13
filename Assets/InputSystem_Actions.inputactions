@@ -96,6 +96,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Shoot",
+                    "type": "Button",
+                    "id": "719cc266-a819-4a0a-a04b-c5b626cf87d5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "TempDamage",
                     "type": "Button",
                     "id": "0be3a684-a8f9-4590-89f3-2d55387ab19b",
@@ -553,6 +562,13 @@
                 },
                 {
                     "name": "",
+                    "id": "7534ec31-6683-46e5-8354-e731d1c869c4",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Shoot",
+
                     "id": "1340f883-11d0-4e91-b1fc-93d84e7ab9ca",
                     "path": "<Keyboard>/q",
                     "interactions": "",
