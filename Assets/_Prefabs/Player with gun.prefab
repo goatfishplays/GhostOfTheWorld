@@ -82,7 +82,7 @@ MonoBehaviour:
   projectileSpawnPoint: {fileID: 3232732390060293229}
   viewDirection: {fileID: 0}
   projectilePrefab: {fileID: 2491153178868494655, guid: eceb7a761a4a99d4ba85fcd9e81acc5f, type: 3}
-  projectileSpeed: 100
+  projectileSpeed: 50
 --- !u!1 &6388737611391752195
 GameObject:
   m_ObjectHideFlags: 0
