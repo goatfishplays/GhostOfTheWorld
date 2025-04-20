@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09ed3c4ad56eede40aa724813b835ac3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ownerId: 0
+  ownerId: -1
   attackLifetime: 20
   damage: 10
   iFramesAddTime: 0.2
