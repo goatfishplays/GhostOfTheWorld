@@ -60,7 +60,7 @@ public class EntityHealth : MonoBehaviour
             {
                 health += delta;
 
-                if (hitSound != null && delta < DAMAGE_HIT_SOUND_THRESHHOLD)
+                if (hitSound != null && delta < DAMAGE_HIT_SOUND_THRESHHOLD && !hitSound.isPlaying)
                 {
                     hitSound.Play();
                 }
