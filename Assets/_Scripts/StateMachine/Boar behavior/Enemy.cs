@@ -18,6 +18,7 @@ namespace PlatformerAI
         [SerializeField] float wanderRadious = 5f;
         [SerializeField] float attackCooldown = 2f; // cooldown
         [SerializeField] float attackRange = 10f; // unique per enemy
+        [SerializeField] float damage = 5f;
 
         StateMachine StateMachine;
         CountdownTimer attackTimer;
@@ -66,12 +67,16 @@ namespace PlatformerAI
             StateMachine.FixedUpdate();
         }
 
-        public void attack()
+        public void attackHit(Entity target)
         {
-            
             if (attackTimer.IsRunning) return;
             attackTimer.Start();
-            Debug.Log("Attacking");
+            EntityHealth targetHealth = target.entityHealth;
+            if (targetHealth != null)
+            {
+                Debug.Log("Attacking");
+                targetHealth.ChangeHealth(-damage);
+            }
         }
 
 
