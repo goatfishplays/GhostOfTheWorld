@@ -29,8 +29,9 @@ namespace PlatformerAI
 
             var wanderState = new EnemyWanderState(this, agent, wanderRadious);
             var chaseState = new EnemyChaseState(this, agent, PlayerDectector);
-            var attackState = new EnemyAttackStateBoar(this, agent, PlayerDectector, attackRange);
-
+            // TODO: chargeSpeed should have a variable or some other solution.
+            var attackState = new EnemyAttackStateBoar(this, agent, PlayerDectector, attackRange, 30, attackRange, attackCooldown);
+            
 
             At(wanderState, chaseState, new FuncPredicated(() => PlayerDectector.canDetectPlayer()));
             At(chaseState, wanderState, new FuncPredicated(() => !PlayerDectector.canDetectPlayer()));
