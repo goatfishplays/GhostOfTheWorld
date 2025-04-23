@@ -3065,8 +3065,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: da2d5f6b3cf2abb4591b1141cb76d13c, type: 2}
     - target: {fileID: 4047595637825126332, guid: 4e71db5fdd68c3c458df1b4d0a64ee59, type: 3}
-      propertyPath: attackCooldown
-      value: 5
+      propertyPath: chargeDistance
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4108979735039268831, guid: 4e71db5fdd68c3c458df1b4d0a64ee59, type: 3}
       propertyPath: m_LocalPosition.x

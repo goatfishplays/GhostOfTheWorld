@@ -48,12 +48,16 @@ namespace PlatformerAI
             defaultSpeed = agent.speed;
             isCharging = false;
             canDamage = false;
-
+            if (timer.Progress <= 0)
+            {
+                timer.Start();
+            }
         }
 
         public override void Update()
         {
             timer.Tick(Time.deltaTime);
+            Debug.Log(timer.Progress);
 
             var player = playerDetector.GetPlayer();
             var distance = Vector3.Distance(enemy.transform.position, player.position);
@@ -72,8 +76,6 @@ namespace PlatformerAI
                 agent.isStopped = false;
                 agent.SetDestination(chargeEndDistant);
                 Debug.Log("CHARG");
-
-
             }
 
             if (isCharging)
@@ -104,6 +106,12 @@ namespace PlatformerAI
                 // Normal chase when not charging
                     agent.isStopped = true;
                 agent.SetDestination(player.position);
+
+                var turnTowardNavSteeringTarget = agent.steeringTarget;
+
+                Vector3 direction = (turnTowardNavSteeringTarget - enemy.transform.position).normalized;
+                Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+                enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, lookRotation, Time.deltaTime * 5);
             }
         }
 

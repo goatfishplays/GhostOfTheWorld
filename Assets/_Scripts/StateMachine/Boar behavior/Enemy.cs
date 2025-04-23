@@ -22,6 +22,7 @@ namespace PlatformerAI
         [SerializeField] float wanderRadius = 5f;
         [SerializeField] float attackCooldown = 2f; // cooldown
         [SerializeField] float attackRange = 10f; // unique per enemy
+        [SerializeField] float chargeDistance = 20f;
         [SerializeField] float damage = 5f;
 
         StateMachine StateMachine;
@@ -39,7 +40,7 @@ namespace PlatformerAI
             var wanderState = new EnemyWanderState(this, agent, wanderRadius);
             var chaseState = new EnemyChaseState(this, agent, PlayerDectector);
             // TODO: chargeSpeed should have a variable or some other solution.
-            var attackState = new EnemyAttackStateBoar(this, agent, PlayerDectector, attackRange, 30, attackRange * 2, attackCooldown);
+            var attackState = new EnemyAttackStateBoar(this, agent, PlayerDectector, attackRange, chargeDistance, attackRange * 2, attackCooldown);
 
 
             // Only allow death state if the enemy has an entity and entity health script.
