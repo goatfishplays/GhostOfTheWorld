@@ -54,7 +54,12 @@ namespace PlatformerAI
             float distance = Vector3.Distance(enemy.transform.position, player.position);
             if (distance <= jumpRange)
             {
-                enemy.Jump();
+                Entity playerEntity = GameObject.FindGameObjectWithTag("Player").GetComponent<Entity>();
+                if (playerEntity != null)
+                {
+                    enemy.Jump(playerEntity); // Damage once
+                }
+                
                 // kick off the visible jump
                 if (jumpRoutine == null)
                     jumpRoutine = enemy.StartCoroutine(JumpTo(player.position));

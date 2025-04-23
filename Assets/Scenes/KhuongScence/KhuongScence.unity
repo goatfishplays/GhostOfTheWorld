@@ -325,6 +325,8 @@ GameObject:
   - component: {fileID: 126099094}
   - component: {fileID: 126099093}
   - component: {fileID: 126099092}
+  - component: {fileID: 126099097}
+  - component: {fileID: 126099096}
   m_Layer: 0
   m_Name: player
   m_TagString: Player
@@ -421,6 +423,48 @@ Transform:
   m_Children: []
   m_Father: {fileID: 396039334}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &126099096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126099091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aadb2f2a198a35b4ba681b2645b4b4ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changingHealth: 1
+  health: 100
+  maxHealth: 100
+  healthChangeRate: 0
+  dead: 0
+  hitSound: {fileID: 0}
+  deathSound: {fileID: 0}
+--- !u!114 &126099097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126099091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7e59167a53641042b516a405b829e5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: -1
+  entityHealth: {fileID: 126099096}
+  entityMovement: {fileID: 0}
+  rb: {fileID: 0}
+  hitBox: {fileID: 126099092}
+  animator: {fileID: 0}
+  dieDestroyObj: {fileID: 0}
+  dieDestroyTime: 3
+  disableHitboxWhileDying: 1
+  enableOnDie: []
+  disableOnDie: []
 --- !u!1 &396039331
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,6 +832,8 @@ GameObject:
   - component: {fileID: 784482149}
   - component: {fileID: 784482148}
   - component: {fileID: 784482152}
+  - component: {fileID: 784482153}
+  - component: {fileID: 784482154}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -809,9 +855,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 784482150}
   PlayerDectector: {fileID: 784482152}
-  wanderRadious: 5
+  entity: {fileID: 0}
+  wanderRadius: 5
   attackCooldown: 2
   attackRange: 5
+  chargeDistance: 20
+  damage: 5
 --- !u!65 &784482149
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -884,9 +933,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionAngle: 60
-  detectionRadious: 20
-  innerDetectionRadious: 5
+  detectionRadius: 10
+  innerDetectionRadius: 5
   detectionCooldown: 1
+--- !u!114 &784482153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784482147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7e59167a53641042b516a405b829e5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: -1
+  entityHealth: {fileID: 784482154}
+  entityMovement: {fileID: 0}
+  rb: {fileID: 0}
+  hitBox: {fileID: 0}
+  animator: {fileID: 0}
+  dieDestroyObj: {fileID: 0}
+  dieDestroyTime: 3
+  disableHitboxWhileDying: 1
+  enableOnDie: []
+  disableOnDie: []
+--- !u!114 &784482154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784482147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aadb2f2a198a35b4ba681b2645b4b4ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changingHealth: 1
+  health: 100
+  maxHealth: 100
+  healthChangeRate: 0
+  dead: 0
+  hitSound: {fileID: 0}
+  deathSound: {fileID: 0}
 --- !u!1 &901617068
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,7 +1623,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1485835374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1546,8 +1637,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionAngle: 30
-  detectionRadious: 40
-  innerDetectionRadious: 5
+  detectionRadius: 10
+  innerDetectionRadius: 5
   detectionCooldown: 1
 --- !u!65 &1485835376
 BoxCollider:
@@ -1601,7 +1692,7 @@ Transform:
   m_GameObject: {fileID: 1485835373}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.96, y: 0.72, z: -3.34}
+  m_LocalPosition: {x: 16.96, y: 0.72, z: 2.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1640,8 +1731,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.15287705
-      value: 0.567215
+      time: 0.6639869
+      value: 0.9855443
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1649,7 +1740,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
-    m_PostInfinity: 2
+    m_PostInfinity: 0
     m_RotationOrder: 4
 --- !u!1 &1553788696
 GameObject:
