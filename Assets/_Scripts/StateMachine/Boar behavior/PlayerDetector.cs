@@ -6,9 +6,13 @@ namespace PlatformerAI
 {
     public class PlayerDectector : MonoBehaviour
     {
+        [Tooltip("Vision cone in front of enemy")]
         [SerializeField] float detectionAngle = 60f; // cone in front of enemy
+        [Tooltip("Enemy vision distance within the vision cone")]
         [SerializeField] float detectionRadius = 10f; // enemy vision aka Large circle around enemy
+        [Tooltip("Detection circle around an enemy for checking if the player is too close from outside vision cone")]
         [SerializeField] float innerDetectionRadius = 5f;
+        [Tooltip("Cooldown for detecting player")]
         [SerializeField] float detectionCooldown = 1f; // cooldown
         //[SerializeField] float attackRange = 10f;
 
