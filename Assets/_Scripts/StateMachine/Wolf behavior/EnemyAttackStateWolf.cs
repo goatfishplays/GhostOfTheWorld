@@ -29,7 +29,11 @@ namespace PlatformerAI
             if (distance <= attackRange)
             {
                 agent.isStopped = true;
-                enemy.Attack();
+                Entity playerEntity = GameObject.FindGameObjectWithTag("Player").GetComponent<Entity>();
+                if (playerEntity != null)
+                {
+                    enemy.Attack(playerEntity); // Damage once
+                }
 
             }
             else

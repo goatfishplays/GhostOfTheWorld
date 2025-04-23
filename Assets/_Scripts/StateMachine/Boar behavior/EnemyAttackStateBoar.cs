@@ -92,7 +92,7 @@ namespace PlatformerAI
                     Entity playerEntity = GameObject.FindGameObjectWithTag("Player").GetComponent<Entity>();
                     if (playerEntity != null)
                     {
-                        enemy.attackHit(playerEntity); // Damage once
+                        enemy.Attack(playerEntity); // Damage once
                     }
                     canDamage = false; // Prevent multiple hits
                     Debug.Log("Boar HIT the player!");

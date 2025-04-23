@@ -11,8 +11,7 @@ namespace PlatformerAI
     [RequireComponent(typeof(PlayerDectector))]
     public class Enemy : BaseEnemy
     {
-        public NavMeshAgent agent;
-        public PlayerDectector PlayerDectector;
+        
         public Entity entity;
 
         private EntityHealth entityHealth;
@@ -61,7 +60,8 @@ namespace PlatformerAI
             {
                 var player = PlayerDectector.GetPlayer();
                 float distance = Vector3.Distance(transform.position, player.position);
-                return distance <= attackRange;
+
+                return distance <= attackRange && !attackTimer.IsRunning;
             }));
 
             At(attackState, chaseState, new FuncPredicated(() =>
@@ -89,7 +89,7 @@ namespace PlatformerAI
             StateMachine.FixedUpdate();
         }
 
-        public void attackHit(Entity target)
+        public override void Attack(Entity target)
         {
             if (attackTimer.IsRunning) return;
             attackTimer.Start();
@@ -100,6 +100,12 @@ namespace PlatformerAI
                 targetHealth.ChangeHealth(-damage);
             }
         }
+        public override void Jump(Entity target)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        
     }
 
 
