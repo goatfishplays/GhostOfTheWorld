@@ -13,6 +13,9 @@ namespace PlatformerAI
     {
         public NavMeshAgent agent;
         public PlayerDectector PlayerDectector;
+        public Entity entity;
+
+        private EntityHealth entityHealth;
         //Animator animator;
 
 
@@ -25,6 +28,11 @@ namespace PlatformerAI
         CountdownTimer attackTimer;
         private void Start()
         {
+            if (entity == null)
+            {
+                entity = GetComponent<Entity>();
+            }
+
             attackTimer = new CountdownTimer(attackCooldown);
             StateMachine = new StateMachine();
 
@@ -32,7 +40,18 @@ namespace PlatformerAI
             var chaseState = new EnemyChaseState(this, agent, PlayerDectector);
             // TODO: chargeSpeed should have a variable or some other solution.
             var attackState = new EnemyAttackStateBoar(this, agent, PlayerDectector, attackRange, 30, attackRange * 2, attackCooldown);
-            
+
+
+            // Only allow death state if the enemy has an entity and entity health script.
+            if (entity != null && entity.entityHealth != null)
+            {
+                entityHealth = entity.entityHealth;
+                var deathState = new EnemyDeathState(this, agent, entity);
+                Any(deathState, new FuncPredicated(() =>
+                {
+                    return entityHealth.dead;
+                }));
+            }
 
             At(wanderState, chaseState, new FuncPredicated(() => PlayerDectector.canDetectPlayer()));
             At(chaseState, wanderState, new FuncPredicated(() => !PlayerDectector.canDetectPlayer()));

@@ -485,10 +485,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1141341360}
   playerInput: {fileID: 1687969419}
-  projectileSpawnPoint: {fileID: 0}
-  projectilePrefab: {fileID: 0}
   mainCam: {fileID: 0}
-  projectileSpeed: 4
 --- !u!1 &184842740
 GameObject:
   m_ObjectHideFlags: 0
@@ -3067,6 +3064,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: da2d5f6b3cf2abb4591b1141cb76d13c, type: 2}
+    - target: {fileID: 4047595637825126332, guid: 4e71db5fdd68c3c458df1b4d0a64ee59, type: 3}
+      propertyPath: attackCooldown
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4108979735039268831, guid: 4e71db5fdd68c3c458df1b4d0a64ee59, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.99
