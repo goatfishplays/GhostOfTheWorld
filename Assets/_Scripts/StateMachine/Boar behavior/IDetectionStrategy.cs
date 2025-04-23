@@ -12,14 +12,14 @@ namespace PlatformerAI
     public class ConeDetectionStrategy : IDetectionStrategy
     {
         readonly float detectionAngle;
-        readonly float detectionRadious;
-        readonly float innerDetectionRadious;
+        readonly float detectionRadius;
+        readonly float innerDetectionRadius;
 
-        public ConeDetectionStrategy(float detectionAngle, float detectionRadious, float innerDetectionRadious)
+        public ConeDetectionStrategy(float detectionAngle, float detectionRadius, float innerDetectionRadius)
         {
             this.detectionAngle = detectionAngle;
-            this.detectionRadious = detectionRadious;
-            this.innerDetectionRadious = innerDetectionRadious;
+            this.detectionRadius = detectionRadius;
+            this.innerDetectionRadius = innerDetectionRadius;
         }
 
         public bool Execute(Transform player, Transform detector, CountdownTimer timer)
@@ -29,11 +29,11 @@ namespace PlatformerAI
             var directionToPlayer = player.position - detector.position; ;
             var angleToPlayer = Vector3.Angle(directionToPlayer, detector.forward);
 
-            // if the player is not in the detectiion angle and outer radious 
+            // if the player is not in the detectiion angle and outer radius 
             //aka the cone in front of the player
-            // or outside the inner radious, return false
-            if ((!(angleToPlayer < detectionAngle / 2f) || !(directionToPlayer.magnitude < detectionRadious))
-                && !(directionToPlayer.magnitude < innerDetectionRadious))
+            // or outside the inner radius, return false
+            if ((!(angleToPlayer < detectionAngle / 2f) || !(directionToPlayer.magnitude < detectionRadius))
+                && !(directionToPlayer.magnitude < innerDetectionRadius))
             {
                 return false;
             }
