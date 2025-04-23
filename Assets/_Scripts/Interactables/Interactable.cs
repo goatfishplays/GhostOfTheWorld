@@ -7,7 +7,7 @@ public class Interactable : MonoBehaviour
 
     public virtual void Interact(Entity interacter)
     {
-        if (!interactableSO.nonPlayersInteractable && interacter.id != 0)
+        if (!interactableSO.nonPlayersInteractable && interacter.id != Entity.playerID)
         {
             return;
         }

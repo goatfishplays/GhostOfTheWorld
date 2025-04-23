@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
+    public static readonly int otherID = -1;
+    public static readonly int playerID = 1;
+    public static readonly int enemyID = 2;
     [Header("Entity")]
-    // Key:
-    //      Other : -1
-    //      Player : 0
-    //      Enemy : 1
     public int id = -1;
 
     public EntityHealth entityHealth;

@@ -5,7 +5,7 @@ public class EctoplasmDrop : Drop
     private static float percentInstantHeal = 1f;
     public void InstantInteract(Entity interacter)
     {
-        if (!interactableSO.nonPlayersInteractable && interacter.id != 0 || co_pickupLock != null)
+        if (!interactableSO.nonPlayersInteractable && interacter.id != Entity.playerID || co_pickupLock != null)
         {
             return;
         }
