@@ -57,7 +57,6 @@ namespace PlatformerAI
         public override void Update()
         {
             timer.Tick(Time.deltaTime);
-            Debug.Log(timer.Progress);
 
             var player = playerDetector.GetPlayer();
             var distance = Vector3.Distance(enemy.transform.position, player.position);
