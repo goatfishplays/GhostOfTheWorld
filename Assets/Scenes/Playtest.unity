@@ -3051,10 +3051,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 823085060}
     m_Modifications:
-    - target: {fileID: 32635100735866697, guid: 4e71db5fdd68c3c458df1b4d0a64ee59, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: da2d5f6b3cf2abb4591b1141cb76d13c, type: 2}
     - target: {fileID: 1568691735784171116, guid: 4e71db5fdd68c3c458df1b4d0a64ee59, type: 3}
       propertyPath: m_Mass
       value: 0.0000001
@@ -3071,26 +3067,6 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: da2d5f6b3cf2abb4591b1141cb76d13c, type: 2}
-    - target: {fileID: 1810743033149210870, guid: 4e71db5fdd68c3c458df1b4d0a64ee59, type: 3}
-      propertyPath: rb
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3824314923586858961, guid: 4e71db5fdd68c3c458df1b4d0a64ee59, type: 3}
-      propertyPath: m_Height
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3824314923586858961, guid: 4e71db5fdd68c3c458df1b4d0a64ee59, type: 3}
-      propertyPath: m_BaseOffset
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4047595637825126332, guid: 4e71db5fdd68c3c458df1b4d0a64ee59, type: 3}
-      propertyPath: damage
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4047595637825126332, guid: 4e71db5fdd68c3c458df1b4d0a64ee59, type: 3}
-      propertyPath: attackRange
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 4108979735039268831, guid: 4e71db5fdd68c3c458df1b4d0a64ee59, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.99
@@ -3130,18 +3106,6 @@ PrefabInstance:
     - target: {fileID: 4108979735039268831, guid: 4e71db5fdd68c3c458df1b4d0a64ee59, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4206314981244470669, guid: 4e71db5fdd68c3c458df1b4d0a64ee59, type: 3}
-      propertyPath: detectionRadius
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4206314981244470669, guid: 4e71db5fdd68c3c458df1b4d0a64ee59, type: 3}
-      propertyPath: detectionCooldown
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4925705695999491500, guid: 4e71db5fdd68c3c458df1b4d0a64ee59, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5629629830943394649, guid: 4e71db5fdd68c3c458df1b4d0a64ee59, type: 3}
       propertyPath: m_Name

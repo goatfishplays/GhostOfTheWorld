@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: da2d5f6b3cf2abb4591b1141cb76d13c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -250,7 +250,7 @@ MonoBehaviour:
   wanderRadius: 5
   attackCooldown: 2
   attackRange: 5
-  damage: 5
+  damage: 10
 --- !u!114 &4206314981244470669
 MonoBehaviour:
   m_ObjectHideFlags: 0
