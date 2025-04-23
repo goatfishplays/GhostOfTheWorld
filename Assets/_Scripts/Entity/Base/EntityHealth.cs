@@ -47,7 +47,7 @@ public class EntityHealth : MonoBehaviour
     }
 
     /// <summary>
-    /// Someone remind me to add a separate hit function so the hit sound detection can be less stupid 
+    /// TODO Someone remind me to add a separate hit function so the hit sound detection can be less stupid  
     /// </summary>
     /// <param name="delta"></param>
     /// <param name="iFramesAddTime"></param>

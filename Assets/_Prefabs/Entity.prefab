@@ -191,7 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e59167a53641042b516a405b829e5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  id: 1
   entityHealth: {fileID: 9021495779775508505}
   entityMovement: {fileID: 322537136667298855}
   rb: {fileID: 2938606765168549507}
@@ -233,11 +233,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb9fd8fdcccc0d4bab8b068b8f794c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canMove: 1
   forwardMoveSpeed: 9
   sideMoveSpeedMult: 0.75
   backMoveSpeedMult: 0.5
-  moveSpeedMult: 1
+  targetSpeedMult: 1
+  compiledSpeedMult: 1
   accel: 9
   deccel: 9
   velPower: 1.2
