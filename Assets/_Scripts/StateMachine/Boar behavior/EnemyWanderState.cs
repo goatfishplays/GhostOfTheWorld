@@ -9,7 +9,7 @@ namespace PlatformerAI
         readonly Vector3 startPoint;
         readonly float wanderRadious;
 
-        public EnemyWanderState(Enemy enemy,NavMeshAgent agent, float wanderRadious) : base(enemy)
+        public EnemyWanderState(BaseEnemy enemy,NavMeshAgent agent, float wanderRadious) : base(enemy)
         {
             this.agent = agent;
             this.startPoint = enemy.transform.position;

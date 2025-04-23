@@ -9,18 +9,18 @@ namespace PlatformerAI
 {
     [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(PlayerDectector))]
-    public class Enemy : MonoBehaviour
+    public class Enemy : BaseEnemy
     {
-        public NavMeshAgent agent;
-        public PlayerDectector PlayerDectector;
+        
+        
         //Animator animator;
 
         [SerializeField] float wanderRadious = 5f;
-        [SerializeField] float attackCooldown = 2f; // cooldown
+        [SerializeField] float attackCooldown = 2f; // cooldown 
         [SerializeField] float attackRange = 10f; // unique per enemy
 
         StateMachine StateMachine;
-        CountdownTimer attackTimer;
+        
         private void Start()
         {
             attackTimer = new CountdownTimer(attackCooldown);
@@ -66,12 +66,17 @@ namespace PlatformerAI
             StateMachine.FixedUpdate();
         }
 
-        public void attack()
+        public override void Attack()
         {
             
             if (attackTimer.IsRunning) return;
             attackTimer.Start();
             Debug.Log("Attacking");
+        }
+
+        public override void Jump()
+        {
+           
         }
 
 

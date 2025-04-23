@@ -4,16 +4,16 @@ namespace PlatformerAI
 {
     public abstract class EnemyBaseState : IState
     {
-        protected readonly Enemy enemy;
-        //for animation
-        //protected reaonly Animator animtor
+        protected readonly BaseEnemy enemy;
 
-        protected const float crossFadeDuration = 1.0f;
-
-        protected EnemyBaseState(Enemy enemy)
+        public EnemyBaseState(BaseEnemy enemy)
         {
             this.enemy = enemy;
         }
+
+        protected const float crossFadeDuration = 1.0f;
+
+        
 
         public virtual void OnEnter()
         {
