@@ -89,7 +89,10 @@ namespace PlatformerAI
                 if (canDamage && Vector3.Distance(enemy.transform.position, player.position) < 1.5f)
                 {
                     Entity playerEntity = GameObject.FindGameObjectWithTag("Player").GetComponent<Entity>();
-                    enemy.attackHit(playerEntity); // Damage once
+                    if (playerEntity != null)
+                    {
+                        enemy.attackHit(playerEntity); // Damage once
+                    }
                     canDamage = false; // Prevent multiple hits
                     Debug.Log("Boar HIT the player!");
                 }
