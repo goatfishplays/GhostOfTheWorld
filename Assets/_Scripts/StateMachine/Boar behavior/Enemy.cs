@@ -11,8 +11,7 @@ namespace PlatformerAI
     [RequireComponent(typeof(PlayerDectector))]
     public class Enemy : BaseEnemy
     {
-        public NavMeshAgent agent;
-        public PlayerDectector PlayerDectector;
+        
         public Entity entity;
 
         private EntityHealth entityHealth;
@@ -89,7 +88,7 @@ namespace PlatformerAI
             StateMachine.FixedUpdate();
         }
 
-        public void attackHit(Entity target)
+        public override void Attack(Entity target)
         {
             if (attackTimer.IsRunning) return;
             attackTimer.Start();
@@ -99,6 +98,11 @@ namespace PlatformerAI
                 Debug.Log("Attacking");
                 targetHealth.ChangeHealth(-damage);
             }
+        }
+
+        public override void Jump(Entity target)
+        {
+            throw new System.NotImplementedException();
         }
     }
 

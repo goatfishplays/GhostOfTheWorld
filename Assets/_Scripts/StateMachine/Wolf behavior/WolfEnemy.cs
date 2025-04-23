@@ -106,14 +106,14 @@ namespace PlatformerAI
             StateMachine.FixedUpdate();
         }
 
-        public override void Attack()
+        public override void Attack(Entity target)
         {
 
             if (attackTimer.IsRunning) return;
             attackTimer.Start();
             Debug.Log("Wolf Attacking");
         }
-        public override void Jump()
+        public override void Jump(Entity target)
         {
             if (jumpTimer.IsRunning) return;
             jumpTimer.Start();

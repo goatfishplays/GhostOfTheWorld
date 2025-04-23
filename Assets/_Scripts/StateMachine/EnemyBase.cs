@@ -9,6 +9,6 @@ public abstract class BaseEnemy : MonoBehaviour
     public PlayerDectector PlayerDectector;
     public CountdownTimer attackTimer;
 
-    public abstract void Attack();
-    public abstract void Jump();
+    public abstract void Attack(Entity target);
+    public abstract void Jump(Entity target);
 }
