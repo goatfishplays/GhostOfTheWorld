@@ -7,8 +7,8 @@ namespace PlatformerAI
     public class PlayerDectector : MonoBehaviour
     {
         [SerializeField] float detectionAngle = 60f; // cone in front of enemy
-        [SerializeField] float detectionRadious = 10f; // enemy vision aka Large circle around enemy
-        [SerializeField] float innerDetectionRadious = 5f; // for checking if the player reach too clos from behind
+        [SerializeField] float detectionRadius = 10f; // enemy vision aka Large circle around enemy
+        [SerializeField] float innerDetectionRadius = 5f;
         [SerializeField] float detectionCooldown = 1f; // cooldown
         //[SerializeField] float attackRange = 10f;
 
@@ -22,8 +22,7 @@ namespace PlatformerAI
         {
             detectionTimer = new CountdownTimer(detectionCooldown);
             Player = GameObject.FindGameObjectWithTag("Player").transform;
-            detectionStrategy = new ConeDetectionStrategy(detectionAngle, detectionRadious, innerDetectionRadious);
-
+            detectionStrategy = new ConeDetectionStrategy(detectionAngle, detectionRadius, innerDetectionRadius);
         }
 
         void Update() => detectionTimer.Tick(Time.deltaTime);
