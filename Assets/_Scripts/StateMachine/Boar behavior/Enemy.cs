@@ -15,7 +15,8 @@ namespace PlatformerAI
         public PlayerDectector PlayerDectector;
         //Animator animator;
 
-        [SerializeField] float wanderRadious = 5f;
+
+        [SerializeField] float wanderRadius = 5f;
         [SerializeField] float attackCooldown = 2f; // cooldown
         [SerializeField] float attackRange = 10f; // unique per enemy
         [SerializeField] float damage = 5f;
@@ -27,10 +28,10 @@ namespace PlatformerAI
             attackTimer = new CountdownTimer(attackCooldown);
             StateMachine = new StateMachine();
 
-            var wanderState = new EnemyWanderState(this, agent, wanderRadious);
+            var wanderState = new EnemyWanderState(this, agent, wanderRadius);
             var chaseState = new EnemyChaseState(this, agent, PlayerDectector);
             // TODO: chargeSpeed should have a variable or some other solution.
-            var attackState = new EnemyAttackStateBoar(this, agent, PlayerDectector, attackRange, 30, attackRange, attackCooldown);
+            var attackState = new EnemyAttackStateBoar(this, agent, PlayerDectector, attackRange, 30, attackRange * 2, attackCooldown);
             
 
             At(wanderState, chaseState, new FuncPredicated(() => PlayerDectector.canDetectPlayer()));
@@ -79,8 +80,6 @@ namespace PlatformerAI
                 targetHealth.ChangeHealth(-damage);
             }
         }
-
-
     }
 
 
