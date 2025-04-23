@@ -9,7 +9,7 @@ namespace PlatformerAI
 {
     [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(PlayerDectector))]
-    public class Enemy : MonoBehaviour
+    public class Enemy : BaseEnemy
     {
         public NavMeshAgent agent;
         public PlayerDectector PlayerDectector;
@@ -26,7 +26,7 @@ namespace PlatformerAI
         [SerializeField] float damage = 5f;
 
         StateMachine StateMachine;
-        CountdownTimer attackTimer;
+        
         private void Start()
         {
             if (entity == null)

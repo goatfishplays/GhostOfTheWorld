@@ -24,7 +24,7 @@ namespace PlatformerAI
 
 
         public EnemyAttackStateBoar(
-            Enemy enemy,
+            BaseEnemy enemy,
             NavMeshAgent agent,
             PlayerDectector playerDetector,
             float attackRange = 5f,

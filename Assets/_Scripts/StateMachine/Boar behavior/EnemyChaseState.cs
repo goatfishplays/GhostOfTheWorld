@@ -8,7 +8,7 @@ public class EnemyChaseState : EnemyBaseState
 
     readonly PlayerDectector playerDetector; // Reference to detector, not player
 
-    public EnemyChaseState(Enemy enemy, NavMeshAgent agent, PlayerDectector playerDetector) : base(enemy)
+    public EnemyChaseState(BaseEnemy enemy, NavMeshAgent agent, PlayerDectector playerDetector) : base(enemy)
     {
         this.agent = agent;
         this.playerDetector = playerDetector; // Store the detector
