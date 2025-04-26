@@ -8,6 +8,7 @@ namespace PlatformerAI
         readonly NavMeshAgent agent;
         readonly Vector3 startPoint;
         readonly float wanderRadious;
+        
 
         public EnemyWanderState(BaseEnemy enemy,NavMeshAgent agent, float wanderRadious) : base(enemy)
         {
