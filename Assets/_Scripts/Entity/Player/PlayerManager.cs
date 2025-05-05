@@ -18,14 +18,14 @@ public class PlayerManager : MonoBehaviour
     [Header("Look")]
     public PlayerCameraControl playerCameraControl;
     private InputAction dashAction;
-    
+
     [Header("Sprint")]
     [SerializeField] private float sprintMult = 1.75f;
     private InputAction sprintAction;
     private const string SPRINT_SPEED_MULT_ID = "sprint";
 
     [Header("Inventory")]
-    [SerializeField] ItemUIInventoryController inventoryUI;
+    // [SerializeField] ItemUIInventoryController inventoryUI; 
     public Inventory inventory;
     private InputAction inventoryAction;
     [Header("Item")]
@@ -38,8 +38,12 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private PlayerInteracter playerInteracter;
     private InputAction interactAction;
     private InputAction shiftAction;
-    
+
     private InputAction shootAction;
+
+    // [Header("Menus")]
+    private InputAction menuAction;
+    public MenuManager menuManager => MenuManager.instance;
 
 
     // private Coroutine co_itemDelay = null;
@@ -68,11 +72,13 @@ public class PlayerManager : MonoBehaviour
             shootAction = playerInput.actions.FindAction("Shoot");
             shootAction.started += Shoot;
         }
-        
+
         itemAction = playerInput.actions.FindAction("Item");
         inventoryAction = playerInput.actions.FindAction("Inventory");
         interactAction = playerInput.actions.FindAction("Interact");
         shiftAction = playerInput.actions.FindAction("Shift");
+        menuAction = playerInput.actions.FindAction("Menu");
+
         // lookAction.performed += context => { playerCameraControl.AddRotation(context.ReadValue<Vector2>()); };
         lookAction.performed += Look;
         dashAction.started += Dash;
@@ -83,6 +89,7 @@ public class PlayerManager : MonoBehaviour
         inventoryAction.started += ToggleInventory;
         interactAction.started += StartInteract;
         interactAction.canceled += EndInteract;
+        menuAction.started += ToggleMenu;
     }
 
 
@@ -160,10 +167,28 @@ public class PlayerManager : MonoBehaviour
         entity.entityMovement.Move(planarMovementInput);
     }
 
+    public void SetLookState(bool canLook = true)
+    {
+        if (canLook)
+        {
+            lookAction.Enable();
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            lookAction.Disable();
+        }
+    }
+
     public void Look(InputAction.CallbackContext context)
     {
-        // Debug.Log(context); 
-        playerCameraControl.AddRotation(context.ReadValue<Vector2>());
+        // Debug.Log(context);
+        Vector2 dir = context.ReadValue<Vector2>();
+        // Add Sensitivity
+        dir.x *= OptionsManager.instance.xSensitivity;
+        dir.y *= OptionsManager.instance.ySensitivity;
+        playerCameraControl.AddRotation(dir);
     }
 
     public void Dash(InputAction.CallbackContext context)
@@ -180,25 +205,34 @@ public class PlayerManager : MonoBehaviour
     {
         entity.entityMovement.RemoveTargetSpeedMult(SPRINT_SPEED_MULT_ID);
     }
-    
+
     public void Shoot(InputAction.CallbackContext context)
     {
         projectileSpawner.Shoot();
     }
 
+    public void ToggleMenu(InputAction.CallbackContext context)
+    {
+        switch (menuManager.state)
+        {
+            case MenuManager.MenuState.None:
+                menuManager.SetState(MenuManager.MenuState.Pause);
+                break;
+            default:
+                menuManager.SetState(MenuManager.MenuState.None);
+                break;
+        }
+    }
+
     public void ToggleInventory(InputAction.CallbackContext context)
     {
-        inventoryUI.gameObject.SetActive(!inventoryUI.gameObject.activeInHierarchy);
-        if (inventoryUI.gameObject.activeInHierarchy)
+        if (menuManager.state == MenuManager.MenuState.None)
         {
-            inventoryUI.OpenInventory();
-            Cursor.lockState = CursorLockMode.None;
-            lookAction.Disable();
+            menuManager.SetState(MenuManager.MenuState.Inventory);
         }
-        else
+        else if (menuManager.state == MenuManager.MenuState.Inventory)
         {
-            lookAction.Enable();
-            Cursor.lockState = CursorLockMode.Locked;
+            menuManager.SetState(MenuManager.MenuState.None);
         }
     }
 
