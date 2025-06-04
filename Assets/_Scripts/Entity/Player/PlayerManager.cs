@@ -4,6 +4,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.Rendering.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -60,6 +61,11 @@ public class PlayerManager : MonoBehaviour
             Debug.LogError("Two Player Managers Found, Deleting Second");
             Destroy(gameObject);
         }
+
+        if (projectileSpawner == null)
+        {
+            Debug.LogWarning("There is no projectileSpawner attached to the player");
+        }
         // lock cursor
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -68,12 +74,7 @@ public class PlayerManager : MonoBehaviour
         lookAction = playerInput.actions.FindAction("Look");
         dashAction = playerInput.actions.FindAction("Dash");
         sprintAction = playerInput.actions.FindAction("Sprint");
-        if (projectileSpawner != null)
-        {
-            shootAction = playerInput.actions.FindAction("Shoot");
-            shootAction.started += Shoot;
-        }
-
+        shootAction = playerInput.actions.FindAction("Shoot");
         itemAction = playerInput.actions.FindAction("Item");
         inventoryAction = playerInput.actions.FindAction("Inventory");
         interactAction = playerInput.actions.FindAction("Interact");
@@ -85,6 +86,7 @@ public class PlayerManager : MonoBehaviour
         dashAction.started += Dash;
         sprintAction.started += StartSprint;
         sprintAction.canceled += EndSprint;
+        shootAction.started += Shoot;
         itemAction.performed += ProgressItemUse;
         itemAction.canceled += ItemKeyRelease;
         inventoryAction.started += ToggleInventory;
@@ -212,7 +214,10 @@ public class PlayerManager : MonoBehaviour
 
     public void Shoot(InputAction.CallbackContext context)
     {
-        projectileSpawner.Shoot();
+        if (projectileSpawner != null)
+        {
+            projectileSpawner.Shoot();
+        }
     }
 
     public void ToggleMenu(InputAction.CallbackContext context)
