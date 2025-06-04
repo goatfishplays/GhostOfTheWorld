@@ -101,6 +101,7 @@ public class PlayerManager : MonoBehaviour
         lookAction.Enable();
         dashAction.Enable();
         sprintAction.Enable();
+        shootAction.Enable();
         itemAction.Enable();
         inventoryAction.Enable();
         interactAction.Enable();
@@ -113,6 +114,7 @@ public class PlayerManager : MonoBehaviour
         lookAction.Disable();
         dashAction.Disable();
         sprintAction.Disable();
+        shootAction.Disable();
         itemAction.Disable();
         inventoryAction.Disable();
         interactAction.Disable();
@@ -125,6 +127,7 @@ public class PlayerManager : MonoBehaviour
         dashAction.started -= Dash;
         sprintAction.started -= StartSprint;
         sprintAction.canceled -= EndSprint;
+        shootAction.started -= Shoot;
         itemAction.performed -= ProgressItemUse;
         itemAction.canceled -= ItemKeyRelease;
         inventoryAction.started -= ToggleInventory;
