@@ -113,10 +113,10 @@ public class AudioPlayer : MonoBehaviour
     public void UnPause()
     {
         audioSource.UnPause();
-        if (!audioSource.loop)
-        {
-            co_audioPlaying = StartCoroutine(Playing(audioSource.clip.length - audioSource.time));
-        }
+        // if (!audioSource.loop)
+        // {
+        co_audioPlaying = StartCoroutine(Playing(audioSource.clip.length - audioSource.time));
+        // }
     }
 
 

@@ -93,14 +93,14 @@ public class AudioManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Play a sound effect that will be childed to an object
+    /// Play a sound effect that will be track an object
     /// </summary>
-    /// <param name="clip">The sound effect to play</param>
+    /// <param name="clip">The sound effect to play</param> 
     /// <param name="tracker">The object to track</param>
-    /// <param name="volume"></param>
+    /// <param name="volume">Volume of sound effect</param>
     /// <param name="pitchMin">Lower Bound on pitch randomization</param>
     /// <param name="pitchMax">Upper Bound on pitch randomization</param>
-    /// <param name="loop"></param>
+    /// <param name="loop">Note: pitch will rerandomize within bounds every time loop happens</param>
     public void PlaySFXAtTracker(AudioClip clip, Transform tracker, float volume = 1f, float pitchMin = 0.9f, float pitchMax = 1.1f, bool loop = false)
     {
         // float pitch = Random.Range(pitchMin, pitchMax);
@@ -118,6 +118,15 @@ public class AudioManager : MonoBehaviour
         player.PlayAudioAtTracker(clip, tracker, volume, pitchMin, pitchMax, loop);
     }
 
+    /// <summary>
+    /// Play a sound effect that will stay at a point
+    /// </summary>
+    /// <param name="clip">The sound effect to play</param> 
+    /// <param name="tracker">The object to track</param>
+    /// <param name="volume">Volume of sound effect</param>
+    /// <param name="pitchMin">Lower Bound on pitch randomization</param>
+    /// <param name="pitchMax">Upper Bound on pitch randomization</param>
+    /// <param name="loop">Note: pitch will rerandomize within bounds every time loop happens</param>
     public void PlaySFXAtPoint(AudioClip clip, Vector3 pos, Quaternion rot, float volume = 1f, float pitchMin = 0.9f, float pitchMax = 1.1f, bool loop = false)
     {
         // float pitch = Random.Range(pitchMin, pitchMax);
@@ -135,6 +144,15 @@ public class AudioManager : MonoBehaviour
         player.PlayAudioAtPoint(clip, pos, rot, volume, pitchMin, pitchMax, loop);
     }
 
+    /// <summary>
+    /// Play a sound effect at the player 
+    /// </summary>
+    /// <param name="clip">The sound effect to play</param> 
+    /// <param name="tracker">The object to track</param>
+    /// <param name="volume">Volume of sound effect</param>
+    /// <param name="pitchMin">Lower Bound on pitch randomization</param>
+    /// <param name="pitchMax">Upper Bound on pitch randomization</param>
+    /// <param name="loop">Note: pitch will rerandomize within bounds every time loop happens</param>
     public void PlaySFX(AudioClip clip, float volume = 1f, float pitchMin = 0.9f, float pitchMax = 1.1f, bool loop = false)
     {
         // float pitch = Random.Range(pitchMin, pitchMax);
@@ -158,18 +176,27 @@ public class AudioManager : MonoBehaviour
         player.PlayAudio(clip, volume, pitchMin, pitchMax, loop);
     }
 
+    /// <summary>
+    /// Use when destroying an SFX Player or making immune to sound pool limits
+    /// </summary>
+    /// <param name="player"></param>
     public void RemoveSFXPlayer(AudioPlayer player)
     {
         freeSFXPlayers.Remove(player);
         activeSFXPlayers.Remove(player);
     }
 
+    /// <summary>
+    /// Use to return an SFX player
+    /// </summary>
+    /// <param name="player"></param>
     public void FreeSFXPlayer(AudioPlayer player)
     {
         freeSFXPlayers.Add(player);
         activeSFXPlayers.Remove(player);
         player.tracker = null;
     }
+
 
     public void PauseAllSFX()
     {
@@ -189,7 +216,10 @@ public class AudioManager : MonoBehaviour
     #endregion SFX
 
     #region Music
-
+    /// <summary>
+    /// Will return a free music player
+    /// </summary>
+    /// <returns></returns>
     private AudioPlayer GetFreeMusicPlayer()
     {
         AudioPlayer player = null;
@@ -229,6 +259,13 @@ public class AudioManager : MonoBehaviour
         return player;
     }
 
+    /// <summary>
+    /// Will crossfade music into the scene
+    /// </summary>
+    /// <param name="clip">New music to play</param>
+    /// <param name="speed">Rate at which the music should fade in and currently playing should fade out</param>
+    /// <param name="volume"></param>
+    /// <param name="loop"></param>
     public void FadeInMusic(AudioClip clip, float speed = 0.5f, float volume = 1, bool loop = true)
     {
         if (co_curMusicPlayer != null)
@@ -238,7 +275,7 @@ public class AudioManager : MonoBehaviour
 
         if (curMusicPlayer != null)
         {
-            dyingMusicPlayers.Add(curMusicPlayer, StartCoroutine(FadeOutCurrentMusic()));
+            dyingMusicPlayers.Add(curMusicPlayer, StartCoroutine(FadeOutCurrentMusic(speed)));
         }
         curMusicPlayer = GetFreeMusicPlayer();
 
