@@ -11,7 +11,6 @@ public class PlayerManager : MonoBehaviour
     public Entity entity;
     public DashController dashController;
     public PlayerInput playerInput;
-    public ProjectileSpawner projectileSpawner;
 
     private InputAction movementAction;
     private InputAction lookAction;
@@ -39,6 +38,8 @@ public class PlayerManager : MonoBehaviour
     private InputAction interactAction;
     private InputAction shiftAction;
 
+    [Header("Shoot")]
+    [SerializeField] private ProjectileSpawner projectileSpawner;
     private InputAction shootAction;
 
     // [Header("Menus")]
