@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,8 +35,16 @@ public class RonanTempThing : MonoBehaviour
         // }
 
         // // itemUIInventoryController.UpdateScreen(inventory.GetTab("Items"));
+        StartCoroutine(SpawnBoi());
+        StartCoroutine(SpawnBoi());
+        StartCoroutine(SpawnBoi());
+        StartCoroutine(SpawnBoi());
     }
-
+    IEnumerator SpawnBoi()
+    {
+        yield return new WaitForSeconds(0.3f);
+        AudioManager.instance.PlaySFXAtTracker(sfx[1], PlayerManager.instance.entity.transform, 0.5f, 0.5f, 1.5f, true);
+    }
     // Update is called once per frame 
     void FixedUpdate()
     {
@@ -57,6 +66,7 @@ public class RonanTempThing : MonoBehaviour
         {
             musicDelay -= 1;
         }
+        // PlayerManager.instance.entity.transform;
 
         // Debug.Log(itemIconsHolderGLG.flexibleHeight);
         // Debug.Log(itemIconsHolderGLG.preferredHeight);

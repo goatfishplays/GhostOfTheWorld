@@ -65,6 +65,10 @@ public class AudioManager : MonoBehaviour
 
     #region SFX
 
+    /// <summary>
+    /// If can get/make a free sfx player will return the free sfx player
+    /// </summary>
+    /// <returns></returns>
     private AudioPlayer RequestFreeSFXPlayer()
     {
         AudioPlayer player = null;
@@ -88,9 +92,18 @@ public class AudioManager : MonoBehaviour
         return player;
     }
 
+    /// <summary>
+    /// Play a sound effect that will be childed to an object
+    /// </summary>
+    /// <param name="clip">The sound effect to play</param>
+    /// <param name="tracker">The object to track</param>
+    /// <param name="volume"></param>
+    /// <param name="pitchMin">Lower Bound on pitch randomization</param>
+    /// <param name="pitchMax">Upper Bound on pitch randomization</param>
+    /// <param name="loop"></param>
     public void PlaySFXAtTracker(AudioClip clip, Transform tracker, float volume = 1f, float pitchMin = 0.9f, float pitchMax = 1.1f, bool loop = false)
     {
-        float pitch = Random.Range(pitchMin, pitchMax);
+        // float pitch = Random.Range(pitchMin, pitchMax);
         AudioPlayer player = RequestFreeSFXPlayer();
         if (player == null)
         {
@@ -102,12 +115,12 @@ public class AudioManager : MonoBehaviour
         activeSFXPlayers.Add(player);
 
         // Play audio
-        player.PlayAudioAtTracker(clip, tracker, volume, pitch, loop);
+        player.PlayAudioAtTracker(clip, tracker, volume, pitchMin, pitchMax, loop);
     }
 
     public void PlaySFXAtPoint(AudioClip clip, Vector3 pos, Quaternion rot, float volume = 1f, float pitchMin = 0.9f, float pitchMax = 1.1f, bool loop = false)
     {
-        float pitch = Random.Range(pitchMin, pitchMax);
+        // float pitch = Random.Range(pitchMin, pitchMax);
         AudioPlayer player = RequestFreeSFXPlayer();
         if (player == null)
         {
@@ -119,12 +132,12 @@ public class AudioManager : MonoBehaviour
         activeSFXPlayers.Add(player);
 
         // Play audio
-        player.PlayAudioAtPoint(clip, pos, rot, volume, pitch, loop);
+        player.PlayAudioAtPoint(clip, pos, rot, volume, pitchMin, pitchMax, loop);
     }
 
     public void PlaySFX(AudioClip clip, float volume = 1f, float pitchMin = 0.9f, float pitchMax = 1.1f, bool loop = false)
     {
-        float pitch = Random.Range(pitchMin, pitchMax);
+        // float pitch = Random.Range(pitchMin, pitchMax);
 
         AudioPlayer player = RequestFreeSFXPlayer();
         if (player == null)
@@ -142,7 +155,7 @@ public class AudioManager : MonoBehaviour
         player.transform.localRotation = Quaternion.identity;
 
         // Play audio
-        player.PlayAudio(clip, volume, pitch, loop);
+        player.PlayAudio(clip, volume, pitchMin, pitchMax, loop);
     }
 
     public void RemoveSFXPlayer(AudioPlayer player)

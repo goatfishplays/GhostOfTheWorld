@@ -4,6 +4,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.Rendering.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -11,12 +12,12 @@ public class PlayerManager : MonoBehaviour
     public Entity entity;
     public DashController dashController;
     public PlayerInput playerInput;
-    public ProjectileSpawner projectileSpawner;
 
     private InputAction movementAction;
-    private InputAction lookAction;
+
     [Header("Look")]
     public PlayerCameraControl playerCameraControl;
+    private InputAction lookAction;
     private InputAction dashAction;
 
     [Header("Sprint")]
@@ -28,26 +29,28 @@ public class PlayerManager : MonoBehaviour
     // [SerializeField] ItemUIInventoryController inventoryUI; 
     public Inventory inventory;
     private InputAction inventoryAction;
+
     [Header("Item")]
     [SerializeField] private float itemUseTime = 0f;
     [SerializeField] private bool itemUsed = false;
     [SerializeField] private Image primaryItemFill;
     private const string ITEM_USE_SPEED_MULT_ID = "ItemUse";
     private InputAction itemAction;
+
     [Header("Interact")]
     [SerializeField] private PlayerInteracter playerInteracter;
     private InputAction interactAction;
     private InputAction shiftAction;
 
+    [Header("Shoot")]
+    [SerializeField] private ProjectileSpawner projectileSpawner;
     private InputAction shootAction;
 
     // [Header("Menus")]
     private InputAction menuAction;
     public MenuManager menuManager => MenuManager.instance;
 
-
     // private Coroutine co_itemDelay = null;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         if (instance == null)
@@ -59,31 +62,34 @@ public class PlayerManager : MonoBehaviour
             Debug.LogError("Two Player Managers Found, Deleting Second");
             Destroy(gameObject);
         }
-        // lock cursor
+
+        if (projectileSpawner == null)
+        {
+            Debug.LogWarning("There is no projectileSpawner attached to the player");
+        }
+
+        // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
 
-        // get inputs
+        // Get inputs
         movementAction = playerInput.actions.FindAction("Move");
         lookAction = playerInput.actions.FindAction("Look");
         dashAction = playerInput.actions.FindAction("Dash");
         sprintAction = playerInput.actions.FindAction("Sprint");
-        if (projectileSpawner != null)
-        {
-            shootAction = playerInput.actions.FindAction("Shoot");
-            shootAction.started += Shoot;
-        }
-
+        shootAction = playerInput.actions.FindAction("Shoot");
         itemAction = playerInput.actions.FindAction("Item");
         inventoryAction = playerInput.actions.FindAction("Inventory");
         interactAction = playerInput.actions.FindAction("Interact");
         shiftAction = playerInput.actions.FindAction("Shift");
         menuAction = playerInput.actions.FindAction("Menu");
 
+        // Set all of the actions to their corresponding functions.
         // lookAction.performed += context => { playerCameraControl.AddRotation(context.ReadValue<Vector2>()); };
         lookAction.performed += Look;
         dashAction.started += Dash;
         sprintAction.started += StartSprint;
         sprintAction.canceled += EndSprint;
+        shootAction.started += Shoot;
         itemAction.performed += ProgressItemUse;
         itemAction.canceled += ItemKeyRelease;
         inventoryAction.started += ToggleInventory;
@@ -100,6 +106,7 @@ public class PlayerManager : MonoBehaviour
         lookAction.Enable();
         dashAction.Enable();
         sprintAction.Enable();
+        shootAction.Enable();
         itemAction.Enable();
         inventoryAction.Enable();
         interactAction.Enable();
@@ -112,6 +119,7 @@ public class PlayerManager : MonoBehaviour
         lookAction.Disable();
         dashAction.Disable();
         sprintAction.Disable();
+        shootAction.Disable();
         itemAction.Disable();
         inventoryAction.Disable();
         interactAction.Disable();
@@ -124,6 +132,7 @@ public class PlayerManager : MonoBehaviour
         dashAction.started -= Dash;
         sprintAction.started -= StartSprint;
         sprintAction.canceled -= EndSprint;
+        shootAction.started -= Shoot;
         itemAction.performed -= ProgressItemUse;
         itemAction.canceled -= ItemKeyRelease;
         inventoryAction.started -= ToggleInventory;
@@ -208,7 +217,10 @@ public class PlayerManager : MonoBehaviour
 
     public void Shoot(InputAction.CallbackContext context)
     {
-        projectileSpawner.Shoot();
+        if (projectileSpawner != null)
+        {
+            projectileSpawner.Shoot();
+        }
     }
 
     public void ToggleMenu(InputAction.CallbackContext context)
@@ -267,6 +279,7 @@ public class PlayerManager : MonoBehaviour
         playerInteracter.interactionHeld = true;
         playerInteracter.areaToggle = shiftAction.IsPressed();
     }
+
     public void EndInteract(InputAction.CallbackContext context)
     {
         playerInteracter.interactionHeld = false;
