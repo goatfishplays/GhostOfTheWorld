@@ -49,11 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ownerId: -1
-  attackLifetime: 20
-  damage: 10
-  iFramesAddTime: 0.2
-  ignoresIFrames: 0
-  destroyOnHit: 1
+  atttakConfig: {fileID: 11400000, guid: 7f93e59ac9decba48ad89c9f19f7b5c9, type: 2}
 --- !u!135 &2248172840737024589
 SphereCollider:
   m_ObjectHideFlags: 0
