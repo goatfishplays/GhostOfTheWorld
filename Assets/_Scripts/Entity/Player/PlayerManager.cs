@@ -14,9 +14,10 @@ public class PlayerManager : MonoBehaviour
     public PlayerInput playerInput;
 
     private InputAction movementAction;
-    private InputAction lookAction;
+
     [Header("Look")]
     public PlayerCameraControl playerCameraControl;
+    private InputAction lookAction;
     private InputAction dashAction;
 
     [Header("Sprint")]
@@ -28,12 +29,14 @@ public class PlayerManager : MonoBehaviour
     // [SerializeField] ItemUIInventoryController inventoryUI; 
     public Inventory inventory;
     private InputAction inventoryAction;
+
     [Header("Item")]
     [SerializeField] private float itemUseTime = 0f;
     [SerializeField] private bool itemUsed = false;
     [SerializeField] private Image primaryItemFill;
     private const string ITEM_USE_SPEED_MULT_ID = "ItemUse";
     private InputAction itemAction;
+
     [Header("Interact")]
     [SerializeField] private PlayerInteracter playerInteracter;
     private InputAction interactAction;
@@ -47,9 +50,7 @@ public class PlayerManager : MonoBehaviour
     private InputAction menuAction;
     public MenuManager menuManager => MenuManager.instance;
 
-
     // private Coroutine co_itemDelay = null;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         if (instance == null)
@@ -66,10 +67,11 @@ public class PlayerManager : MonoBehaviour
         {
             Debug.LogWarning("There is no projectileSpawner attached to the player");
         }
-        // lock cursor
+
+        // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
 
-        // get inputs
+        // Get inputs
         movementAction = playerInput.actions.FindAction("Move");
         lookAction = playerInput.actions.FindAction("Look");
         dashAction = playerInput.actions.FindAction("Dash");
@@ -81,6 +83,7 @@ public class PlayerManager : MonoBehaviour
         shiftAction = playerInput.actions.FindAction("Shift");
         menuAction = playerInput.actions.FindAction("Menu");
 
+        // Set all of the actions to their corresponding functions.
         // lookAction.performed += context => { playerCameraControl.AddRotation(context.ReadValue<Vector2>()); };
         lookAction.performed += Look;
         dashAction.started += Dash;
@@ -276,6 +279,7 @@ public class PlayerManager : MonoBehaviour
         playerInteracter.interactionHeld = true;
         playerInteracter.areaToggle = shiftAction.IsPressed();
     }
+
     public void EndInteract(InputAction.CallbackContext context)
     {
         playerInteracter.interactionHeld = false;
