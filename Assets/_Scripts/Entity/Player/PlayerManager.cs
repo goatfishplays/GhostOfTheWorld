@@ -11,7 +11,6 @@ public class PlayerManager : MonoBehaviour
     public Entity entity;
     public DashController dashController;
     public PlayerInput playerInput;
-    public ProjectileSpawner projectileSpawner;
 
     private InputAction movementAction;
     private InputAction lookAction;
@@ -39,6 +38,8 @@ public class PlayerManager : MonoBehaviour
     private InputAction interactAction;
     private InputAction shiftAction;
 
+    [Header("Shoot")]
+    [SerializeField] private ProjectileSpawner projectileSpawner;
     private InputAction shootAction;
 
     // [Header("Menus")]
@@ -100,6 +101,7 @@ public class PlayerManager : MonoBehaviour
         lookAction.Enable();
         dashAction.Enable();
         sprintAction.Enable();
+        shootAction.Enable();
         itemAction.Enable();
         inventoryAction.Enable();
         interactAction.Enable();
@@ -112,6 +114,7 @@ public class PlayerManager : MonoBehaviour
         lookAction.Disable();
         dashAction.Disable();
         sprintAction.Disable();
+        shootAction.Disable();
         itemAction.Disable();
         inventoryAction.Disable();
         interactAction.Disable();
@@ -124,6 +127,7 @@ public class PlayerManager : MonoBehaviour
         dashAction.started -= Dash;
         sprintAction.started -= StartSprint;
         sprintAction.canceled -= EndSprint;
+        shootAction.started -= Shoot;
         itemAction.performed -= ProgressItemUse;
         itemAction.canceled -= ItemKeyRelease;
         inventoryAction.started -= ToggleInventory;
