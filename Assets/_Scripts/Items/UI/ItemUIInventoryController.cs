@@ -76,6 +76,7 @@ public class ItemUIInventoryController : MonoBehaviour
     public void FetchNextScreen()
     {
         curTab++;
+
         UpdateScreen(inventory.GetTabItems(curTab), inventory.GetTabName(curTab));
     }
 
