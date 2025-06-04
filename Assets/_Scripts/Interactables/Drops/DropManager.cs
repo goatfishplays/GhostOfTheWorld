@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class DropManager : MonoBehaviour
 {
+    [Tooltip("The game object that is the parent of all of the drops. Usually --- Drops ---")]
     [SerializeField] private Transform holder;
     private static DropManager _instance;
     public static DropManager instance => _instance;
