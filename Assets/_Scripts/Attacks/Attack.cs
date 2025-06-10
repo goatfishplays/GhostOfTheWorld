@@ -27,7 +27,7 @@ public class Attack : MonoBehaviour
         if (entity != null && ownerId != entity.id)
         {
             // TODO: Make this call a function on the target when it touches instead of directly changing health.
-            other.GetComponentInParent<EntityHealth>().ChangeHealth(-atttakConfig.damage, atttakConfig.iFramesAddTime, atttakConfig.ignoresIFrames);
+            other.GetComponentInParent<EntityHealth>().onHit(atttakConfig.damage, atttakConfig.iFramesAddTime, atttakConfig.ignoresIFrames);
 
             if (atttakConfig.destroyOnHit == true)
             {

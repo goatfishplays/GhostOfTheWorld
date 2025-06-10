@@ -60,10 +60,7 @@ public class EntityHealth : MonoBehaviour
             {
                 health += delta;
 
-                if (hitSound != null && delta < DAMAGE_HIT_SOUND_THRESHHOLD && !hitSound.isPlaying)
-                {
-                    hitSound.Play();
-                }
+                
 
                 OnHealthChange?.Invoke(delta);
 
@@ -104,6 +101,26 @@ public class EntityHealth : MonoBehaviour
     {
         yield return new WaitForSeconds(iFrameAddTime);
         co_iFrames = null;
+    }
+
+    // Called when an attack collides with the entity.
+    public virtual void onHit(float damage, float iFramesAddTime = 0.2f, bool ignoresIframes = false)
+    {
+        // Check that damage is more than 0
+        if (damage <= 0f)
+        {
+            return;
+        }
+
+        // Call hit sound
+        // TODO: Figure out what DAMAGE_HIT_SOUND_THRESHHOLD actually does. -1f means anything larger than that would still trigger stuff.
+        if (hitSound != null && damage < DAMAGE_HIT_SOUND_THRESHHOLD && !hitSound.isPlaying)
+        {
+            hitSound.Play();
+        }
+
+        // Change health.
+        ChangeHealth(-damage, iFramesAddTime, ignoresIframes);
     }
 
     public virtual void Die()
