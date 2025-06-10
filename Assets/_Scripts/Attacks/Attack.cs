@@ -8,7 +8,10 @@ public class Attack : MonoBehaviour
 
     private void Awake()
     {
-        Destroy(gameObject, atttakConfig.attackLifetime);
+        if (atttakConfig.attackLifetime != -1f)
+        {
+            Destroy(gameObject, atttakConfig.attackLifetime);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

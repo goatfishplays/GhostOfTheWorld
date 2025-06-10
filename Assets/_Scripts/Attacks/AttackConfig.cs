@@ -3,8 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/AttackConfig")]
 public class AttackConfig : ScriptableObject
 {
-    [Range (0f, 300f)]
-    [Tooltip("Amount of time in seconds before the attack is destroyed automatically")]
+    [Range (-1f, 300f)]
+    [Tooltip("Amount of time in seconds before the attack is destroyed automatically. If -1 then infinite")]
     public float attackLifetime = 100f;
     [Range (0f, 100f)]
     public float damage = 10f;
