@@ -12,8 +12,8 @@ public class InputSliderSync : MonoBehaviour
     [SerializeField] private Slider slider;
     [SerializeField] private TMP_InputField inputField;
 
-    [SerializeField] private UnityEvent m_OnValueChanged = new UnityEvent();
-    public UnityEvent onValueChanged { get { return m_OnValueChanged; } set { m_OnValueChanged = value; } }
+    [SerializeField] private UnityEvent<float> m_OnValueChanged = new UnityEvent<float>();
+    public UnityEvent<float> onValueChanged { get { return m_OnValueChanged; } set { m_OnValueChanged = value; } }
 
     private void Awake()
     {
@@ -33,7 +33,7 @@ public class InputSliderSync : MonoBehaviour
         _curVal = val;
         // Debug.Log($"{name} had value set to {_curVal}");
         inputField.text = _curVal.ToString("F3");
-        m_OnValueChanged.Invoke();
+        m_OnValueChanged.Invoke(_curVal);
     }
 
     /// <summary>
@@ -58,6 +58,6 @@ public class InputSliderSync : MonoBehaviour
         // Debug.Log($"{name} had value set to {_curVal}");
         slider.value = _curVal;
         inputField.text = _curVal.ToString();
-        m_OnValueChanged.Invoke();
+        m_OnValueChanged.Invoke(_curVal);
     }
 }
