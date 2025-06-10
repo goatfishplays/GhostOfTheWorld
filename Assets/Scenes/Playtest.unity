@@ -915,7 +915,7 @@ GameObject:
   - component: {fileID: 881982745}
   - component: {fileID: 881982744}
   m_Layer: 6
-  m_Name: Cube
+  m_Name: Gun Render
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -959,7 +959,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: da2d5f6b3cf2abb4591b1141cb76d13c, type: 2}
+  - {fileID: 2100000, guid: 9b6ee51a26d331e499512a16c0d26cb5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1942,7 +1942,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1563348921}
   m_Layer: 7
-  m_Name: Floor
+  m_Name: Generic Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
