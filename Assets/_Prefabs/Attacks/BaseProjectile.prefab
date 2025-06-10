@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1759130200623249787}
   - component: {fileID: 7354916256786197011}
   - component: {fileID: 4881007179783630726}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BaseProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ownerId: -1
-  atttakConfig: {fileID: 11400000, guid: 7f93e59ac9decba48ad89c9f19f7b5c9, type: 2}
+  atttakConfig: {fileID: 11400000, guid: 1b7ff41f3722b384ab54f4aa90dccdfe, type: 2}
 --- !u!135 &2248172840737024589
 SphereCollider:
   m_ObjectHideFlags: 0

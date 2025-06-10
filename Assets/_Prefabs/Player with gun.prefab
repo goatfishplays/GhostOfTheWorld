@@ -80,8 +80,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 4605453249981260005}
   projectileSpawnPoint: {fileID: 3232732390060293229}
-  viewDirection: {fileID: 0}
-  projectilePrefab: {fileID: 2491153178868494655, guid: eceb7a761a4a99d4ba85fcd9e81acc5f, type: 3}
+  viewDirection: {fileID: 6416582868237728377}
+  projectilePrefab: {fileID: 2352089919489166350, guid: 423315d7a9dcb854b8f694ba007e021f, type: 3}
+  parent: {fileID: 0}
   projectileSpeed: 50
 --- !u!1 &6388737611391752195
 GameObject:
