@@ -1,31 +1,21 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Gideon_Temp : MonoBehaviour
 {
-    public Entity player;
-    public PlayerInput playerInput;
-    public Camera mainCam;
-
-    private InputAction damageAction;
-
+    public Button reset;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        damageAction = playerInput.actions.FindAction("TempDamage");
-        damageAction.performed += TakeDamage;
+        reset.onClick.AddListener(ResetScene);
 
     }
 
-    // Update is called once per frame
-    void Update()
+    private void ResetScene()
     {
-        
-    }
-
-    void TakeDamage(InputAction.CallbackContext context)
-    {
-        player.entityHealth.ChangeHealth(-5f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

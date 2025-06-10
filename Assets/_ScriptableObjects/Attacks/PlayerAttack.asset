@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d14a4d4f9349434d94e732602f46e87, type: 3}
   m_Name: PlayerAttack
   m_EditorClassIdentifier: 
-  attackLifetime: 1000
-  damage: 26.6
+  attackLifetime: 10
+  damage: 20
   iFramesAddTime: 0
   ignoresIFrames: 0
   destroyOnHit: 1

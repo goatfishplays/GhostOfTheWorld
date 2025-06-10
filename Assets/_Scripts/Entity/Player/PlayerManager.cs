@@ -98,8 +98,6 @@ public class PlayerManager : MonoBehaviour
         menuAction.started += ToggleMenu;
     }
 
-
-
     private void OnEnable()
     {
         movementAction.Enable();
@@ -111,6 +109,7 @@ public class PlayerManager : MonoBehaviour
         inventoryAction.Enable();
         interactAction.Enable();
         shiftAction.Enable();
+        menuAction.Enable();
     }
 
     private void OnDisable()
@@ -124,6 +123,7 @@ public class PlayerManager : MonoBehaviour
         inventoryAction.Disable();
         interactAction.Disable();
         shiftAction.Disable();
+        menuAction.Disable();
     }
 
     void OnDestroy()
@@ -138,6 +138,21 @@ public class PlayerManager : MonoBehaviour
         inventoryAction.started -= ToggleInventory;
         interactAction.started -= StartInteract;
         interactAction.canceled -= EndInteract;
+        menuAction.started -= ToggleMenu; 
+    }
+    
+    public void disableActions()
+    {
+        movementAction.Disable();
+        lookAction.Disable();
+        dashAction.Disable();
+        sprintAction.Disable();
+        shootAction.Disable();
+        itemAction.Disable();
+        inventoryAction.Disable();
+        interactAction.Disable();
+        shiftAction.Disable();
+        menuAction.Disable();
     }
 
     // Update is called once per frame 
