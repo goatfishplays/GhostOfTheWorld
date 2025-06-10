@@ -10,6 +10,7 @@ public class OptionsManager : MonoBehaviour
     public void SetXSensitivity(float xSensitivity)
     {
         xSensitivityHolder.SetValue(xSensitivity);
+        _xSensitivity = xSensitivity;
     }
 
     public void FetchXSensitivity()
@@ -27,6 +28,7 @@ public class OptionsManager : MonoBehaviour
     public void FetchYSensitivity()
     {
         _ySensitivity = ySensitivityHolder.curVal;
+        _ySensitivity = ySensitivity;
     }
 
 
@@ -43,7 +45,9 @@ public class OptionsManager : MonoBehaviour
             Destroy(this);
         }
 
-        xSensitivityHolder.onValueChanged.AddListener(FetchXSensitivity);
-        ySensitivityHolder.onValueChanged.AddListener(FetchYSensitivity);
+        // xSensitivityHolder.onValueChanged.AddListener(FetchXSensitivity);
+        // ySensitivityHolder.onValueChanged.AddListener(FetchYSensitivity); 
+        xSensitivityHolder.onValueChanged.AddListener((float _) => FetchXSensitivity());
+        ySensitivityHolder.onValueChanged.AddListener((float _) => FetchYSensitivity());
     }
 }
