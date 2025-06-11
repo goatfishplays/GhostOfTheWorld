@@ -19,10 +19,11 @@ public class EntityHealth : MonoBehaviour
     // Actions/Events
     public event Action OnDie;
     public event Action<float> OnHealthChange;
+    public event Action<float> OnHit;
 
     // Misc
-    public AudioSource hitSound = null;
-    public AudioSource deathSound = null;
+    public AudioClip hitSound = null;
+    public AudioClip deathSound = null;
 
     // Coroutines
     public Coroutine co_iFrames = null;
@@ -47,7 +48,8 @@ public class EntityHealth : MonoBehaviour
     }
 
     /// <summary>
-    /// TODO Someone remind me to add a separate hit function so the hit sound detection can be less stupid  
+    /// For health changes
+    /// Triggers OnHealthChange Action
     /// </summary>
     /// <param name="delta"></param>
     /// <param name="iFramesAddTime"></param>
@@ -60,12 +62,45 @@ public class EntityHealth : MonoBehaviour
             {
                 health += delta;
 
-                if (hitSound != null && delta < DAMAGE_HIT_SOUND_THRESHHOLD && !hitSound.isPlaying)
+                OnHealthChange?.Invoke(delta);
+
+                if (health > maxHealth)
                 {
-                    hitSound.Play();
+                    health = maxHealth;
+                }
+                else if (health <= 0)
+                {
+                    Die();
                 }
 
+
+                if (iFramesAddTime > 0f)
+                {
+                    SetIFrames(iFramesAddTime, overridesCurrent: false);
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// For explicit damage dealing
+    /// Triggers OnHit Action
+    /// </summary>
+    /// <param name="delta"></param> 
+    /// <param name="iFramesAddTime"></param>
+    /// <param name="ignoresIframes"></param>
+    public virtual void Hit(float delta, float iFramesAddTime = 0.2f, bool ignoresIframes = false)
+    {
+        if (changingHealth && !dead)
+        {
+            if (delta > 0 || !hasIFrames || ignoresIframes)
+            {
+                health += delta;
+
+
+                AudioManager.instance.PlaySFXAtTracker(hitSound, transform);
                 OnHealthChange?.Invoke(delta);
+                OnHit?.Invoke(delta);
 
                 if (health > maxHealth)
                 {
@@ -110,7 +145,8 @@ public class EntityHealth : MonoBehaviour
     {
         if (deathSound != null)
         {
-            deathSound.Play();
+            // deathSound.Play();
+            AudioManager.instance.PlaySFXAtTracker(deathSound, transform);
         }
 
         dead = true;

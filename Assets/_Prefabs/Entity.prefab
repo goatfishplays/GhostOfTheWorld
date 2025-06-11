@@ -219,8 +219,8 @@ MonoBehaviour:
   maxHealth: 100
   healthChangeRate: 0
   dead: 0
-  hitSound: {fileID: 0}
-  deathSound: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: 21d947ee8165aa24ea98ca2d8543fc2c, type: 3}
+  deathSound: {fileID: 8300000, guid: ff6f3da92dc80034ea11fcae56286aef, type: 3}
 --- !u!114 &322537136667298855
 MonoBehaviour:
   m_ObjectHideFlags: 0
