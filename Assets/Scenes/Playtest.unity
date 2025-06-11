@@ -445,7 +445,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddd88329796bb39438f3fdb0a7df717a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1221945094}
   reset: {fileID: 156012224}
 --- !u!1 &593659400
 GameObject:
@@ -1042,6 +1041,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3131932763214718089, guid: 66c23a186ae7513419c85b78c49adb21, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 145dadb9bb9f3284d9e7daa7b415b0c2, type: 2}
     - target: {fileID: 5357125165475625520, guid: 66c23a186ae7513419c85b78c49adb21, type: 3}
       propertyPath: m_Name
       value: BoarHitbox
@@ -1561,10 +1564,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3491416432501150593, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
-      propertyPath: disableHitboxWhileDying
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3491416432501150593, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
       propertyPath: disableOnDie.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -1623,6 +1622,10 @@ PrefabInstance:
     - target: {fileID: 4740106956462075950, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5010563861782182163, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5322493560923960867, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
       propertyPath: m_IsActive
@@ -1815,17 +1818,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e13d4fcb9debc64fa6bc2e6b50c092e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1221945094 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3491416432501150593, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
-  m_PrefabInstance: {fileID: 1221945092}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7e59167a53641042b516a405b829e5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1255446805
