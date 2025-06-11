@@ -21,11 +21,11 @@ public class Gideon_Temp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void TakeDamage(InputAction.CallbackContext context)
     {
-        player.entityHealth.ChangeHealth(-5f);
+        player.entityHealth.Hit(-5f);
     }
 }
