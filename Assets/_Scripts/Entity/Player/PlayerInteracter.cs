@@ -23,6 +23,12 @@ public class PlayerInteracter : MonoBehaviour
         layerMask = LayerMask.GetMask("Entities", "Interactable", "World");
         interactableMask = LayerMask.GetMask("Interactable");
     }
+
+    public void Start()
+    {
+        Interactable interactable = AttemptCast();
+        SetInteractionBoi(interactable);
+    }
     // public GameObject AttemptCast()
     public Interactable AttemptCast()
     {

@@ -69,7 +69,7 @@ public class MenuManager : MonoBehaviour
         {
             case MenuState.None:
                 // Set game state
-                PlayerManager.instance.SetLookState(true);
+                PlayerManager.instance.LockInputs(false, false);
                 PauseGame(false);
 
                 // Activate Stuff
@@ -77,37 +77,37 @@ public class MenuManager : MonoBehaviour
 
             case MenuState.Pause:
                 // Set game state
-                PlayerManager.instance.SetLookState(false);
-                pauseHolder.SetActive(true);
+                PlayerManager.instance.LockInputs(true, true);
+                PauseGame(true);
 
                 // Activate Stuff
+                pauseHolder.SetActive(true);
                 activeMenu = pauseHolder;
-                PauseGame(true);
                 break;
 
             case MenuState.Controls:
                 // Set game state
-                PlayerManager.instance.SetLookState(false);
-                controlsHolder.SetActive(true);
+                PlayerManager.instance.LockInputs(true, true);
+                PauseGame(true);
 
                 // Activate Stuff
+                controlsHolder.SetActive(true);
                 activeMenu = controlsHolder;
-                PauseGame(true);
                 break;
 
             case MenuState.Audio:
                 // Set game state
-                PlayerManager.instance.SetLookState(false);
-                audioHolder.SetActive(true);
+                PlayerManager.instance.LockInputs(true, true);
+                PauseGame(true);
 
                 // Activate Stuff
+                audioHolder.SetActive(true);
                 activeMenu = audioHolder;
-                PauseGame(true);
                 break;
 
             case MenuState.Inventory:
                 // Set game state
-                PlayerManager.instance.SetLookState(false);
+                PlayerManager.instance.LockInputs(true, true);
                 PauseGame(false);
 
                 // Activate Stuff
