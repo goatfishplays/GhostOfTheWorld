@@ -22,5 +22,8 @@ public class EnemySpawner : MonoBehaviour
             xPos = Random.Range(10, 11);
             
         }
+
+        // This gives an error if there's no return value.
+        return null;
     }
 }
