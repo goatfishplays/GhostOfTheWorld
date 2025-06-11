@@ -44,7 +44,7 @@ namespace PlatformerAI
 
         public override void OnEnter()
         {
-            // Debug.Log("Entering attack state");
+            Debug.Log("Entering attack state");
             defaultSpeed = agent.speed;
             isCharging = false;
             canDamage = false;
@@ -74,7 +74,7 @@ namespace PlatformerAI
                 agent.speed = chargeSpeed;
                 agent.isStopped = false;
                 agent.SetDestination(chargeEndDistant);
-                // Debug.Log("CHARG");
+                Debug.Log("CHARG");
             }
 
             if (isCharging)
@@ -95,7 +95,7 @@ namespace PlatformerAI
                         enemy.Attack(playerEntity); // Damage once
                     }
                     canDamage = false; // Prevent multiple hits
-                    // Debug.Log("Boar HIT the player!");
+                    Debug.Log("Boar HIT the player!");
                 }
 
             }
@@ -116,7 +116,7 @@ namespace PlatformerAI
 
         void endCharge()
         {
-            // Debug.Log("No more charging");
+            Debug.Log("No more charging");
             isCharging = false;
             canDamage = false;
             timer.Start();

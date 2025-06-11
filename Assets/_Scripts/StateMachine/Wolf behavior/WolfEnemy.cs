@@ -119,6 +119,7 @@ namespace PlatformerAI
             jumpTimer.Start();
             Debug.Log("Wolf jumping");
         }
+        
 
     }
 

@@ -68,6 +68,8 @@ public class PlayerManager : MonoBehaviour
             Debug.LogWarning("There is no projectileSpawner attached to the player");
         }
 
+        entity.entityHealth.OnDie += onPlayerDie;
+
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -98,8 +100,6 @@ public class PlayerManager : MonoBehaviour
         interactAction.canceled += EndInteract;
         menuAction.started += ToggleMenu;
     }
-
-
 
     private void OnEnable()
     {
@@ -141,7 +141,7 @@ public class PlayerManager : MonoBehaviour
         inventoryAction.started -= ToggleInventory;
         interactAction.started -= StartInteract;
         interactAction.canceled -= EndInteract;
-        menuAction.started -= ToggleMenu;
+        menuAction.started -= ToggleMenu; 
     }
 
     // Update is called once per frame 
@@ -312,6 +312,12 @@ public class PlayerManager : MonoBehaviour
     public void EndInteract(InputAction.CallbackContext context)
     {
         playerInteracter.interactionHeld = false;
+    }
+
+    private void onPlayerDie()
+    {
+        LockInputs(true, true);
+        entity.rb.linearVelocity = Vector3.zero;
     }
 
     // public void StartItemUse(InputAction.CallbackContext context)

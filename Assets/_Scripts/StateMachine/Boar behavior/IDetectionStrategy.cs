@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using Utilities;
 
@@ -26,20 +27,38 @@ namespace PlatformerAI
         {
             if (timer.IsRunning) return false;
 
-            var directionToPlayer = player.position - detector.position; ;
-            var angleToPlayer = Vector3.Angle(directionToPlayer, detector.forward);
+            Vector3 directionToPlayer = player.position - detector.position;
+            float distanceToPlayer = directionToPlayer.magnitude;
+            float angleToPlayer = Vector3.Angle(directionToPlayer.normalized, detector.forward);
 
-            // if the player is not in the detectiion angle and outer radius 
-            //aka the cone in front of the player
-            // or outside the inner radius, return false
-            if ((!(angleToPlayer < detectionAngle / 2f) || !(directionToPlayer.magnitude < detectionRadius))
-                && !(directionToPlayer.magnitude < innerDetectionRadius))
-            {
+            bool isInInnerRadius = distanceToPlayer < innerDetectionRadius;
+            bool isInCone = angleToPlayer < detectionAngle / 2f && distanceToPlayer < detectionRadius;
+
+            if (!(isInInnerRadius || isInCone))
                 return false;
+
+            // Check for line of sight
+            Vector3 eyeLevel = detector.position + Vector3.up * 1f; // Adjust height if needed
+            Vector3 shootDir = (player.position - eyeLevel).normalized;
+            LayerMask detectionMask = LayerMask.GetMask("Default", "Player");
+
+            RaycastHit hit;
+            if (Physics.Raycast(eyeLevel, shootDir, out hit, distanceToPlayer,detectionMask))
+            {
+                if (!hit.collider.CompareTag("Player"))
+                {
+                    return false; // Something is blocking the view
+                }
             }
+            else
+            {
+                return false; // Nothing was hit — very unlikely, but a safe fallback
+            }
+
             timer.Start();
             return true;
         }
+
     }
 
 
