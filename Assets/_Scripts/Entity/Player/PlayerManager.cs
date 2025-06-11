@@ -141,20 +141,6 @@ public class PlayerManager : MonoBehaviour
         interactAction.canceled -= EndInteract;
         menuAction.started -= ToggleMenu; 
     }
-    
-    public void disableActions()
-    {
-        movementAction.Disable();
-        lookAction.Disable();
-        dashAction.Disable();
-        sprintAction.Disable();
-        shootAction.Disable();
-        itemAction.Disable();
-        inventoryAction.Disable();
-        interactAction.Disable();
-        shiftAction.Disable();
-        menuAction.Disable();
-    }
 
     // Update is called once per frame 
     void Update()
