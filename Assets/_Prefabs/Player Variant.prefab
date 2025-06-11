@@ -76,6 +76,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7424302950510523429, guid: 127f4ffb360f7064b8b9c1f7e8a5ac8a, type: 3}
+      propertyPath: id
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8880053759967795834, guid: 127f4ffb360f7064b8b9c1f7e8a5ac8a, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.5
@@ -108,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1af09132305024b8415ae3060497e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dashCost: 5
   dashTime: 0.2
   dashCooldownTime: 1
   iFrameTime: 0.2
@@ -126,6 +131,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74048ab386a305246ad58a4f39ec5c50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  primaryItem: {fileID: 0}
+  controllerUI: {fileID: 0}
+  primaryItemUI: {fileID: 0}
+  entity: {fileID: 0}
+  dropOffset: 1
 --- !u!114 &7213735928535696153 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7424302950510523429, guid: 127f4ffb360f7064b8b9c1f7e8a5ac8a, type: 3}
