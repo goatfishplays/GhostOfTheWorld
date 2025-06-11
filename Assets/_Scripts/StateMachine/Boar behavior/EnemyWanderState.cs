@@ -19,8 +19,7 @@ namespace PlatformerAI
 
         public override void OnEnter()
         {
-            Debug.Log("Wander");
-            
+            // Debug.Log("Wander");
         }
 
         public override void Update()
