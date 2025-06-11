@@ -156,6 +156,7 @@ GameObject:
   - component: {fileID: 210348509221545620}
   - component: {fileID: 280241534858500637}
   - component: {fileID: 2938606765168549507}
+  - component: {fileID: 8797792608303903724}
   m_Layer: 6
   m_Name: Entity
   m_TagString: Untagged
@@ -345,3 +346,20 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!114 &8797792608303903724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858288228154479931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdfa35efd6bbba247b2122bf87c21eb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drops:
+  - itemSO: {fileID: 0}
+    minCount: 0
+    excessDropChance: 0
+    maxCount: 0

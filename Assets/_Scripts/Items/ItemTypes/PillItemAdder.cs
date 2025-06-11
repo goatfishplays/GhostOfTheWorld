@@ -5,7 +5,7 @@ using UnityEngine;
 /// </summary>
 public class PillItemAdder : MonoBehaviour
 {
-    public PillItem[] items;
+    public PillItemSO[] items;
     void Start()
     {
         foreach (var item in items)

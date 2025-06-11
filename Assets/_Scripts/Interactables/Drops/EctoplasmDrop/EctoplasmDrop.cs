@@ -9,7 +9,7 @@ public class EctoplasmDrop : Drop
         {
             return;
         }
-        float healAmt = (item as PillItem).healAmount * percentInstantHeal;
+        float healAmt = (item as PillItemSO).healAmount * percentInstantHeal * count;
         interacter.entityHealth.ChangeHealth(healAmt);
         Debug.Log($"Entity {interacter.name}, instant picked up {count} of {item.name} to heal {healAmt}");
         if (interactableSO.destroyOnInteract)
