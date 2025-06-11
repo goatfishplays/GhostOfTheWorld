@@ -32,6 +32,7 @@ namespace PlatformerAI
         void Update() => detectionTimer.Tick(Time.deltaTime);
         public bool canDetectPlayer()
         {
+            //put a raycast here.s
             return detectionTimer.IsRunning || detectionStrategy.Execute(Player, transform, detectionTimer);
         }
 

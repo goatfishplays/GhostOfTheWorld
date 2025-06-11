@@ -17,7 +17,7 @@ public class EnemyChaseState : EnemyBaseState
 
     public override void OnEnter()
     {
-        // Debug.Log("chase");
+        Debug.Log("chase");
     }
     public override void Update()
     {

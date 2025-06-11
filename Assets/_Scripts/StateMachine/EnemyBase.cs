@@ -13,6 +13,8 @@ public abstract class BaseEnemy : MonoBehaviour
 
     public abstract void Attack(Entity target);
     public abstract void Jump(Entity target);
+    
+
 
     
 }
