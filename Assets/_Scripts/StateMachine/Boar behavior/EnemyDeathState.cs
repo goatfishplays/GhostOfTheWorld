@@ -16,7 +16,7 @@ public class EnemyDeathState : EnemyBaseState
 
     public override void OnEnter()
     {
-        Debug.Log("Dead");
+        // Debug.Log("Dead");
         agent.isStopped = true;
         GameObject.Destroy(entity.gameObject);
     }

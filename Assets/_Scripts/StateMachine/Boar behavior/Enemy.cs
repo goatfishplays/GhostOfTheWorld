@@ -96,7 +96,7 @@ namespace PlatformerAI
             EntityHealth targetHealth = target.entityHealth;
             if (targetHealth != null)
             {
-                Debug.Log("Attacking");
+                // Debug.Log("Attacking");
                 targetHealth.ChangeHealth(-damage);
             }
         }
