@@ -370,6 +370,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7213735928535696153, guid: 2d20492db1c3462429d63463d4819c01, type: 3}
+      propertyPath: disableHitboxWhileDying
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8799104530862113081, guid: 2d20492db1c3462429d63463d4819c01, type: 3}
       propertyPath: entity
       value: 

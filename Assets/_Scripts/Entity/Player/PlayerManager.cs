@@ -68,6 +68,8 @@ public class PlayerManager : MonoBehaviour
             Debug.LogWarning("There is no projectileSpawner attached to the player");
         }
 
+        entity.entityHealth.OnDie += onPlayerDie;
+
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -310,6 +312,12 @@ public class PlayerManager : MonoBehaviour
     public void EndInteract(InputAction.CallbackContext context)
     {
         playerInteracter.interactionHeld = false;
+    }
+
+    private void onPlayerDie()
+    {
+        LockInputs(true, true);
+        entity.rb.linearVelocity = Vector3.zero;
     }
 
     // public void StartItemUse(InputAction.CallbackContext context)
