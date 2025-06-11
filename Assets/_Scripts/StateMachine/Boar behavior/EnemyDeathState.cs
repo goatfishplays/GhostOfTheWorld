@@ -8,7 +8,7 @@ public class EnemyDeathState : EnemyBaseState
     readonly NavMeshAgent agent;
     private Entity entity;
 
-    public EnemyDeathState(Enemy enemy, NavMeshAgent agent, Entity entity) : base(enemy)
+    public EnemyDeathState(BaseEnemy enemy, NavMeshAgent agent, Entity entity) : base(enemy)
     {
         this.agent = agent;
         this.entity = entity;
@@ -16,8 +16,10 @@ public class EnemyDeathState : EnemyBaseState
 
     public override void OnEnter()
     {
-        // Debug.Log("Dead");
+        Debug.Log("Dead");
         agent.isStopped = true;
+
         GameObject.Destroy(entity.gameObject);
     }
+
 }

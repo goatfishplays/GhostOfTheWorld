@@ -56,9 +56,10 @@ namespace PlatformerAI
             if (distance < attackRange && !timer.IsRunning &&
                 Physics.Raycast(enemy.transform.position, directionToPlayer, out hit, attackRange))
             {
+                agent.isStopped = false;
                 if (hit.collider.CompareTag("Player"))
                 {
-                    agent.isStopped = true;
+                    
                     Entity playerEntity = hit.collider.GetComponent<Entity>();
                     if (playerEntity != null)
                     {
@@ -70,13 +71,13 @@ namespace PlatformerAI
 
             else
             {
-                agent.isStopped = false;
+                agent.isStopped = true;
                 agent.SetDestination(player.position);
-                /*var turnTowardNavSteeringTarget = agent.steeringTarget;
+                var turnTowardNavSteeringTarget = agent.steeringTarget;
 
                 Vector3 direction = (turnTowardNavSteeringTarget - enemy.transform.position).normalized;
                 Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-                enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, lookRotation, Time.deltaTime * 5);*/
+                enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, lookRotation, Time.deltaTime * 5);
             }
 
         }
