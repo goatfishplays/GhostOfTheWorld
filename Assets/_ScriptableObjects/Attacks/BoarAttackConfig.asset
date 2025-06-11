@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BoarAttackConfig
   m_EditorClassIdentifier: 
   attackLifetime: -1
-  damage: 10
+  damage: 30
   iFramesAddTime: 1
   ignoresIFrames: 0
   destroyOnHit: 0
