@@ -19,9 +19,4 @@ public class Gideon_Temp : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
     }
-
-    void TakeDamage(InputAction.CallbackContext context)
-    {
-        player.entityHealth.Hit(-5f);
-    }
 }
