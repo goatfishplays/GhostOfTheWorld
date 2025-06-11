@@ -84,6 +84,7 @@ public class PlayerManager : MonoBehaviour
         menuAction = playerInput.actions.FindAction("Menu");
 
         // Set all of the actions to their corresponding functions.
+        // ! Remember to set the OnEnable(), OnDisable(), and OnDestroy()
         // lookAction.performed += context => { playerCameraControl.AddRotation(context.ReadValue<Vector2>()); };
         lookAction.performed += Look;
         dashAction.started += Dash;
@@ -111,6 +112,7 @@ public class PlayerManager : MonoBehaviour
         inventoryAction.Enable();
         interactAction.Enable();
         shiftAction.Enable();
+        menuAction.Enable();
     }
 
     private void OnDisable()
@@ -124,6 +126,7 @@ public class PlayerManager : MonoBehaviour
         inventoryAction.Disable();
         interactAction.Disable();
         shiftAction.Disable();
+        menuAction.Disable();
     }
 
     void OnDestroy()
@@ -138,6 +141,7 @@ public class PlayerManager : MonoBehaviour
         inventoryAction.started -= ToggleInventory;
         interactAction.started -= StartInteract;
         interactAction.canceled -= EndInteract;
+        menuAction.started -= ToggleMenu;
     }
 
     // Update is called once per frame 
@@ -187,6 +191,31 @@ public class PlayerManager : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
             lookAction.Disable();
+        }
+    }
+
+    public void LockInputs(bool inputsLocked, bool cursorLocked)
+    {
+        SetLookState(!cursorLocked);
+        if (inputsLocked)
+        {
+            movementAction.Disable();
+            dashAction.Disable();
+            sprintAction.Disable();
+            shootAction.Disable();
+            itemAction.Disable();
+            interactAction.Disable();
+            shiftAction.Disable();
+        }
+        else
+        {
+            movementAction.Enable();
+            dashAction.Enable();
+            sprintAction.Enable();
+            shootAction.Enable();
+            itemAction.Enable();
+            interactAction.Enable();
+            shiftAction.Enable();
         }
     }
 

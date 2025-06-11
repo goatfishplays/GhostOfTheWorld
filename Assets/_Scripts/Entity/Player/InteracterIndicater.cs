@@ -7,6 +7,7 @@ public class InteracterIndicater : MonoBehaviour
     public Image baseIcon;
     public Image fill;
 
+
     public void SetInteractable(bool state)
     {
         if (state)
