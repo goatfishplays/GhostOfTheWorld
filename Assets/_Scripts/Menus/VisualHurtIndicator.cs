@@ -33,24 +33,6 @@ public class VisualHurtIndicator : MonoBehaviour
         wearoffTimer.OnTimerStop += turnOffHurtIndicator;
     }
 
-    private void OnEnable()
-    {
-        playerHealth.OnHit += turnOnHurtIndicator;
-        wearoffTimer.OnTimerStop += turnOffHurtIndicator;
-    }
-
-    private void OnDisable()
-    {
-        playerHealth.OnHit -= turnOnHurtIndicator;
-        wearoffTimer.OnTimerStop -= turnOffHurtIndicator;
-    }
-
-    private void OnDestroy()
-    {
-        playerHealth.OnHit -= turnOnHurtIndicator;
-        wearoffTimer.OnTimerStop -= turnOffHurtIndicator;
-    }
-
     private void turnOnHurtIndicator(float delta)
     {
         hurtIndicator.enabled = true;
