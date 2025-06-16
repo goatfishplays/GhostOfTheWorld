@@ -147,7 +147,6 @@ public class EntityHealth : MonoBehaviour
     {
         if (deathSound != null)
         {
-            // deathSound.Play();
             AudioManager.instance.PlaySFXAtTracker(deathSound, transform);
         }
 
