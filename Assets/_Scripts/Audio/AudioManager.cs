@@ -6,6 +6,7 @@ using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
+    //TODO: script probably should be more split up 
     public static AudioManager instance;
     public Transform audioPlayerHolder;
 
@@ -48,18 +49,25 @@ public class AudioManager : MonoBehaviour
 
 
 
-    #region Mixer
+    #region Mixer 
+    // Recast range from 0 to 100 to 0.0001 to 1 to correct log range 
+    public float AdaptPercentValue(float val)
+    {
+        val = val / 100f + 0.00001f;
+        return Mathf.Log10(val) * 20f;
+    }
+
     public void SetMasterVolume(float level)
     {
-        mixer.SetFloat("MasterVolume", Mathf.Log10(level) * 20f);
+        mixer.SetFloat("MasterVolume", AdaptPercentValue(level));
     }
     public void SetSFXVolume(float level)
     {
-        mixer.SetFloat("SFXVolume", Mathf.Log10(level) * 20f);
+        mixer.SetFloat("SFXVolume", AdaptPercentValue(level));
     }
     public void SetMusicVolume(float level)
     {
-        mixer.SetFloat("MusicVolume", Mathf.Log10(level) * 20f);
+        mixer.SetFloat("MusicVolume", AdaptPercentValue(level));
     }
     #endregion Mixer
 

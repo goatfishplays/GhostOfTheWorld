@@ -5,17 +5,17 @@ using UnityEngine.UI;
 
 public class InputSliderSync : MonoBehaviour
 {
-    [SerializeField] private float minVal = 0f;
-    [SerializeField] private float maxVal = 5f;
-    [SerializeField] private float _curVal = 1f;
+    [SerializeField] protected float minVal = 0f;
+    [SerializeField] protected float maxVal = 5f;
+    [SerializeField] protected float _curVal = 1f;
     public float curVal => _curVal;
-    [SerializeField] private Slider slider;
-    [SerializeField] private TMP_InputField inputField;
+    [SerializeField] protected Slider slider;
+    [SerializeField] protected TMP_InputField inputField;
 
-    [SerializeField] private UnityEvent<float> m_OnValueChanged = new UnityEvent<float>();
+    [SerializeField] protected UnityEvent<float> m_OnValueChanged = new UnityEvent<float>();
     public UnityEvent<float> onValueChanged { get { return m_OnValueChanged; } set { m_OnValueChanged = value; } }
 
-    private void Awake()
+    protected void Awake()
     {
         slider.minValue = minVal;
         slider.maxValue = maxVal;

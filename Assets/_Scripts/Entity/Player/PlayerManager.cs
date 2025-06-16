@@ -143,7 +143,7 @@ public class PlayerManager : MonoBehaviour
         inventoryAction.started -= ToggleInventory;
         interactAction.started -= StartInteract;
         interactAction.canceled -= EndInteract;
-        menuAction.started -= ToggleMenu; 
+        menuAction.started -= ToggleMenu;
     }
 
     // Update is called once per frame 
