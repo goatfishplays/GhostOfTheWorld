@@ -42,9 +42,9 @@ public class PlayerManager : MonoBehaviour
     private InputAction interactAction;
     private InputAction shiftAction;
 
-    [Header("Shoot")]
-    [SerializeField] private ProjectileSpawner projectileSpawner;
-    private InputAction shootAction;
+    [Header("Attack")]
+    [SerializeField] private AttackController attackController;
+    private InputAction attackAction;
 
     // [Header("Menus")]
     private InputAction menuAction;
@@ -63,9 +63,9 @@ public class PlayerManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (projectileSpawner == null)
+        if (attackController == null)
         {
-            Debug.LogWarning("There is no projectileSpawner attached to the player");
+            Debug.LogWarning("No attackController on PlayerManager. Gun will not work.");
         }
 
         entity.entityHealth.OnDie += onPlayerDie;
@@ -78,7 +78,7 @@ public class PlayerManager : MonoBehaviour
         lookAction = playerInput.actions.FindAction("Look");
         dashAction = playerInput.actions.FindAction("Dash");
         sprintAction = playerInput.actions.FindAction("Sprint");
-        shootAction = playerInput.actions.FindAction("Shoot");
+        attackAction = playerInput.actions.FindAction("Attack");
         itemAction = playerInput.actions.FindAction("Item");
         inventoryAction = playerInput.actions.FindAction("Inventory");
         interactAction = playerInput.actions.FindAction("Interact");
@@ -92,7 +92,8 @@ public class PlayerManager : MonoBehaviour
         dashAction.started += Dash;
         sprintAction.started += StartSprint;
         sprintAction.canceled += EndSprint;
-        shootAction.started += Shoot;
+        attackAction.started += StartAttack;
+        attackAction.canceled += EndAttack;
         itemAction.performed += ProgressItemUse;
         itemAction.canceled += ItemKeyRelease;
         inventoryAction.started += ToggleInventory;
@@ -107,7 +108,7 @@ public class PlayerManager : MonoBehaviour
         lookAction.Enable();
         dashAction.Enable();
         sprintAction.Enable();
-        shootAction.Enable();
+        attackAction.Enable();
         itemAction.Enable();
         inventoryAction.Enable();
         interactAction.Enable();
@@ -121,7 +122,7 @@ public class PlayerManager : MonoBehaviour
         lookAction.Disable();
         dashAction.Disable();
         sprintAction.Disable();
-        shootAction.Disable();
+        attackAction.Disable();
         itemAction.Disable();
         inventoryAction.Disable();
         interactAction.Disable();
@@ -135,7 +136,8 @@ public class PlayerManager : MonoBehaviour
         dashAction.started -= Dash;
         sprintAction.started -= StartSprint;
         sprintAction.canceled -= EndSprint;
-        shootAction.started -= Shoot;
+        attackAction.started -= StartAttack;
+        attackAction.canceled -= EndAttack;
         itemAction.performed -= ProgressItemUse;
         itemAction.canceled -= ItemKeyRelease;
         inventoryAction.started -= ToggleInventory;
@@ -202,7 +204,7 @@ public class PlayerManager : MonoBehaviour
             movementAction.Disable();
             dashAction.Disable();
             sprintAction.Disable();
-            shootAction.Disable();
+            attackAction.Disable();
             itemAction.Disable();
             interactAction.Disable();
             shiftAction.Disable();
@@ -212,7 +214,7 @@ public class PlayerManager : MonoBehaviour
             movementAction.Enable();
             dashAction.Enable();
             sprintAction.Enable();
-            shootAction.Enable();
+            attackAction.Enable();
             itemAction.Enable();
             interactAction.Enable();
             shiftAction.Enable();
@@ -244,11 +246,20 @@ public class PlayerManager : MonoBehaviour
         entity.entityMovement.RemoveTargetSpeedMult(SPRINT_SPEED_MULT_ID);
     }
 
-    public void Shoot(InputAction.CallbackContext context)
+    public void StartAttack(InputAction.CallbackContext context)
     {
-        if (projectileSpawner != null)
+        // TODO: Remove this once all player variants have attackController.
+        if (attackController != null)
         {
-            projectileSpawner.Shoot();
+            attackController.StartAttacking();
+        }
+    }
+
+    public void EndAttack(InputAction.CallbackContext context)
+    {
+        if (attackController != null)
+        {
+            attackController.EndAttacking();
         }
     }
 
