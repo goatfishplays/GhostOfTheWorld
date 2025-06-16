@@ -55,5 +55,51 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 454663424146746050, guid: 2d20492db1c3462429d63463d4819c01, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5861570823081770446}
   m_SourcePrefab: {fileID: 100100000, guid: 2d20492db1c3462429d63463d4819c01, type: 3}
+--- !u!114 &2515662536675217751 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8727096950657266347, guid: 2d20492db1c3462429d63463d4819c01, type: 3}
+  m_PrefabInstance: {fileID: 6626358350719935484}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6753926328774019390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da171fa376e47754c8966e8730882380, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2725660716561933529 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9090217007880849189, guid: 2d20492db1c3462429d63463d4819c01, type: 3}
+  m_PrefabInstance: {fileID: 6626358350719935484}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aadb2f2a198a35b4ba681b2645b4b4ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6753926328774019390 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 454663424146746050, guid: 2d20492db1c3462429d63463d4819c01, type: 3}
+  m_PrefabInstance: {fileID: 6626358350719935484}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5861570823081770446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6753926328774019390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9086a15f4ee045b40a92bc82173c2aa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: {fileID: 2725660716561933529}
+  projectileSpawner: {fileID: 2515662536675217751}
+  attackDelay: 0.2
+  attackHealthCost: 1
