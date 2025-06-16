@@ -5,7 +5,7 @@ using Utilities;
 
 public class VisualHurtIndicator : MonoBehaviour
 {
-    public PlayerManager playerManager;
+    [Tooltip("How long the red flash appears after getting hit")]
     public float maxWearoffTime = 0.3f;
 
     private EntityHealth playerHealth;
@@ -15,7 +15,12 @@ public class VisualHurtIndicator : MonoBehaviour
     private void Start()
     {
         // Get the player's health
-        playerHealth = playerManager.entity.entityHealth;
+        playerHealth = PlayerManager.instance.entity.entityHealth;
+        if (playerHealth == null)
+        {
+            Debug.LogWarning("playerHealth is null. Disabling VisualHurtIndicator");
+            gameObject.SetActive(false);
+        }
 
         // Disable hurt indicator image
         hurtIndicator = gameObject.GetComponent<Image>();
@@ -26,6 +31,11 @@ public class VisualHurtIndicator : MonoBehaviour
         // Run turnOffHurtIndicator after getting hit
         wearoffTimer = new CountdownTimer(maxWearoffTime);
         wearoffTimer.OnTimerStop += turnOffHurtIndicator;
+    }
+
+    private void OnDestroy()
+    {
+        playerHealth.OnHit -= turnOnHurtIndicator;
     }
 
     private void turnOnHurtIndicator(float delta)

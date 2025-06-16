@@ -97,8 +97,10 @@ public class EntityHealth : MonoBehaviour
             {
                 health += delta;
 
-
-                AudioManager.instance.PlaySFXAtTracker(hitSound, transform);
+                if (hitSound != null)
+                {
+                    AudioManager.instance.PlaySFXAtTracker(hitSound, transform);
+                }
                 OnHealthChange?.Invoke(delta);
                 OnHit?.Invoke(delta);
 
@@ -145,7 +147,6 @@ public class EntityHealth : MonoBehaviour
     {
         if (deathSound != null)
         {
-            // deathSound.Play();
             AudioManager.instance.PlaySFXAtTracker(deathSound, transform);
         }
 
