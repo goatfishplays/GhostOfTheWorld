@@ -26,8 +26,12 @@ public class PlayerInteracter : MonoBehaviour
 
     public void Start()
     {
-        Interactable interactable = AttemptCast();
-        SetInteractionBoi(interactable);
+        if (interacterIndicater != null)
+        {
+            Interactable interactable = AttemptCast();
+            SetInteractionBoi(interactable);
+
+        }
     }
     // public GameObject AttemptCast()
     public Interactable AttemptCast()

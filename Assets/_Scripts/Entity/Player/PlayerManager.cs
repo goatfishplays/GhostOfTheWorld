@@ -196,7 +196,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public void LockInputs(bool inputsLocked, bool cursorLocked)
+    public void LockInputs(bool inputsLocked, bool cursorLocked, bool menuButtonsLocked = false)
     {
         SetLookState(!cursorLocked);
         if (inputsLocked)
@@ -218,6 +218,17 @@ public class PlayerManager : MonoBehaviour
             itemAction.Enable();
             interactAction.Enable();
             shiftAction.Enable();
+        }
+
+        if (menuButtonsLocked)
+        {
+            menuAction.Disable();
+            inventoryAction.Disable();
+        }
+        else
+        {
+            menuAction.Enable();
+            inventoryAction.Enable();
         }
     }
 

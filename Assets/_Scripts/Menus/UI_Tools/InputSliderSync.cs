@@ -20,7 +20,7 @@ public class InputSliderSync : MonoBehaviour
         slider.minValue = minVal;
         slider.maxValue = maxVal;
         slider.value = _curVal;
-        inputField.text = _curVal.ToString();
+        // inputField.text = _curVal.ToString(); 
     }
 
 
