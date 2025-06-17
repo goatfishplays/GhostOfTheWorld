@@ -335,10 +335,9 @@ public class PlayerManager : MonoBehaviour
     {
         playerInteracter.interactionHeld = false;
     }
-
     private void onPlayerDie()
     {
-        LockInputs(true, true);
+        LockInputs(true, true, true);
         entity.rb.linearVelocity = Vector3.zero;
     }
 
