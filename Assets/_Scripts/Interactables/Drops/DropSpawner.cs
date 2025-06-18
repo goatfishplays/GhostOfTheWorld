@@ -25,19 +25,19 @@ public class DropSpawner : MonoBehaviour
     [SerializeField] private Vector2 dropHeightRange = new Vector2(-0.2f, 0.5f);
     private const int maxDropLocationTries = 5;
 
-    [SerializeField] private EntityHealth entity;
+    [SerializeField] private EntityHealth entityHealth;
 
     private void Start()
     {
-        if (entity != null)
+        if (entityHealth != null)
         {
-            entity.OnDie += CreateDrops;
+            entityHealth.OnDie += CreateDrops;
         }
     }
 
     private void OnDestroy()
     {
-        entity.OnDie -= CreateDrops;
+        entityHealth.OnDie -= CreateDrops;
     }
 
     /// <summary>
