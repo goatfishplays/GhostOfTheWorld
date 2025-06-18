@@ -35,6 +35,11 @@ public class Interactable : MonoBehaviour
             return;
         }
 
+        if (!interactableSO.nonPlayersInteractable && entity.id != Entity.playerID)
+        {
+            return;
+        }
+
         Interact(entity);
     }
 }
