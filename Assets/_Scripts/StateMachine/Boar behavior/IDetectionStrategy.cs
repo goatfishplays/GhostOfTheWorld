@@ -40,7 +40,7 @@ namespace PlatformerAI
             // Check for line of sight
             Vector3 eyeLevel = detector.position + Vector3.up * 1f; // Adjust height if needed
             Vector3 shootDir = (player.position - eyeLevel).normalized;
-            LayerMask detectionMask = LayerMask.GetMask("Default", "Player");
+            LayerMask detectionMask = LayerMask.GetMask("Default","Entities");
 
             RaycastHit hit;
             if (Physics.Raycast(eyeLevel, shootDir, out hit, distanceToPlayer,detectionMask))
