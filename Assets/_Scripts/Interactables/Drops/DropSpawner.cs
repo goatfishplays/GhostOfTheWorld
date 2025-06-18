@@ -29,15 +29,25 @@ public class DropSpawner : MonoBehaviour
 
     private void Start()
     {
-        if (entityHealth != null)
+        if (entityHealth == null)
         {
-            entityHealth.OnDie += CreateDrops;
+            Debug.LogWarning("entityHealth not set for DropSpawner. Trying to get component automatically.");
+            entityHealth = gameObject.GetComponent<EntityHealth>();
+            if (entityHealth == null)
+            {
+                return;
+            }
         }
+
+        entityHealth.OnDie += CreateDrops;
     }
 
     private void OnDestroy()
     {
-        entityHealth.OnDie -= CreateDrops;
+        if (entityHealth != null)
+        {
+            entityHealth.OnDie -= CreateDrops;
+        }
     }
 
     /// <summary>
