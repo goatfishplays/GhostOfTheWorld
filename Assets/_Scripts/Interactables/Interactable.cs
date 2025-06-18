@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
+    [Tooltip("Defines how the interactable interacts with the player and non-player.")]
     public InteractableSO interactableSO;
+    [Tooltip("The parent of the object this script is attached to. Used for destroying the interactable.")]
     public GameObject rootObject;
 
     public virtual void Interact(Entity interacter)

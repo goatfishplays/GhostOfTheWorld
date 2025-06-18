@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class Drop : Interactable
 {
+    [Tooltip("Defines the stats of the item.")]
     [SerializeField] protected ItemSO item;
+    [Tooltip("The number of items in this drop.")]
     [SerializeField] protected int count = 1;
     protected Coroutine co_pickupLock = null;
 
