@@ -6,13 +6,14 @@ public class InteracterIndicater : MonoBehaviour
 {
     public Image baseIcon;
     public Image fill;
+    private Color interactIndicatorColor = new Color(1,1,1,0.1f);
 
 
     public void SetInteractable(bool state)
     {
         if (state)
         {
-            baseIcon.color = Color.white;
+            baseIcon.color = interactIndicatorColor;
         }
         else
         {
