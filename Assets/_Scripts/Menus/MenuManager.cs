@@ -18,7 +18,7 @@ public class MenuManager : MonoBehaviour
         Controls,
         Audio,
         Inventory,
-
+        Death,
     }
 
     public MenuState state { get; private set; }
@@ -36,6 +36,9 @@ public class MenuManager : MonoBehaviour
     [Header("Inventory Menu")]
     public GameObject inventoryHolder;
     public ItemUIInventoryController inventoryUI;
+
+    [Header("Death Menu")]
+    public GameObject deathHolder;
 
     public static MenuManager instance;
 
@@ -114,6 +117,16 @@ public class MenuManager : MonoBehaviour
                 inventoryHolder.SetActive(true);
                 activeMenu = inventoryHolder;
                 inventoryUI.OpenInventory();
+                break;
+
+            case MenuState.Death:
+                // Set game state
+                PlayerManager.instance.LockInputs(true, true, true);
+                PauseGame(false);
+
+                // Activate Stuff 
+                deathHolder.SetActive(true);
+                activeMenu = deathHolder;
                 break;
         }
         state = newState;

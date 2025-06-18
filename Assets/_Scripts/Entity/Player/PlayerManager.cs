@@ -68,7 +68,7 @@ public class PlayerManager : MonoBehaviour
             Debug.LogWarning("No attackController on PlayerManager. Gun will not work.");
         }
 
-        entity.entityHealth.OnDie += onPlayerDie;
+        entity.entityHealth.OnDie += OnPlayerDie;
 
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
@@ -335,13 +335,15 @@ public class PlayerManager : MonoBehaviour
     {
         playerInteracter.interactionHeld = false;
     }
-    private void onPlayerDie()
+    private void OnPlayerDie()
     {
-        LockInputs(true, true, true);
-        entity.rb.linearVelocity = Vector3.zero;
+        // LockInputs(true, true, true);
+        // entity.rb.linearVelocity = Vector3.zero; 
+        entity.rb.isKinematic = true;
+        MenuManager.instance.SetState(MenuManager.MenuState.Death);
     }
 
-    // public void StartItemUse(InputAction.CallbackContext context)
+    // public void StartItemUse(InputAction.CallbackContext context) 
     // {
     //     if (co_itemDelay != null)
     //     {
