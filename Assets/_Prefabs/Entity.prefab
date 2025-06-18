@@ -271,7 +271,7 @@ MonoBehaviour:
     maxCount: 1
   dropRadius: 1
   dropHeightRange: {x: -0.2, y: 1}
-  entity: {fileID: 9021495779775508505}
+  entityHealth: {fileID: 9021495779775508505}
 --- !u!33 &5359367829354666312
 MeshFilter:
   m_ObjectHideFlags: 0
