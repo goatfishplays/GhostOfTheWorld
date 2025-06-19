@@ -1166,14 +1166,6 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
-    - target: {fileID: 3491416432501150593, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
-      propertyPath: disableOnDie.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3491416432501150593, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
-      propertyPath: 'disableOnDie.Array.data[0]'
-      value: 
-      objectReference: {fileID: 1786827867}
     - target: {fileID: 3554143979077040770, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
       propertyPath: m_LocalPosition.x
       value: 926.4151
@@ -1964,11 +1956,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1741934948}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1786827867 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2676764869379520493, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
-  m_PrefabInstance: {fileID: 1221945092}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1794399994 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5494299711711762726, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
