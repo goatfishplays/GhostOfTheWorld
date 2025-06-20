@@ -13,7 +13,6 @@ namespace PlatformerAI
         protected override void Start()
         {
             attackState = new EnemyAttackStateWolf(this, agent, PlayerDectector, attackRange, attackHitbox);
-            Debug.Log("Done with attack");
 
             // Run base Start function to prepare State machine.
             base.Start();
@@ -29,8 +28,6 @@ namespace PlatformerAI
                 jumpRange
                 
             );
-
-            Debug.Log("Done with base start");
             // Enter jump attack when outside of attack range but within jump range
             At(attackState, jumpAttackState, new FuncPredicated(() => {
                 var player = PlayerDectector.GetPlayer();
@@ -47,8 +44,6 @@ namespace PlatformerAI
                     && dist > attackRange
                     ;       // only if our cooldown is ready
             }));
-
-            Debug.Log("Done with into jump attack");
 
             // jump‐attack → melee‐attack
             At(jumpAttackState, attackState, new FuncPredicated(() => {
