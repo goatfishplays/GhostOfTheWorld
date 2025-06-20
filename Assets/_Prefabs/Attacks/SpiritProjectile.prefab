@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7154141689896103235
+--- !u!1001 &4859393221920202137
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,12 +10,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 188243915407234518, guid: 4d1a8fdec3272944d955ea53cfcdddcc, type: 3}
       propertyPath: ownerId
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 188243915407234518, guid: 4d1a8fdec3272944d955ea53cfcdddcc, type: 3}
-      propertyPath: atttakConfig
-      value: 
-      objectReference: {fileID: 11400000, guid: 7f93e59ac9decba48ad89c9f19f7b5c9, type: 2}
     - target: {fileID: 1984153497968944522, guid: 4d1a8fdec3272944d955ea53cfcdddcc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -59,10 +55,10 @@ PrefabInstance:
     - target: {fileID: 4282337444735533220, guid: 4d1a8fdec3272944d955ea53cfcdddcc, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 90506d3cd2371564bb87dfbdc4a3f854, type: 2}
+      objectReference: {fileID: 2100000, guid: 2814a33bb3c6d02468d02a8b85de4730, type: 2}
     - target: {fileID: 6504151700397891101, guid: 4d1a8fdec3272944d955ea53cfcdddcc, type: 3}
       propertyPath: m_Name
-      value: PlayerProjectile
+      value: SpiritProjectile
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

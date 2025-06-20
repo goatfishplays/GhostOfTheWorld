@@ -199,7 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 3830789937299472568}
   PlayerDectector: {fileID: 2567706512089166395}
-  entity: {fileID: 6892578209017652228}
+  entityHealth: {fileID: 0}
   wanderRadius: 5
   attackCooldown: 1
   attackRange: 15
@@ -238,7 +238,7 @@ MonoBehaviour:
   owner: {fileID: 6892578209017652228}
   projectileSpawnPoint: {fileID: 5995209435121523190}
   viewDirection: {fileID: 9045453878532531172}
-  projectilePrefab: {fileID: 2491153178868494655, guid: eceb7a761a4a99d4ba85fcd9e81acc5f, type: 3}
+  projectilePrefab: {fileID: 1815913690802062212, guid: 169c7beb4645d5346900333d6f4ee64e, type: 3}
   parent: {fileID: 0}
   projectileSpeed: 15
 --- !u!1 &8811235287096195710

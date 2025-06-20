@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerAttack
   m_EditorClassIdentifier: 
   attackLifetime: 10
-  damage: 20
+  damage: 50
   iFramesAddTime: 0
   ignoresIFrames: 0
   destroyOnHit: 1
