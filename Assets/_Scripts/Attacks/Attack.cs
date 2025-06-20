@@ -1,10 +1,12 @@
+using System;
 using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
     public int ownerId = 0;
     public AttackConfig atttakConfig;
-    
+    public event Action OnAttackHits;
+    public event Action OnAttackDestroyed;
 
     private void Awake()
     {
@@ -26,7 +28,7 @@ public class Attack : MonoBehaviour
         // Only deal damage if the entity is not the cause of the attack.
         if (entity != null && ownerId != entity.id)
         {
-            // TODO: Make this call a function on the target when it touches instead of directly changing health.
+            OnAttackHits?.Invoke();
             other.GetComponentInParent<EntityHealth>().Hit(-atttakConfig.damage, atttakConfig.iFramesAddTime, atttakConfig.ignoresIFrames);
 
             if (atttakConfig.destroyOnHit == true)
@@ -34,5 +36,10 @@ public class Attack : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        OnAttackDestroyed?.Invoke();
     }
 }
