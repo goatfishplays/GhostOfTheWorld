@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using UnityEngine.AI;
 using Utilities;
@@ -20,7 +19,7 @@ namespace PlatformerAI
         private Vector3 chargeEndDistant;
         private Vector3 chargeDirection;
         private CountdownTimer timer;
-        private bool canDamage; // to prevent multiple hit
+
 
 
 
@@ -43,7 +42,10 @@ namespace PlatformerAI
             this.chargeCooldown = chargeCooldown;
             this.attackHitbox = attackHitbox;
 
-            timer = new CountdownTimer(chargeCooldown);
+            // Call Attack when the hitbox hits a valid entity.
+            attackHitbox.GetComponent<Attack>().OnEntityHit += enemy.Attack;
+
+            timer = new CountdownTimer(this.chargeCooldown);
         }
 
         public override void OnEnter()
@@ -51,7 +53,7 @@ namespace PlatformerAI
             Debug.Log("Entering attack state");
             defaultSpeed = agent.speed;
             isCharging = false;
-            canDamage = false;
+            attackHitbox?.SetActive(false);
             if (timer.Progress <= 0)
             {
                 timer.Start();
@@ -69,7 +71,8 @@ namespace PlatformerAI
             {
                 //start to charge
                 isCharging=true;
-                canDamage=true;
+                // canDamage=true;
+                attackHitbox.SetActive(true);
 
                 chargeDirection = (player.position - enemy.transform.position).normalized;
                 chargeEndDistant = enemy.transform.position + chargeDirection * chargeDistance;
@@ -90,18 +93,6 @@ namespace PlatformerAI
                 {
                     endCharge();
                 }
-
-                if (canDamage && Vector3.Distance(enemy.transform.position, player.position) < 1.5f)
-                {
-                    Entity playerEntity = GameObject.FindGameObjectWithTag("Player").GetComponent<Entity>();
-                    if (playerEntity != null)
-                    {
-                        enemy.Attack(playerEntity); // Damage once
-                    }
-                    canDamage = false; // Prevent multiple hits
-                    Debug.Log("Boar HIT the player!");
-                }
-
             }
             else
             {
@@ -122,7 +113,8 @@ namespace PlatformerAI
         {
             Debug.Log("No more charging");
             isCharging = false;
-            canDamage = false;
+            attackHitbox.SetActive(false);
+
             timer.Start();
             agent.speed = defaultSpeed;
             agent.isStopped = true;
@@ -130,6 +122,7 @@ namespace PlatformerAI
 
         public override void OnExit()
         {
+            attackHitbox.SetActive(false);
             agent.speed = defaultSpeed;
             agent.isStopped = false;
         }
