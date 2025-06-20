@@ -4,7 +4,7 @@ using Utilities;
 
 namespace PlatformerAI
 {
-    public class EnemyAttackStateWolf : EnemyBaseState
+    public class EnemyAttackStateWolf : EnemyAttackState
     {
         readonly NavMeshAgent agent;
         readonly PlayerDectector playerDetector;
