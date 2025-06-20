@@ -9,8 +9,12 @@ namespace PlatformerAI
         readonly NavMeshAgent agent;
         readonly PlayerDectector playerDetector;
         readonly float attackRange;
+        readonly GameObject attackHitbox;
 
-        public EnemyAttackStateWolf(BaseEnemy enemy, NavMeshAgent agent, PlayerDectector playerDetector, float attackRange): base(enemy)
+        public EnemyAttackStateWolf(BaseEnemy enemy, 
+            NavMeshAgent agent, 
+            PlayerDectector playerDetector, 
+            float attackRange, 
         {
             this.agent = agent;
             this.playerDetector = playerDetector;

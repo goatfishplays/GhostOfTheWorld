@@ -1,6 +1,8 @@
-using PlatformerAI;
 
-public abstract class EnemyAttackState : EnemyBaseState
+namespace PlatformerAI
 {
-    public EnemyAttackState(BaseEnemy enemy) : base(enemy) {}
+    public abstract class EnemyAttackState : EnemyBaseState
+    {
+        public EnemyAttackState(BaseEnemy enemy) : base(enemy) { }
+    }
 }

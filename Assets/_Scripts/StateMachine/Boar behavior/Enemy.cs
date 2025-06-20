@@ -1,113 +1,33 @@
-//using System.Diagnostics;
 using UnityEngine;
-using UnityEngine.AI;
 using Utilities;
-
-
 
 namespace PlatformerAI
 {
-    [RequireComponent(typeof(NavMeshAgent))]
-    [RequireComponent(typeof(PlayerDectector))]
-    public class Enemy : BaseEnemy
+    public class Enemy : MeleeEnemy
     {
-        [Tooltip("The entityHealth of the entity this script is attached to. Used for determining when the entity is dead.")]
-        [SerializeField] protected EntityHealth entityHealth;
-        //Animator animator;
-
-
-        [SerializeField] float wanderRadius = 5f;
-        [SerializeField] float attackCooldown = 2f; // cooldown
-        [SerializeField] float attackRange = 10f; // unique per enemy
+        [SerializeField] float chargeSpeed = 30f;
         [SerializeField] float chargeDistance = 20f;
-        [SerializeField] float damage = 5f;
+        // [SerializeField] float damage = 5f;
 
-        StateMachine StateMachine;
-        
-        private void Start()
+        protected override void Start()
         {
-            if (entityHealth == null)
-            {
-                entityHealth = GetComponent<EntityHealth>();
-            }
-
-            attackTimer = new CountdownTimer(attackCooldown);
-            StateMachine = new StateMachine();
-
-            var wanderState = new EnemyWanderState(this, agent, wanderRadius);
-            var chaseState = new EnemyChaseState(this, agent, PlayerDectector);
-            // TODO: chargeSpeed should have a variable or some other solution.
-            var attackState = new EnemyAttackStateBoar(this, agent, PlayerDectector, attackRange, chargeDistance, attackRange * 2, attackCooldown);
-
-
-            // Only allow death state if the enemy has an entity and entity health script.
-            // Note: this might be more optimized if we don't use the state machine and make it use events instead of checking every update.
-            if (entityHealth != null)
-            {
-                var deathState = new EnemyDeathState(this, agent, entityHealth);
-                Any(deathState, new FuncPredicated(() =>
-                {
-                    return entityHealth.dead;
-                }));
-            }
-
-            At(wanderState, chaseState, new FuncPredicated(() => PlayerDectector.canDetectPlayer()));
-            At(chaseState, wanderState, new FuncPredicated(() => !PlayerDectector.canDetectPlayer()));
-
-            At(chaseState, attackState, new FuncPredicated(() =>
-            {
-                var player = PlayerDectector.GetPlayer();
-                float distance = Vector3.Distance(transform.position, player.position);
-
-                return distance <= attackRange && !attackTimer.IsRunning;
-            }));
-
-            At(attackState, chaseState, new FuncPredicated(() =>
-            {
-                var player = PlayerDectector.GetPlayer();
-                float distance = Vector3.Distance(transform.position, player.position);
-                return distance > attackRange;
-            }));
-
-            StateMachine.SetState(wanderState);
-
-        }
-
-        void At(IState from, IState to, IPredicated condition) => StateMachine.AddTranstion(from, to, condition);
-        void Any(IState to, IPredicated condition) => StateMachine.AddAnyTransition(to, condition);
-
-        private void Update()
-        {
-            StateMachine.Update();
-            attackTimer.Tick(Time.deltaTime);
-        }
-
-        private void FixedUpdate()
-        {
-            StateMachine.FixedUpdate();
+            attackState = new EnemyAttackStateBoar(this, agent, PlayerDectector, attackRange, chargeSpeed, chargeDistance, attackCooldown, attackHitbox);
+            
+            // Run base Start function to prepare State machine.
+            base.Start();
         }
 
         public override void Attack(Entity target)
         {
-            if (attackTimer.IsRunning) return;
-            attackTimer.Start();
-            EntityHealth targetHealth = target.entityHealth;
-            if (targetHealth != null)
-            {
-                Debug.Log("Attacking");
-                targetHealth.ChangeHealth(-damage);
-            }
+            // This literally doesn't do anything. idk what to do with it.
+            //if (attackTimer.IsRunning) return;
+            //attackTimer.Start();
         }
+
         public override void Jump(Entity target)
         {
             throw new System.NotImplementedException();
         }
-
-        
-
-        
     }
-
-
 }
 

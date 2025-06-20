@@ -13,6 +13,7 @@ namespace PlatformerAI
         readonly float chargeSpeed;
         readonly float chargeDistance;
         readonly float chargeCooldown;
+        readonly GameObject attackHitbox;
 
         private float defaultSpeed;
         private bool isCharging;
@@ -30,7 +31,9 @@ namespace PlatformerAI
             float attackRange = 5f,
             float chargeSpeed = 30f,
             float chargeDistance = 10f,
-            float chargeCooldown = 5f) : base(enemy)
+            float chargeCooldown = 5f,
+            GameObject attackHitbox = null) 
+            : base(enemy)
         {
             this.agent = agent;
             this.playerDetector = playerDetector;
@@ -38,6 +41,7 @@ namespace PlatformerAI
             this.chargeSpeed = chargeSpeed;
             this.chargeDistance = chargeDistance;
             this.chargeCooldown = chargeCooldown;
+            this.attackHitbox = attackHitbox;
 
             timer = new CountdownTimer(chargeCooldown);
         }
