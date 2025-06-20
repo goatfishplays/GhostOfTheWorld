@@ -68,16 +68,16 @@ namespace PlatformerAI
 
         protected override void Update()
         {
-            attackTimer.Tick(Time.deltaTime);
             base.Update();
+            // attackTimer.Tick(Time.deltaTime);
             jumpTimer.Tick(Time.deltaTime);
         }
 
         public override void Attack(Entity target)
         {
 
-            if (attackTimer.IsRunning) return;
-            attackTimer.Start();
+            //if (attackTimer.IsRunning) return;
+            //attackTimer.Start();
             Debug.Log("Wolf Attacking");
         }
         public override void Jump(Entity target)
