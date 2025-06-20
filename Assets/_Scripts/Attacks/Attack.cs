@@ -5,8 +5,9 @@ public class Attack : MonoBehaviour
 {
     public int ownerId = 0;
     public AttackConfig atttakConfig;
-    public event Action OnAttackHits;
-    public event Action OnAttackDestroyed;
+    public event Action OnAttackHit;
+    public event Action<Entity> OnEntityHit;
+    public event Action OnAttackDestroy;
 
     private void Awake()
     {
@@ -16,6 +17,7 @@ public class Attack : MonoBehaviour
         }
     }
 
+    // Note: This only triggers on trigger enter so if the player is in the hitbox it will only hit once.
     private void OnTriggerEnter(Collider other)
     {
         // If the object hits a world object and is destroyable.
@@ -28,7 +30,8 @@ public class Attack : MonoBehaviour
         // Only deal damage if the entity is not the cause of the attack.
         if (entity != null && ownerId != entity.id)
         {
-            OnAttackHits?.Invoke();
+            OnAttackHit?.Invoke();
+            OnEntityHit?.Invoke(entity);
             other.GetComponentInParent<EntityHealth>().Hit(-atttakConfig.damage, atttakConfig.iFramesAddTime, atttakConfig.ignoresIFrames);
 
             if (atttakConfig.destroyOnHit == true)
@@ -40,6 +43,6 @@ public class Attack : MonoBehaviour
 
     private void OnDestroy()
     {
-        OnAttackDestroyed?.Invoke();
+        OnAttackDestroy?.Invoke();
     }
 }
