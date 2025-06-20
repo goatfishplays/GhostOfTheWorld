@@ -52,7 +52,7 @@ namespace PlatformerAI
             if (entity != null && entity.entityHealth != null)
             {
                 entityHealth = entity.entityHealth;
-                var deathState = new EnemyDeathState(this, agent, entity);
+                var deathState = new EnemyDeathState(this, agent, entityHealth);
                 Any(deathState, new FuncPredicated(() =>
                 {
                     return entityHealth.dead;

@@ -11,10 +11,8 @@ namespace PlatformerAI
     [RequireComponent(typeof(PlayerDectector))]
     public class Enemy : BaseEnemy
     {
-        
-        public Entity entity;
-
-        private EntityHealth entityHealth;
+        [Tooltip("The entityHealth of the entity this script is attached to. Used for determining when the entity is dead.")]
+        [SerializeField] protected EntityHealth entityHealth;
         //Animator animator;
 
 
@@ -28,9 +26,9 @@ namespace PlatformerAI
         
         private void Start()
         {
-            if (entity == null)
+            if (entityHealth == null)
             {
-                entity = GetComponent<Entity>();
+                entityHealth = GetComponent<EntityHealth>();
             }
 
             attackTimer = new CountdownTimer(attackCooldown);
@@ -43,10 +41,10 @@ namespace PlatformerAI
 
 
             // Only allow death state if the enemy has an entity and entity health script.
-            if (entity != null && entity.entityHealth != null)
+            // Note: this might be more optimized if we don't use the state machine and make it use events instead of checking every update.
+            if (entityHealth != null)
             {
-                entityHealth = entity.entityHealth;
-                var deathState = new EnemyDeathState(this, agent, entity);
+                var deathState = new EnemyDeathState(this, agent, entityHealth);
                 Any(deathState, new FuncPredicated(() =>
                 {
                     return entityHealth.dead;
