@@ -28,7 +28,7 @@ namespace PlatformerAI
 
         public override void OnEnter()
         {
-            Debug.Log("Wolf attack");
+            Debug.Log("Enter Wolf attack state");
             attackHitbox.SetActive(false);
         }
         public override void Update()
