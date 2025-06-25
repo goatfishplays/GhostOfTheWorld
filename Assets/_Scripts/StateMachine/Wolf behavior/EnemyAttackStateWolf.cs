@@ -1,25 +1,35 @@
 using UnityEngine;
 using UnityEngine.AI;
-using Utilities;
 
 namespace PlatformerAI
 {
-    public class EnemyAttackStateWolf : EnemyBaseState
+    public class EnemyAttackStateWolf : EnemyAttackState
     {
         readonly NavMeshAgent agent;
         readonly PlayerDectector playerDetector;
         readonly float attackRange;
+        readonly GameObject attackHitbox;
 
-        public EnemyAttackStateWolf(BaseEnemy enemy, NavMeshAgent agent, PlayerDectector playerDetector, float attackRange): base(enemy)
+        public EnemyAttackStateWolf(BaseEnemy enemy, 
+            NavMeshAgent agent, 
+            PlayerDectector playerDetector, 
+            float attackRange, 
+            GameObject attackHitbox = null)
+            : base(enemy)
         {
             this.agent = agent;
             this.playerDetector = playerDetector;
             this.attackRange = attackRange;
+            this.attackHitbox = attackHitbox;
+
+            // Call Attack when the hitbox hits a valid entity.
+            attackHitbox.GetComponent<Attack>().OnEntityHit += enemy.Attack;
         }
 
         public override void OnEnter()
         {
             Debug.Log("Wolf attack");
+            attackHitbox.SetActive(false);
         }
         public override void Update()
         {
@@ -29,11 +39,15 @@ namespace PlatformerAI
             if (distance <= attackRange)
             {
                 agent.isStopped = true;
-                Entity playerEntity = GameObject.FindGameObjectWithTag("Player").GetComponent<Entity>();
-                if (playerEntity != null)
-                {
-                    enemy.Attack(playerEntity); // Damage once
-                }
+
+                attackHitbox.SetActive(true);
+
+                //Entity playerEntity = GameObject.FindGameObjectWithTag("Player").GetComponent<Entity>();
+                //if (playerEntity != null)
+                //{
+                    
+                //    enemy.Attack(playerEntity); // Damage once
+                //}
 
             }
             else
@@ -43,6 +57,10 @@ namespace PlatformerAI
             }
 
 
+        }
+        public override void OnExit()
+        {
+            attackHitbox.SetActive(false);
         }
 
     }

@@ -1,101 +1,32 @@
 using UnityEngine;
-using UnityEngine.AI;
 using Utilities;
 
 
 
 namespace PlatformerAI
 {
-    [RequireComponent(typeof(NavMeshAgent))]
-    [RequireComponent(typeof(PlayerDectector))]
-    public class SpiritEnemy : BaseEnemy
+    [RequireComponent(typeof(ProjectileSpawner))]
+    public class SpiritEnemy : AttackEnemy
     {
-
-        public Entity entity;
-
-        private EntityHealth entityHealth;
-        //Animator animator;
-
-
-        [SerializeField] float wanderRadius = 5f;
-        [SerializeField] float attackCooldown = 1f; // cooldown
-        [SerializeField] float attackRange = 10f; // unique per enemy
-        //[SerializeField] float chargeDistance = 20f;
-        //[SerializeField] float damage = 5f;
-        //[SerializeField] private GameObject projectilePrefab;
-
         [SerializeField] private ProjectileSpawner PS;
-        //[SerializeField] private float projectileSpeed = 10f;
-
-        //[SerializeField] private bulletSO bulletData;
         
-
-        StateMachine StateMachine;
-
-        private void Start()
+        protected override void Start()
         {
-            if (entity == null)
-            {
-                entity = GetComponent<Entity>();
-            }
+            // NOTE: idk why the attackRange is multiplied by 2 for no reason. TODO: remove the * 2
+            attackState = new EnemyAttackStateSpirit(this, agent, PlayerDectector, attackRange * 2, attackCooldown);
+            
+            // Run base Start function to prepare State machine.
+            base.Start();
 
-            attackTimer = new CountdownTimer(attackCooldown);
-            StateMachine = new StateMachine();
+            // Attack timer isn't used for spirit. Probably can remove
+            // attackTimer = new CountdownTimer(attackCooldown);
 
-            var wanderState = new EnemyWanderState(this, agent, wanderRadius);
-            var chaseState = new EnemyChaseState(this, agent, PlayerDectector);
-            // TODO: chargeSpeed should have a variable or some other solution.
-            var attackState = new EnemyAttackStateSpirit(this, agent, PlayerDectector, attackRange*2, attackCooldown);
+            
 
-
-            // Only allow death state if the enemy has an entity and entity health script.
-            if (entity != null && entity.entityHealth != null)
-            {
-                entityHealth = entity.entityHealth;
-                var deathState = new EnemyDeathState(this, agent, entity);
-                Any(deathState, new FuncPredicated(() =>
-                {
-                    return entityHealth.dead;
-                }));
-            }
-
-            At(wanderState, chaseState, new FuncPredicated(() => PlayerDectector.canDetectPlayer()));
-            At(chaseState, wanderState, new FuncPredicated(() => !PlayerDectector.canDetectPlayer()));
-
-            At(chaseState, attackState, new FuncPredicated(() =>
-            {
-                var player = PlayerDectector.GetPlayer();
-                float distance = Vector3.Distance(transform.position, player.position);
-
-                return distance <= attackRange ;
-            }));
-
-            At(attackState, chaseState, new FuncPredicated(() =>
-            {
-                var player = PlayerDectector.GetPlayer();
-                float distance = Vector3.Distance(transform.position, player.position);
-
-                return distance > attackRange;
-            }));
 
             StateMachine.SetState(wanderState);
 
         }
-
-        void At(IState from, IState to, IPredicated condition) => StateMachine.AddTranstion(from, to, condition);
-        void Any(IState to, IPredicated condition) => StateMachine.AddAnyTransition(to, condition);
-
-        private void Update()
-        {
-            StateMachine.Update();
-            //attackTimer.Tick(Time.deltaTime);
-        }
-
-        private void FixedUpdate()
-        {
-            StateMachine.FixedUpdate();
-        }
-
         public override void Attack(Entity target)
         {
             /*if (attackTimer.IsRunning) return;
@@ -103,6 +34,7 @@ namespace PlatformerAI
             if (target == null) return;
             Debug.Log("Spirit enemy shoots");
 
+            // TODO: put this into the attack state.
             // Face the player before shooting
             Vector3 lookDirection = (target.transform.position - transform.position).normalized;
             lookDirection.y = 0;
@@ -122,9 +54,5 @@ namespace PlatformerAI
         {
             throw new System.NotImplementedException();
         }
-        
-
     }
-
-
 }

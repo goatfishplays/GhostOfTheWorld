@@ -6,12 +6,12 @@ using UnityEditor;
 public class EnemyDeathState : EnemyBaseState
 {
     readonly NavMeshAgent agent;
-    private Entity entity;
+    private EntityHealth entityHealth;
 
-    public EnemyDeathState(BaseEnemy enemy, NavMeshAgent agent, Entity entity) : base(enemy)
+    public EnemyDeathState(BaseEnemy enemy, NavMeshAgent agent, EntityHealth entityHealth) : base(enemy)
     {
         this.agent = agent;
-        this.entity = entity;
+        this.entityHealth = entityHealth;
     }
 
     public override void OnEnter()
@@ -19,7 +19,7 @@ public class EnemyDeathState : EnemyBaseState
         Debug.Log("Dead");
         agent.isStopped = true;
 
-        GameObject.Destroy(entity.gameObject);
+        GameObject.Destroy(entityHealth.gameObject);
     }
 
 }
