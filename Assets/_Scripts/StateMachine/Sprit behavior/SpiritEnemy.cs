@@ -13,6 +13,7 @@ namespace PlatformerAI
         protected override void Start()
         {
             // NOTE: idk why the attackRange is multiplied by 2 for no reason. TODO: remove the * 2
+            // EnemyAttackState attackState
             attackState = new EnemyAttackStateSpirit(this, agent, PlayerDectector, attackRange * 2, attackCooldown);
             
             // Run base Start function to prepare State machine.

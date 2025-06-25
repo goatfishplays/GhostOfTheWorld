@@ -2,44 +2,44 @@ using UnityEngine;
 using UnityEngine.AI;
 using Utilities;
 using System.Collections;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 namespace PlatformerAI
 {
     public class EnemyJumpAttackWolf : EnemyBaseState
     {
-        readonly NavMeshAgent agent;
-        readonly PlayerDectector playerDetector;
-        readonly float jumpRange;
-        readonly float jumpSpeed;
-        readonly float jumpCooldown;
-        readonly AnimationCurve heightCurve;
+        readonly protected NavMeshAgent agent;
+        readonly protected PlayerDectector playerDetector;
+        readonly protected float jumpTimeLength;
+        readonly protected float jumpCooldown;
+        readonly protected AnimationCurve heightCurve;
 
-        private CountdownTimer jumpCooldownTimer;
-        private bool hasJumped;
-        private Coroutine jumpRoutine;
+        readonly protected CountdownTimer jumpCooldownTimer;
+        protected bool hasJumped;
+        protected Coroutine jumpRoutine;
 
         public EnemyJumpAttackWolf(BaseEnemy enemy,
             NavMeshAgent agent,
             PlayerDectector playerDetector,
             AnimationCurve heightCurve,
-            float jumpRange = 10f,
-            float jumpSpeed = 2f,       // this now controls how fast the arc plays out
-            float jumpCooldown = 1f) : base(enemy)
+            float jumpTimeLength = 2f,
+            float jumpCooldown = 1f)
+            : base(enemy)
         {
             this.agent = agent;
-            this.jumpRange = jumpRange;
             this.playerDetector = playerDetector;
             this.jumpCooldown = jumpCooldown;
-            this.jumpSpeed = jumpSpeed;
+            this.jumpTimeLength = jumpTimeLength;
             this.heightCurve = heightCurve;
 
-            jumpCooldownTimer = new CountdownTimer(jumpCooldown);
+            jumpCooldownTimer = new CountdownTimer(this.jumpCooldown);
         }
 
         public override void OnEnter()
         {
             hasJumped = false;
-           
+            //Debug.Log("Entered Jump Attack State");
         }
 
         public override void Update()
@@ -48,48 +48,54 @@ namespace PlatformerAI
             jumpCooldownTimer.Tick(Time.deltaTime);
             // only try to jump if cooldown has elapsed and we haven't jumped yet
             if (hasJumped || jumpCooldownTimer.IsRunning)
-                return;
-            Debug.Log("Jump");
-            Transform player = playerDetector.GetPlayer();
-            float distance = Vector3.Distance(enemy.transform.position, player.position);
-            if (distance <= jumpRange)
             {
-                Entity playerEntity = GameObject.FindGameObjectWithTag("Player").GetComponent<Entity>();
-                if (playerEntity != null)
-                {
-                    enemy.Jump(playerEntity); // Damage once
-                }
-                
-                // kick off the visible jump
-                if (jumpRoutine == null)
-                    jumpRoutine = enemy.StartCoroutine(JumpTo(player.position));
+                //Debug.Log("can't jump! cooldown on!");
+                return;
             }
+
+            
+            Transform player = playerDetector.GetPlayer();
+          
+            if (GameObject.FindGameObjectWithTag("Player").TryGetComponent<Entity>(out Entity playerEntity))
+            {
+                enemy.Jump(playerEntity); 
+            }
+
+            // kick off the visible jump
+            jumpRoutine ??= enemy.StartCoroutine(JumpTo(player.position));
         }
 
-        private IEnumerator JumpTo(Vector3 target)
+        protected IEnumerator JumpTo(Vector3 target)
         {
+            // Debug.Log("Start JumpTo");
+
             hasJumped = true;
             agent.isStopped = true;
 
             Vector3 startPos = enemy.transform.position;
-            float t = 0f;
+            float heightCurveTime = heightCurve.keys[^1].time;
 
-            // animate t from 0?1 over time
-            while (t < 1f)
+            float t = 0f;
+            // Move Wolf based on t from 0 to jumpTimeLength
+            while (t < jumpTimeLength) 
             {
-                t += Time.deltaTime * jumpSpeed;
-                float clamped = Mathf.Clamp01(t);
-                // move along the horizontal line plus the curve height
+                t += Time.deltaTime;
+
+                float percentageOfJump = t / jumpTimeLength;
+                
+                // The time t along the height curve adjusted to account for how long the jump is.
+                float tHeight = percentageOfJump * heightCurveTime;
+
+                // Move along the horizontal line plus the curve height
                 enemy.transform.position =
-                    Vector3.Lerp(startPos, target, clamped)
-                    + Vector3.up * heightCurve.Evaluate(clamped);
+                    Vector3.Lerp(startPos, target, percentageOfJump) // Horizontal
+                    + Vector3.up * heightCurve.Evaluate(tHeight); // Vertical
                 yield return null;
             }
 
-            // land exactly at the target
-            enemy.transform.position = target;
+            // Debug.Log("Finish JumpTo");
 
-            // un?stop the NavMeshAgent so it can resume chasing
+            // unstop the NavMeshAgent so it can resume chasing
             agent.isStopped = false;
 
             // restart cooldown so we can jump again later

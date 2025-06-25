@@ -992,6 +992,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1794399994}
     m_Modifications:
+    - target: {fileID: -7696159662560356633, guid: 66bac5a9637857c4b938d1cc9894f7fc, type: 3}
+      propertyPath: jumpRangeMin
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -7696159662560356633, guid: 66bac5a9637857c4b938d1cc9894f7fc, type: 3}
+      propertyPath: jumpTimeLength
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 2156247166618007133, guid: 66bac5a9637857c4b938d1cc9894f7fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.7
@@ -1030,6 +1038,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2156247166618007133, guid: 66bac5a9637857c4b938d1cc9894f7fc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4383292942607584125, guid: 66bac5a9637857c4b938d1cc9894f7fc, type: 3}
+      propertyPath: drops.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6846996709070400938, guid: 66bac5a9637857c4b938d1cc9894f7fc, type: 3}
@@ -1222,6 +1234,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: -17
       objectReference: {fileID: 0}
+    - target: {fileID: 3048556588514498493, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
+      propertyPath: healthChangeRate
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3191059932266062550, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -1304,6 +1320,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5890404855667621270, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982343109425245059, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
+      propertyPath: backMoveSpeedMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982343109425245059, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
+      propertyPath: sideMoveSpeedMult
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6093394676875925352, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
@@ -1852,7 +1876,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 538775917405357423, guid: a113d1c65d2e56848a8dd808dd2e45de, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5013616560525729432, guid: a113d1c65d2e56848a8dd808dd2e45de, type: 3}
       propertyPath: m_LocalPosition.x
