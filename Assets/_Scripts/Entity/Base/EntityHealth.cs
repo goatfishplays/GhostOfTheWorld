@@ -89,7 +89,7 @@ public class EntityHealth : MonoBehaviour
     /// <param name="delta"></param> 
     /// <param name="iFramesAddTime"></param>
     /// <param name="ignoresIframes"></param>
-    public virtual void Hit(float delta, float iFramesAddTime = 0.2f, bool ignoresIframes = false)
+    public virtual bool Hit(float delta, float iFramesAddTime = 0.2f, bool ignoresIframes = false)
     {
         if (changingHealth && !dead)
         {
@@ -118,8 +118,10 @@ public class EntityHealth : MonoBehaviour
                 {
                     SetIFrames(iFramesAddTime, overridesCurrent: false);
                 }
+                return true;
             }
         }
+        return false;
     }
 
     public Coroutine SetIFrames(float iFramesSetTime, bool overridesCurrent = false)
