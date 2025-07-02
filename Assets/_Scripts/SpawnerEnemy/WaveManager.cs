@@ -9,10 +9,16 @@ public class WaveManager : MonoBehaviour
     public int currentWave = 0;
     public int remainEnemy;
     [SerializeField] public EnemySpawner enemySpawner;
+    [System.Serializable]
+    struct EnemyInfo
+    {
+        public int wave;
+        public GameObject prefab;
+    }
 
+    [SerializeField] private EnemyInfo[] enemyInLevel;
 
-    [SerializeField] private List<GameObject> introducedEnemies = new();
-    [SerializeField] public Dictionary<GameObject, int> enemyInLevel= new ();
+    List<GameObject> introducedEnemies = new ();
 
     private void Start()
     {
@@ -45,18 +51,22 @@ public class WaveManager : MonoBehaviour
     //make a function that return a dictionary to determine which type of spawning enemy
     Dictionary<GameObject, int> GetSpawnPlan(int wave)
     {
-        // set the wave manager to add certain enemy at a certain wave
+        Debug.Log(wave);
+        
+        
         foreach (var entry in enemyInLevel)
         {
-            if (entry.Value == wave)
-                introducedEnemies.Add(entry.Key);
+            if (entry.wave == wave)
+                introducedEnemies.Add(entry.prefab);
         }
-
+        
         Dictionary<GameObject, int> spawnPlan = new();
         int totalEnemy = wave + 3;
         for (int i = 0; i<totalEnemy;i++)
         {
-            GameObject randomEnemyType = introducedEnemies[Random.Range(0,introducedEnemies.Count)];
+
+            GameObject randomEnemyType = introducedEnemies[Random.Range(0, introducedEnemies.Count)];
+ 
             if (!spawnPlan.ContainsKey(randomEnemyType))
                 spawnPlan[randomEnemyType] = 0;
             spawnPlan[randomEnemyType]++;
