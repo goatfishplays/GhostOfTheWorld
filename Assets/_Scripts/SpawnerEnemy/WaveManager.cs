@@ -6,15 +6,19 @@ using System.Linq;
 public class WaveManager : MonoBehaviour
 {
     
-    int currentWave = 0;
-    int remainEnemy;
-    [SerializeField] private EnemySpawner enemySpawner;
-    
+    public int currentWave = 0;
+    public int remainEnemy;
+    [SerializeField] public EnemySpawner enemySpawner;
 
-    private List<GameObject> introducedEnemies = new();
-    public Dictionary<GameObject, int> enemyInLevel= new ();
 
-    
+    [SerializeField] private List<GameObject> introducedEnemies = new();
+    [SerializeField] public Dictionary<GameObject, int> enemyInLevel= new ();
+
+    private void Start()
+    {
+        starNextWave();
+    }
+
     void HandleEnemyDead()
     {
         remainEnemy--;
