@@ -17,8 +17,9 @@ public class Attack : MonoBehaviour
         }
     }
 
-    // Note: This only triggers on trigger enter so if the player is in the hitbox it will only hit once.
-    private void OnTriggerEnter(Collider other)
+    // This may be very inefficient and not good.
+    // Triggers every second and calls the hit function.
+    private void OnTriggerStay(Collider other)
     {
         // If the object hits a world object and is destroyable.
         if (atttakConfig.destroyOnHit == true && ((1 << other.gameObject.layer) & LayerMask.GetMask("World")) != 0)
@@ -30,13 +31,16 @@ public class Attack : MonoBehaviour
         // Only deal damage if the entity is not the cause of the attack.
         if (entity != null && ownerId != entity.id)
         {
-            OnAttackHit?.Invoke();
-            OnEntityHit?.Invoke(entity);
-            other.GetComponentInParent<EntityHealth>().Hit(-atttakConfig.damage, atttakConfig.iFramesAddTime, atttakConfig.ignoresIFrames);
+            bool hasHit = other.GetComponentInParent<EntityHealth>().Hit(-atttakConfig.damage, atttakConfig.iFramesAddTime, atttakConfig.ignoresIFrames);
 
-            if (atttakConfig.destroyOnHit == true)
+            if (hasHit)
             {
-                Destroy(gameObject);
+                OnAttackHit?.Invoke();
+                OnEntityHit?.Invoke(entity);
+                if (atttakConfig.destroyOnHit == true)
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }
