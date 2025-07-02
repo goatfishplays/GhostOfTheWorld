@@ -69,6 +69,19 @@ namespace PlatformerAI
             anyTransitions.Add(new Transition(GetOrAddNode(to).State,condition));
         }
 
+        // Tries changes the state from a given state to another.
+        public bool TryChangeState(IState from, IState to)
+        {
+            // Check current state matches from
+            if (current.State == from)
+            {
+                Debug.Log("changed state to " + to.ToString());
+                ChangeState(to);
+                return true;
+            }
+            return false;
+        }
+
         StateNode GetOrAddNode(IState state)
         {
             var node = nodes.GetValueOrDefault(state.GetType());

@@ -23,8 +23,9 @@ public class EnemyChaseState : EnemyBaseState
     {
         agent.isStopped = false;
         // Check if player exists before using
-        if (playerDetector.Player != null)
+        if (playerDetector.Player != null && playerDetector.canDetectPlayer())
         {
+            // This means that if an enemy enters chase state even without detecting the player, they will still path to their location.
             agent.SetDestination(playerDetector.Player.position);
 
         }

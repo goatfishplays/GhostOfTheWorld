@@ -30,6 +30,7 @@ namespace PlatformerAI
         protected EnemyWanderState wanderState = null;
         protected EnemyChaseState chaseState = null;
         protected EnemyAttackState attackState = null;
+        protected EnemyPathToState pathToState = null;
 
         // A lambda function that defines a transition from a specified state to another
         protected void At(IState from, IState to, IPredicated condition) => StateMachine.AddTranstion(from, to, condition);
@@ -50,6 +51,7 @@ namespace PlatformerAI
             // ----- State definitions -----
             wanderState = new EnemyWanderState(this, agent, wanderRadius);
             chaseState = new EnemyChaseState(this, agent, PlayerDectector);
+            pathToState = new EnemyPathToState(this, agent, PlayerDectector);
 
             // Note: Attack state is defined by the derived class.
             if (attackState == null)
@@ -74,6 +76,26 @@ namespace PlatformerAI
             // Chase -> Wander: When player can't be detected.
             At(chaseState, wanderState, new FuncPredicated(() => !PlayerDectector.canDetectPlayer()));
 
+            At(pathToState, chaseState, new FuncPredicated(() => PlayerDectector.canDetectPlayer()));
+
+            At(pathToState, wanderState, new FuncPredicated(() =>
+            {
+                // Check not processing
+                if (!agent.pathPending)
+                {
+                    // Check within range
+                    if (agent.remainingDistance <= agent.stoppingDistance)
+                    {
+                        // Check either at position or not moving
+                        if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                        {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }));
+
             // Chase -> Attack: when player is within attackRange.
             At(chaseState, attackState, new FuncPredicated(() =>
             {
@@ -92,6 +114,10 @@ namespace PlatformerAI
                 return distanceToPlayer > attackRange;
             }));
 
+            // Try to path to player position when hit.
+            // Possible bug: Might try if there's something that hits them but it's not the player.
+            entityHealth.OnHit += enemyHit;
+
             // Set starting state to wandering
             StateMachine.SetState(wanderState);
         }
@@ -106,6 +132,10 @@ namespace PlatformerAI
         {
             // StateMachine.FixedUpdate();
         }
-
+        
+        protected void enemyHit(float delta)
+        {
+            StateMachine.TryChangeState(wanderState, pathToState);
+        }
     }
 }

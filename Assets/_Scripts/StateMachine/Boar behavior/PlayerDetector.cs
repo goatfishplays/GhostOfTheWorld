@@ -14,7 +14,6 @@ namespace PlatformerAI
         [SerializeField] float innerDetectionRadius = 5f;
         [Tooltip("Cooldown for detecting player")]
         [SerializeField] float detectionCooldown = 1f; // cooldown
-        //[SerializeField] float attackRange = 10f;
 
         public Transform GetPlayer() => Player;
         public Transform Player { get; private set; }
@@ -35,13 +34,6 @@ namespace PlatformerAI
             //put a raycast here.s
             return detectionTimer.IsRunning || detectionStrategy.Execute(Player, transform, detectionTimer);
         }
-
-        /*public bool canAttack()
-        {
-            var directionToPlayer = Player.position - transform.position;
-            return directionToPlayer.magnitude <= attackRange;
-        }*/
-
 
         // make sure that whenever you cretae a new odj, it will hold the code by call new
         public void SetDetectionStrategy(IDetectionStrategy detectionStrategy) => this.detectionStrategy = detectionStrategy;
