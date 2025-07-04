@@ -6,21 +6,19 @@ namespace PlatformerAI
     public class EnemyWanderState : EnemyBaseState
     {
         readonly NavMeshAgent agent;
-        readonly Vector3 startPoint;
-        readonly float wanderRadious;
+        
+        readonly float wanderRadius;
         
 
-        public EnemyWanderState(BaseEnemy enemy,NavMeshAgent agent, float wanderRadious) : base(enemy)
+        public EnemyWanderState(BaseEnemy enemy,NavMeshAgent agent, float wanderRadius) : base(enemy)
         {
             this.agent = agent;
-            this.startPoint = enemy.transform.position;
-            this.wanderRadious = wanderRadious;
+            this.wanderRadius = wanderRadius;
         }
 
         public override void OnEnter()
         {
             Debug.Log("Wander");
-            
         }
 
         public override void Update()
@@ -29,10 +27,10 @@ namespace PlatformerAI
            if (HasReachedDestination())
             {
                 //find a new destination
-                var randomDirection = Random.insideUnitSphere * wanderRadious;
-                randomDirection += startPoint;
+                var randomDirection = Random.insideUnitSphere * wanderRadius;
+                randomDirection += enemy.transform.position;
                 NavMeshHit hit;
-                NavMesh.SamplePosition(randomDirection, out hit, wanderRadious, 1);
+                NavMesh.SamplePosition(randomDirection, out hit, wanderRadius, 1);
                 var finalPosition = hit.position;
 
                 agent.SetDestination(finalPosition);
