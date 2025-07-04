@@ -37,7 +37,7 @@ namespace PlatformerAI
         public override void OnEnter()
         {
             hasJumped = false;
-            //Debug.Log("Entered Jump Attack State");
+            Debug.Log("Entered Jump Attack State");
         }
 
         public override void Update()

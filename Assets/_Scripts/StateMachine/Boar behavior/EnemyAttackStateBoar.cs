@@ -21,8 +21,6 @@ namespace PlatformerAI
         private CountdownTimer timer;
 
 
-
-
         public EnemyAttackStateBoar(
             BaseEnemy enemy,
             NavMeshAgent agent,

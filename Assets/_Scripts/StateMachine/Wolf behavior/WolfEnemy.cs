@@ -52,7 +52,8 @@ namespace PlatformerAI
             {
                 var player = PlayerDectector.GetPlayer();
                 float dist = Vector3.Distance(transform.position, player.position);
-                return dist > wolfSO.jumpRangeMax || dist < wolfSO.jumpRangeMin;
+                // add one condition for jump
+                return dist > wolfSO.jumpRangeMax || dist < wolfSO.jumpRangeMin || jumpTimer.IsRunning;
             }));
         }
 
@@ -66,9 +67,7 @@ namespace PlatformerAI
         public override void Attack(Entity target)
         {
 
-            //if (attackTimer.IsRunning) return;
-            //attackTimer.Start();
-            //Debug.Log("Wolf Attack");
+          
         }
 
         public override void Jump(Entity target)
