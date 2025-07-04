@@ -339,6 +339,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 1.148
       objectReference: {fileID: 0}
+    - target: {fileID: 9021495779775508505, guid: 127f4ffb360f7064b8b9c1f7e8a5ac8a, type: 3}
+      propertyPath: health
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 9021495779775508505, guid: 127f4ffb360f7064b8b9c1f7e8a5ac8a, type: 3}
+      propertyPath: maxHealth
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2938606765168549507, guid: 127f4ffb360f7064b8b9c1f7e8a5ac8a, type: 3}
     - {fileID: 5359367829354666312, guid: 127f4ffb360f7064b8b9c1f7e8a5ac8a, type: 3}
@@ -413,10 +421,10 @@ MonoBehaviour:
   agent: {fileID: 4598870429425695857}
   PlayerDectector: {fileID: 5966584908867010939}
   entityHealth: {fileID: 7170047295168127053}
-  attackHitbox: {fileID: 881407518851108816}
   wanderRadius: 40
   attackCooldown: 1
   attackRange: 8
+  attackHitbox: {fileID: 881407518851108816}
   chargeSpeed: 30
   chargeDistance: 16
 --- !u!114 &5966584908867010939
@@ -432,7 +440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionAngle: 180
-  detectionRadius: 15
+  detectionRadius: 25
   innerDetectionRadius: 5
   detectionCooldown: 1
 --- !u!65 &7553632027607648146
