@@ -15,7 +15,7 @@ namespace PlatformerAI
         protected override void Start()
         {
             attackEnemySO = spiritSO;
-            attackState = new EnemyAttackStateSpirit(this, agent, PlayerDectector, attackEnemySO.attackRange, attackEnemySO.attackCooldown);
+            attackState = new EnemyAttackStateSpirit(this, agent, PlayerDectector, spiritSO);
             
             // Run base Start function to prepare State machine.
             base.Start();

@@ -11,7 +11,7 @@ namespace PlatformerAI
         protected override void Start()
         {
             attackEnemySO = boarSO;
-            attackState = new EnemyAttackStateBoar(this, agent, PlayerDectector, attackEnemySO.attackRange, boarSO.chargeSpeed, boarSO.chargeDistance, attackEnemySO.attackCooldown, attackHitbox);
+            attackState = new EnemyAttackStateBoar(this, agent, PlayerDectector, boarSO, attackHitbox);
             
             // Run base Start function to prepare State machine.
             base.Start();

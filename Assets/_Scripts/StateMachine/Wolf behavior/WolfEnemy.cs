@@ -24,7 +24,7 @@ namespace PlatformerAI
             }
 
             
-            attackState = new EnemyAttackStateWolf(this, agent, PlayerDectector, attackEnemySO.attackRange, attackHitbox);
+            attackState = new EnemyAttackStateWolf(this, agent, PlayerDectector, wolfSO.attackRange, attackHitbox);
 
             // Run base Start function to prepare State machine.
             base.Start();
@@ -36,10 +36,7 @@ namespace PlatformerAI
                 this,
                 agent,
                 PlayerDectector,
-                wolfSO.HeightCurve,
-                wolfSO.jumpTimeLength,
-                wolfSO.jumpCooldown
-                
+                wolfSO
             );
 
             // chase → jump‐attack. When distance to player within min and max jump range and not on cooldown
