@@ -1,25 +1,35 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DropSpawner : MonoBehaviour
 {
-    [System.Serializable]
-    struct DropInfo
+    abstract class DropInfoBase
     {
-        public ItemSO itemSO;
+        [Tooltip("Minimum amount in the stack of items.", order = 10)]
+        [Min(0)]
         public int minCount;
+        [Range(0f, 1f)]
+        [Tooltip("Percentage chance within 0 to 1 inclusive of another drop generating above the minCount.", order = 10)]
         public float excessDropChance;
-        public int maxCount;
-    }
-    [System.Serializable]
-    struct EctoplasmDropInfo
-    {
-        public PillItemSO itemSO;
-        public int minCount;
-        public float excessDropChance;
+        [Tooltip("Max amount of items in the stack. Each maxCount greater than minCount is another roll using excessDropChance.", order = 10)]
+        [Min(0)]
         public int maxCount;
     }
 
-    [SerializeField] private DropInfo[] drops;
+    [System.Serializable]
+    class ItemDropInfo : DropInfoBase
+    {
+        [Tooltip("Scriptable object which defines the physical object and items stats", order = 1)]
+        public ItemSO itemSO;
+    }
+    [System.Serializable]
+    class EctoplasmDropInfo : DropInfoBase
+    {
+        [Tooltip("Scriptable object which defines the physical object and ectoplasm stats", order = 1)]
+        public PillItemSO itemSO;
+    }
+
+    [SerializeField] private ItemDropInfo[] drops;
     [SerializeField] private EctoplasmDropInfo[] ectoplasmDrops;
     [SerializeField] private float dropRadius = .5f;
     [SerializeField] private Vector2 dropHeightRange = new Vector2(-0.2f, 0.5f);
@@ -56,7 +66,7 @@ public class DropSpawner : MonoBehaviour
     public void CreateDrops()
     {
         // Debug.Log("drop");
-        foreach (DropInfo dropInfo in drops)
+        foreach (var dropInfo in drops)
         {
             // Get Drop Position
             Vector3 dropPos;

@@ -13,17 +13,12 @@ namespace PlatformerAI
     // This is an enemy that has an attack and wanders.
     public abstract class AttackEnemy : BaseEnemy
     {
-        [Tooltip("The entity that this script is attached to.")]
-        [SerializeField] protected EntityHealth entityHealth;
+        [Tooltip("The entity that this script is attached to."), SerializeField] 
+        protected EntityHealth entityHealth;
         //Animator animator;
-
-        [Tooltip("Max distance they will randomly wander to from their current location. Basically how far they move each movement when wandering")]
-        [SerializeField] public float wanderRadius = 5f;
-        [Tooltip("Time between attacks")]
-        [SerializeField] public float attackCooldown = 2f;
-        [Tooltip("Distance before the enemy starts doing attacks.")]
-        [SerializeField] public float attackRange = 10f;
-
+        [SerializeField, HideInInspector]
+        protected AttackEnemySO attackEnemySO = null;
+        
 
 
         protected StateMachine StateMachine = null;
@@ -49,7 +44,7 @@ namespace PlatformerAI
             StateMachine = new StateMachine();
 
             // ----- State definitions -----
-            wanderState = new EnemyWanderState(this, agent, wanderRadius);
+            wanderState = new EnemyWanderState(this, agent, attackEnemySO.wanderRadius);
             chaseState = new EnemyChaseState(this, agent, PlayerDectector);
             pathToState = new EnemyPathToState(this, agent, PlayerDectector);
 
@@ -102,7 +97,7 @@ namespace PlatformerAI
                 var player = PlayerDectector.GetPlayer();
                 float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-                return distanceToPlayer <= attackRange;
+                return distanceToPlayer <= attackEnemySO.attackRange;
             }));
 
             // Attack -> Chase: When player is outside of attack range
@@ -111,7 +106,7 @@ namespace PlatformerAI
                 var player = PlayerDectector.GetPlayer();
                 float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-                return distanceToPlayer > attackRange;
+                return distanceToPlayer > attackEnemySO.attackRange;
             }));
 
             // Try to path to player position when hit.

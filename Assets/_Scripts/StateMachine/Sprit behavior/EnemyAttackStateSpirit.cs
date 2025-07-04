@@ -21,14 +21,13 @@ namespace PlatformerAI
             BaseEnemy enemy,
             NavMeshAgent agent,
             PlayerDectector playerDetector,
-            float attackRange = 5f,
-            float shootCooldown = 30f
+            SpiritSO spiritSO
             ) : base(enemy)
         {
             this.agent = agent;
             this.playerDetector = playerDetector;
-            this.attackRange = attackRange;
-            this.shootCooldown = shootCooldown;
+            attackRange = spiritSO.attackRange;
+            shootCooldown = spiritSO.attackCooldown;
 
 
             timer = new CountdownTimer(shootCooldown);

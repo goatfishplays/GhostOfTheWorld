@@ -12,7 +12,7 @@ namespace PlatformerAI
 
         public EnemyAttackStateWolf(BaseEnemy enemy, 
             NavMeshAgent agent, 
-            PlayerDectector playerDetector, 
+            PlayerDectector playerDetector,
             float attackRange, 
             GameObject attackHitbox = null)
             : base(enemy)

@@ -327,6 +327,22 @@ PrefabInstance:
       propertyPath: drops.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8797792608303903724, guid: 127f4ffb360f7064b8b9c1f7e8a5ac8a, type: 3}
+      propertyPath: ectoplasmDrops.Array.data[0].itemSO
+      value: 
+      objectReference: {fileID: 11400000, guid: dbfa096b60fda8e4a8cbf88b95528c19, type: 2}
+    - target: {fileID: 8797792608303903724, guid: 127f4ffb360f7064b8b9c1f7e8a5ac8a, type: 3}
+      propertyPath: ectoplasmDrops.Array.data[0].maxCount
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8797792608303903724, guid: 127f4ffb360f7064b8b9c1f7e8a5ac8a, type: 3}
+      propertyPath: ectoplasmDrops.Array.data[0].minCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8797792608303903724, guid: 127f4ffb360f7064b8b9c1f7e8a5ac8a, type: 3}
+      propertyPath: ectoplasmDrops.Array.data[0].excessDropChance
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 322537136667298855, guid: 127f4ffb360f7064b8b9c1f7e8a5ac8a, type: 3}
     - {fileID: 5359367829354666312, guid: 127f4ffb360f7064b8b9c1f7e8a5ac8a, type: 3}
@@ -417,47 +433,9 @@ MonoBehaviour:
   agent: {fileID: 6039760403473626768}
   PlayerDectector: {fileID: -3160817928236635415}
   entityHealth: {fileID: 4322988262846924936}
-  wanderRadius: 5
-  attackCooldown: 2
-  attackRange: 2
+  attackEnemySO: {fileID: 0}
   attackHitbox: {fileID: 112932612694092993}
-  jumpRangeMin: 4
-  jumpRangeMax: 12
-  jumpTimeLength: 0.75
-  jumpCooldown: 1
-  HeightCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1.9952829
-      outSlope: 1.9952829
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.5
-      value: 0.99764144
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -1.9952829
-      outSlope: -1.9952829
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  wolfSO: {fileID: 11400000, guid: 2f86ecbe7413bd449b1b5aa83dc58249, type: 2}
 --- !u!114 &-3160817928236635415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,8 +448,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ad98e678fd72e47bb34eebaebabc1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionAngle: 90
-  detectionRadius: 16
+  detectionAngle: 120
+  detectionRadius: 25
   innerDetectionRadius: 5
   detectionCooldown: 1
 --- !u!65 &4014472337204250117

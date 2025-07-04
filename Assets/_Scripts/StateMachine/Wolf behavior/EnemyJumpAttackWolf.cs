@@ -22,16 +22,14 @@ namespace PlatformerAI
         public EnemyJumpAttackWolf(BaseEnemy enemy,
             NavMeshAgent agent,
             PlayerDectector playerDetector,
-            AnimationCurve heightCurve,
-            float jumpTimeLength = 2f,
-            float jumpCooldown = 1f)
+            WolfSO wolfSO)
             : base(enemy)
         {
             this.agent = agent;
             this.playerDetector = playerDetector;
-            this.jumpCooldown = jumpCooldown;
-            this.jumpTimeLength = jumpTimeLength;
-            this.heightCurve = heightCurve;
+            jumpCooldown = wolfSO.jumpCooldown;
+            jumpTimeLength = wolfSO.jumpTimeLength;
+            heightCurve = wolfSO.heightCurve;
 
             jumpCooldownTimer = new CountdownTimer(this.jumpCooldown);
         }

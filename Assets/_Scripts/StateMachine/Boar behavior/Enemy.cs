@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using Utilities;
 
@@ -5,13 +6,12 @@ namespace PlatformerAI
 {
     public class Enemy : MeleeEnemy
     {
-        [SerializeField] float chargeSpeed = 30f;
-        [SerializeField] float chargeDistance = 20f;
-        // [SerializeField] float damage = 5f;
-
+        [SerializeField] protected BoarSO boarSO = null;
+        
         protected override void Start()
         {
-            attackState = new EnemyAttackStateBoar(this, agent, PlayerDectector, attackRange, chargeSpeed, chargeDistance, attackCooldown, attackHitbox);
+            attackEnemySO = boarSO;
+            attackState = new EnemyAttackStateBoar(this, agent, PlayerDectector, boarSO, attackHitbox);
             
             // Run base Start function to prepare State machine.
             base.Start();

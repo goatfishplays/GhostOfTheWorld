@@ -31,7 +31,7 @@ public class MenuManager : MonoBehaviour
     public GameObject controlsHolder;
     [Header("Audio Menu")]
     public GameObject audioHolder;
-    public AudioManager audioManager => AudioManager.instance;
+    public AudioManager AudioManager => AudioManager.instance;
 
     [Header("Inventory Menu")]
     public GameObject inventoryHolder;
@@ -138,12 +138,12 @@ public class MenuManager : MonoBehaviour
         if (pause)
         {
             Time.timeScale = 0f;
-            audioManager.PauseAllSFX();
+            AudioManager.PauseAllSFX();
         }
         else
         {
             Time.timeScale = 1f;
-            audioManager.UnPauseAllSFX();
+            AudioManager.UnPauseAllSFX();
         }
     }
 
@@ -158,6 +158,7 @@ public class MenuManager : MonoBehaviour
             Debug.LogWarning("Two MenuManagers detected, deleting second");
             Destroy(this);
         }
+
     }
 
 }
