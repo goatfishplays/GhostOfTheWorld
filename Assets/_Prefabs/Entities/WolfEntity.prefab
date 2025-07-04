@@ -433,47 +433,9 @@ MonoBehaviour:
   agent: {fileID: 6039760403473626768}
   PlayerDectector: {fileID: -3160817928236635415}
   entityHealth: {fileID: 4322988262846924936}
-  wanderRadius: 5
-  attackCooldown: 2
-  attackRange: 2
+  attackEnemySO: {fileID: 0}
   attackHitbox: {fileID: 112932612694092993}
-  jumpRangeMin: 4
-  jumpRangeMax: 12
-  jumpTimeLength: 0.75
-  jumpCooldown: 1
-  HeightCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1.9952829
-      outSlope: 1.9952829
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.5
-      value: 0.99764144
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -1.9952829
-      outSlope: -1.9952829
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  wolfSO: {fileID: 11400000, guid: 2f86ecbe7413bd449b1b5aa83dc58249, type: 2}
 --- !u!114 &-3160817928236635415
 MonoBehaviour:
   m_ObjectHideFlags: 0
