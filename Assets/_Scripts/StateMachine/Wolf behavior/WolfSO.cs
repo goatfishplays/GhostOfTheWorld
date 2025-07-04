@@ -13,5 +13,5 @@ public class WolfSO : AttackEnemySO
     [Tooltip("Time in seconds between wolf jumping. Cooldown starts the moment they start jumping.")]
     public float jumpCooldown = 5f;
     [Tooltip("Curve the wolf follows when jumping. Time is adjusted to the jumpTimeLength.")]
-    public AnimationCurve HeightCurve;
+    public AnimationCurve heightCurve;
 }

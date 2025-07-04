@@ -19,7 +19,7 @@ MonoBehaviour:
   jumpRangeMax: 12
   jumpTimeLength: 0.75
   jumpCooldown: 1
-  HeightCurve:
+  heightCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
