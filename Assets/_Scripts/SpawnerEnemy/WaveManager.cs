@@ -2,12 +2,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using static EnemyEvent;
 using System.Linq;
+using System.Collections;
 
 public class WaveManager : MonoBehaviour
 {
     
     public int currentWave = 0;
     public int remainEnemy;
+    public int delayTime;
     public EnemySpawner enemySpawner;
     [System.Serializable]
     struct EnemyInfo
@@ -31,7 +33,8 @@ public class WaveManager : MonoBehaviour
         if (remainEnemy == 0)
         {
             Debug.Log("All enemy are dead, start the next wave");
-            StartNextWave();
+            StartCoroutine(delayWave(delayTime));
+            
         }
 
     }
@@ -41,11 +44,18 @@ public class WaveManager : MonoBehaviour
     }*/
     void StartNextWave()
     {
+        
         currentWave++;
         Dictionary<GameObject, int> plan = GetSpawnPlan(currentWave);
         remainEnemy = plan.Values.Sum();
         SpawnWave(plan);
 
+    }
+   
+    IEnumerator delayWave(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        StartNextWave();
     }
     //make a random spawn
     //make a function that return a dictionary to determine which type of spawning enemy
