@@ -4,57 +4,52 @@ using UnityEngine;
 
 public class PlayerInteracter : MonoBehaviour
 {
-    [SerializeField] private Entity entity;
+    [SerializeField] private Entity player;
     public Transform castPoint;
     public float maxCastDistance = 4f;
     private int layerMask;
-    private int interactableMask;
-    private Interactable target;
-    private float curInteractTime = 0;
-    [SerializeField] private float areaEctoplasmTime = 3f;
-    [SerializeField] private float areaRadius = 4f;
+    private EctoplasmDrop currentEctoplasmDrop = null;
 
-    public bool interactionHeld = false;
-    public bool areaToggle = false;
-    [SerializeField] private InteracterIndicater interacterIndicater;
+    //private int interactableMask;
+    //private Interactable target;
+    //private float curInteractTime = 0;
+    //[SerializeField] private float areaEctoplasmTime = 3f;
+    //[SerializeField] private float areaRadius = 4f;
+
+    //[DoNotSerialize] public bool interactionHeld = false;
+    //[DoNotSerialize] public bool areaToggle = false;
+    //[SerializeField] private InteracterIndicater interacterIndicater;
 
     void Awake()
     {
         layerMask = LayerMask.GetMask("Entities", "Interactable", "World");
-        interactableMask = LayerMask.GetMask("Interactable");
+        // interactableMask = LayerMask.GetMask("Interactable");
     }
 
     public void Start()
     {
-        if (interacterIndicater != null)
-        {
-            Interactable interactable = AttemptCast();
-            SetInteractionBoi(interactable);
-
-        }
-    }
-    // public GameObject AttemptCast()
-    public Interactable AttemptCast()
-    {
-        if (Physics.Raycast(castPoint.position, castPoint.forward, out RaycastHit hit, maxCastDistance, layerMask, QueryTriggerInteraction.Collide))
-        {
-            // Debug.Log($"{hit.collider.gameObject.name}");
-            // return hit.collider.gameObject;
-            return hit.collider.GetComponent<Interactable>();
-        }
-        return null;
+        //if (interacterIndicater != null)
+        //{
+        //    Interactable interactable = AttemptCastToEctoplasm();
+        //    SetInteractionBoi(interactable);
+        //}
     }
 
-
+    
     public void Update()
     {
-        // GameObject hitBoi = AttemptCast(); 
-        // if (hitBoi != null)
-        // {
-        //     // Debug.Log(hitBoi.name);
-        //     Interactable hitInteractable = hitBoi.GetComponent<Interactable>();
-        // } 
-        // Interactable interactable;
+        // Try to find a interactable in front of us
+        currentEctoplasmDrop = AttemptCastToEctoplasm();
+
+        /*
+         GameObject hitBoi = AttemptCast(); 
+         if (hitBoi != null)
+         {
+             // Debug.Log(hitBoi.name);
+             Interactable hitInteractable = hitBoi.GetComponent<Interactable>();
+         } 
+         Interactable interactable;
+
         if (!areaToggle)
         {
             Interactable interactable = AttemptCast();
@@ -65,8 +60,10 @@ public class PlayerInteracter : MonoBehaviour
         }
         // Debug.Log("target: " + (target != null ? target.name : "null"));
 
+        // If the target is something or area pickup
         if (target != null || areaToggle)
         {
+            // Normal pickup
             if (interactionHeld)
             {
 
@@ -92,6 +89,7 @@ public class PlayerInteracter : MonoBehaviour
                     }
                 }
             }
+            // Try instant interact
             else if (curInteractTime > 0f)
             {
                 if (areaToggle)
@@ -106,54 +104,90 @@ public class PlayerInteracter : MonoBehaviour
                 StartCoroutine(CastAndSetInteraction());
             }
         }
-
+        */
     }
 
-    private void AreaEctoplasmInteract()
+    // Attempts to get and return the ectoplasm drop that the player is looking at
+    public EctoplasmDrop AttemptCastToEctoplasm()
     {
-        foreach (Collider col in Physics.OverlapSphere(castPoint.position, areaRadius, interactableMask, QueryTriggerInteraction.Collide))
+        if (Physics.Raycast(castPoint.position, castPoint.forward, out RaycastHit hit, maxCastDistance, layerMask, QueryTriggerInteraction.Collide))
         {
-            EctoplasmDrop ed = col.GetComponent<EctoplasmDrop>();
-            if (ed != null)
-            {
-                ed.Interact(entity);
-            }
+            // Debug.Log($"{hit.collider.gameObject.name}");
+            // return hit.collider.gameObject;
+            hit.collider.TryGetComponent<EctoplasmDrop>(out var ectoplasmDrop);
+            Debug.Log("ectoplasm drop: " + ectoplasmDrop);
+
+            return ectoplasmDrop;
         }
-        areaToggle = false;
+        return null;
     }
-    private void AreaEctoplasmInstantInteract()
+
+    public void TryInstantUse()
     {
-        foreach (Collider col in Physics.OverlapSphere(castPoint.position, areaRadius, interactableMask, QueryTriggerInteraction.Collide))
+        if (currentEctoplasmDrop != null)
         {
-            EctoplasmDrop ed = col.GetComponent<EctoplasmDrop>();
-            // Debug.Log(col.gameObject.name);
-            if (ed != null)
-            {
-                ed.InstantInteract(entity);
-            }
+            Debug.Log("Tried to get the thingy");
+            currentEctoplasmDrop.InstantInteract(player);
         }
-        areaToggle = false;
     }
+    
+    public void startInteract()
+    {
+        TryInstantUse();
+    }
+
+    public void endInteract()
+    {
+         // Does not do anything. Basic function for if needed later.
+    }
+
+
+
+    //private void AreaEctoplasmInteract()
+    //{
+    //    foreach (Collider col in Physics.OverlapSphere(castPoint.position, areaRadius, interactableMask, QueryTriggerInteraction.Collide))
+    //    {
+    //        if (col.TryGetComponent<EctoplasmDrop>(out EctoplasmDrop ectoplasmDrop))
+    //        {
+    //            ectoplasmDrop.Interact(player);
+    //        }
+    //    }
+    //    areaToggle = false;
+    //}
+    //private void AreaEctoplasmInstantInteract()
+    //{
+    //    foreach (Collider col in Physics.OverlapSphere(castPoint.position, areaRadius, interactableMask, QueryTriggerInteraction.Collide))
+    //    {
+    //        if (col.TryGetComponent<EctoplasmDrop>(out EctoplasmDrop ectoplasmDrop))
+    //        {
+    //            ectoplasmDrop.InstantInteract(player);
+    //        }
+    //    }
+    //    areaToggle = false;
+    //}
 
     // obj not deleted till end of frame so need coroutine 
-    public IEnumerator CastAndSetInteraction()
-    {
-        yield return new WaitForEndOfFrame();
-        SetInteractionBoi(AttemptCast());
-    }
+    //public IEnumerator CastAndSetInteraction()
+    //{
+    //    yield return new WaitForEndOfFrame();
+    //    SetInteractionBoi(AttemptCastToEctoplasm());
+    //}
 
-    public void SetInteractionBoi(Interactable interactable)
-    {
-        // Debug.Log(interactable != null ? interactable.name : "null");
-        interacterIndicater.SetInteractable(interactable != null);
-        interacterIndicater.fill.fillAmount = 0;
-        target = interactable;
-        ResetInteractTime();
-    }
+    // Starts an interaction with an interactable
+    //public void SetInteractionBoi(EctoplasmDrop interactable)
+    //{
+    //    // Debug.Log(interactable != null ? interactable.name : "null");
+    //    //interacterIndicater.SetInteractable(interactable != null);
+    //    //interacterIndicater.fill.fillAmount = 0;
+
+    //    //target = interactable;
+
+    //    //ResetInteractTime();
+    //}
 
 
-    public void ResetInteractTime()
-    {
-        curInteractTime = 0;
-    }
+    //public void ResetInteractTime()
+    //{
+    //    curInteractTime = 0;
+    //}
 }

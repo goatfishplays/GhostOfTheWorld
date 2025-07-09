@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1610631531855399194, guid: 2d20492db1c3462429d63463d4819c01, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 4605453249981260005}
     - target: {fileID: 1935929800497013255, guid: 2d20492db1c3462429d63463d4819c01, type: 3}
       propertyPath: m_Name
       value: Player with gun
@@ -85,6 +89,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aadb2f2a198a35b4ba681b2645b4b4ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4605453249981260005 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7213735928535696153, guid: 2d20492db1c3462429d63463d4819c01, type: 3}
+  m_PrefabInstance: {fileID: 6626358350719935484}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7e59167a53641042b516a405b829e5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6753926328774019390 stripped

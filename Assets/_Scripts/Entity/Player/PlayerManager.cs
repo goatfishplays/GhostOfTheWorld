@@ -327,13 +327,14 @@ public class PlayerManager : MonoBehaviour
 
     public void StartInteract(InputAction.CallbackContext context)
     {
-        playerInteracter.interactionHeld = true;
-        playerInteracter.areaToggle = shiftAction.IsPressed();
+        playerInteracter.startInteract();
+        playerInteracter.TryInstantUse();
+        //playerInteracter.areaToggle = shiftAction.IsPressed();
     }
 
     public void EndInteract(InputAction.CallbackContext context)
     {
-        playerInteracter.interactionHeld = false;
+        playerInteracter.endInteract();
     }
     private void OnPlayerDie()
     {

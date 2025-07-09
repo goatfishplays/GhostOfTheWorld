@@ -758,7 +758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4339a9e3fa010b48aaa92e4372a4230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawnZone: {fileID: 0}
+  enemySpawnZone: {fileID: 775595755}
   parent: {fileID: 1794399994}
 --- !u!114 &1014982516
 MonoBehaviour:
@@ -1001,6 +1001,10 @@ PrefabInstance:
     - target: {fileID: 4740106956462075950, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4769957402028956034, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
+      propertyPath: areaEctoplasmTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5010563861782182163, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
       propertyPath: m_IsActive

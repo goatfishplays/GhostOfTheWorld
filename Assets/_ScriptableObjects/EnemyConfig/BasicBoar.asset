@@ -15,5 +15,5 @@ MonoBehaviour:
   wanderRadius: 10
   attackCooldown: 1
   attackRange: 10
-  chargeSpeed: 60
-  chargeDistance: 20
+  chargeSpeed: 5
+  chargeDistance: 30
