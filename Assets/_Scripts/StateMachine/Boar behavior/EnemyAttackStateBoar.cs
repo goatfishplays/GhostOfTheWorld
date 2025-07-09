@@ -21,26 +21,22 @@ namespace PlatformerAI
         private CountdownTimer timer;
 
 
-
-
         public EnemyAttackStateBoar(
             BaseEnemy enemy,
             NavMeshAgent agent,
             PlayerDectector playerDetector,
-            float attackRange = 5f,
-            float chargeSpeed = 30f,
-            float chargeDistance = 10f,
-            float chargeCooldown = 5f,
-            GameObject attackHitbox = null) 
+            BoarSO boarSO,
+            GameObject attackHitbox) 
             : base(enemy)
         {
             this.agent = agent;
             this.playerDetector = playerDetector;
-            this.attackRange = attackRange;
-            this.chargeSpeed = chargeSpeed;
-            this.chargeDistance = chargeDistance;
-            this.chargeCooldown = chargeCooldown;
             this.attackHitbox = attackHitbox;
+            attackRange = boarSO.attackRange;
+            chargeSpeed = boarSO.chargeSpeed;
+            chargeDistance = boarSO.chargeDistance;
+            chargeCooldown = boarSO.attackCooldown;
+            
 
             // Call Attack when the hitbox hits a valid entity.
             attackHitbox.GetComponent<Attack>().OnEntityHit += enemy.Attack;

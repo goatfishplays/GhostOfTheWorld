@@ -8,7 +8,7 @@ public class WaveManager : MonoBehaviour
     
     public int currentWave = 0;
     public int remainEnemy;
-    [SerializeField] public EnemySpawner enemySpawner;
+    public EnemySpawner enemySpawner;
     [System.Serializable]
     struct EnemyInfo
     {
@@ -22,7 +22,7 @@ public class WaveManager : MonoBehaviour
 
     private void Start()
     {
-        starNextWave();
+        StartNextWave();
     }
 
     void HandleEnemyDead()
@@ -31,7 +31,7 @@ public class WaveManager : MonoBehaviour
         if (remainEnemy == 0)
         {
             Debug.Log("All enemy are dead, start the next wave");
-            starNextWave();
+            StartNextWave();
         }
 
     }
@@ -39,7 +39,7 @@ public class WaveManager : MonoBehaviour
     {
         remainEnemy++;
     }*/
-    void starNextWave()
+    void StartNextWave()
     {
         currentWave++;
         Dictionary<GameObject, int> plan = GetSpawnPlan(currentWave);

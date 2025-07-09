@@ -8,13 +8,14 @@ namespace PlatformerAI
     [RequireComponent(typeof(ProjectileSpawner))]
     public class SpiritEnemy : AttackEnemy
     {
+        [SerializeField] protected SpiritSO spiritSO = null;
         [SerializeField] private ProjectileSpawner PS;
+
         
         protected override void Start()
         {
-            // NOTE: idk why the attackRange is multiplied by 2 for no reason. TODO: remove the * 2
-            // EnemyAttackState attackState
-            attackState = new EnemyAttackStateSpirit(this, agent, PlayerDectector, attackRange * 2, attackCooldown);
+            attackEnemySO = spiritSO;
+            attackState = new EnemyAttackStateSpirit(this, agent, PlayerDectector, spiritSO);
             
             // Run base Start function to prepare State machine.
             base.Start();
