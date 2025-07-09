@@ -12,6 +12,7 @@ namespace PlatformerAI
         readonly protected PlayerDectector playerDetector;
         readonly protected BoarSO boarSO;
         readonly protected GameObject attackHitbox;
+        readonly int layerMask;
 
         private float defaultSpeed;
         private bool isCharging;
@@ -33,6 +34,7 @@ namespace PlatformerAI
             this.attackHitbox = attackHitbox;
             this.boarSO = boarSO;
 
+            layerMask = LayerMask.GetMask("World");
 
             // Call Attack when the hitbox hits a valid entity.
             attackHitbox.GetComponent<Attack>().OnEntityHit += enemy.Attack;
@@ -70,7 +72,19 @@ namespace PlatformerAI
                 chargeEndDistant = enemy.transform.position + chargeDirection * boarSO.chargeDistance;
 
                 //agent setting
+                agent.speed = boarSO.chargeSpeed;
                 agent.isStopped = false;
+
+                //Debug.DrawRay(enemy.transform.position, chargeDirection * boarSO.chargeDistance, Color.red, 3f);
+                if (Physics.Raycast(enemy.transform.position, chargeDirection, out var hit, boarSO.chargeDistance, layerMask)) {
+                    //Debug.DrawLine(hit.point, hit.transform.position + Vector3.up * 10, Color.blue, 3f);
+                    agent.SetDestination(hit.point);
+                }
+                else {
+                    agent.SetDestination(chargeEndDistant);
+                }
+
+
                 Debug.Log("CHARG");
             }
 
