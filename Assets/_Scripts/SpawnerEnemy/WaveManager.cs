@@ -3,6 +3,7 @@ using UnityEngine;
 using static EnemyEvent;
 using System.Linq;
 using System.Collections;
+using System;
 
 public class WaveManager : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class WaveManager : MonoBehaviour
     public int remainEnemy;
     public int delayTime;
     public EnemySpawner enemySpawner;
+    public event Action startWaveEvent;
+    public event Action enemyDie;// for whenever enemy die, 
+    public event Action endWaveEvent;
     [System.Serializable]
     struct EnemyInfo
     {
@@ -33,18 +37,16 @@ public class WaveManager : MonoBehaviour
         if (remainEnemy == 0)
         {
             Debug.Log("All enemy are dead, start the next wave");
+            endWaveEvent?.Invoke();
             StartCoroutine(delayWave(delayTime));
             
         }
 
     }
-    /*void HaddleEnemySpawn()
-    {
-        remainEnemy++;
-    }*/
+    
     void StartNextWave()
     {
-        
+        startWaveEvent?.Invoke();
         currentWave++;
         Dictionary<GameObject, int> plan = GetSpawnPlan(currentWave);
         remainEnemy = plan.Values.Sum();
@@ -54,6 +56,7 @@ public class WaveManager : MonoBehaviour
    
     IEnumerator delayWave(float delayTime)
     {
+
         yield return new WaitForSeconds(delayTime);
         StartNextWave();
     }
