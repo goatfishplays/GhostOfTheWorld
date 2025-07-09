@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
+    //! don't think this is currently used within the game, would mostly be used if we ever got a console to dynamically search for items for some reason
     public static ItemManager instance;
 
     private void Awake()
