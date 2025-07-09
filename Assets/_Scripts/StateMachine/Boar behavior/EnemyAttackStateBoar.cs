@@ -1,18 +1,17 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 using Utilities;
 
 namespace PlatformerAI
 {
     public class EnemyAttackStateBoar : EnemyAttackState
     {
-        readonly NavMeshAgent agent;
-        readonly PlayerDectector playerDetector;
-        readonly float attackRange;
-        readonly float chargeSpeed;
-        readonly float chargeDistance;
-        readonly float chargeCooldown;
-        readonly GameObject attackHitbox;
+        readonly protected NavMeshAgent agent;
+        readonly protected PlayerDectector playerDetector;
+        readonly protected BoarSO boarSO;
+        readonly protected GameObject attackHitbox;
 
         private float defaultSpeed;
         private bool isCharging;
@@ -32,16 +31,13 @@ namespace PlatformerAI
             this.agent = agent;
             this.playerDetector = playerDetector;
             this.attackHitbox = attackHitbox;
-            attackRange = boarSO.attackRange;
-            chargeSpeed = boarSO.chargeSpeed;
-            chargeDistance = boarSO.chargeDistance;
-            chargeCooldown = boarSO.attackCooldown;
-            
+            this.boarSO = boarSO;
+
 
             // Call Attack when the hitbox hits a valid entity.
             attackHitbox.GetComponent<Attack>().OnEntityHit += enemy.Attack;
 
-            timer = new CountdownTimer(this.chargeCooldown);
+            timer = new CountdownTimer(this.boarSO.attackCooldown);
         }
 
         public override void OnEnter()
@@ -63,7 +59,7 @@ namespace PlatformerAI
             var player = playerDetector.GetPlayer();
             var distance = Vector3.Distance(enemy.transform.position, player.position);
 
-            if (!isCharging && distance <= attackRange && !timer.IsRunning)
+            if (!isCharging && distance <= boarSO.attackRange && !timer.IsRunning)
             {
                 //start to charge
                 isCharging=true;
@@ -71,12 +67,10 @@ namespace PlatformerAI
                 attackHitbox.SetActive(true);
 
                 chargeDirection = (player.position - enemy.transform.position).normalized;
-                chargeEndDistant = enemy.transform.position + chargeDirection * chargeDistance;
+                chargeEndDistant = enemy.transform.position + chargeDirection * boarSO.chargeDistance;
 
                 //agent setting
-                agent.speed = chargeSpeed;
                 agent.isStopped = false;
-                agent.SetDestination(chargeEndDistant);
                 Debug.Log("CHARG");
             }
 
@@ -92,7 +86,7 @@ namespace PlatformerAI
             }
             else
             {
-                if (distance <= attackRange)
+                if (distance <= boarSO.attackRange)
                 // Normal chase when not charging
                     agent.isStopped = true;
                 agent.SetDestination(player.position);

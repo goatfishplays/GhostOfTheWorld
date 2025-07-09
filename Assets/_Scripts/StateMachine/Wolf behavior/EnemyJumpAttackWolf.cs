@@ -11,10 +11,7 @@ namespace PlatformerAI
     {
         readonly protected NavMeshAgent agent;
         readonly protected PlayerDectector playerDetector;
-        readonly protected float jumpTimeLength;
-        readonly protected float jumpCooldown;
-        readonly protected AnimationCurve heightCurve;
-
+        readonly protected WolfSO wolfSO;
         readonly protected CountdownTimer jumpCooldownTimer;
         protected bool hasJumped;
         protected Coroutine jumpRoutine;
@@ -27,11 +24,9 @@ namespace PlatformerAI
         {
             this.agent = agent;
             this.playerDetector = playerDetector;
-            jumpCooldown = wolfSO.jumpCooldown;
-            jumpTimeLength = wolfSO.jumpTimeLength;
-            heightCurve = wolfSO.heightCurve;
+            this.wolfSO = wolfSO;
 
-            jumpCooldownTimer = new CountdownTimer(this.jumpCooldown);
+            jumpCooldownTimer = new CountdownTimer(this.wolfSO.jumpCooldown);
         }
 
         public override void OnEnter()
@@ -71,15 +66,15 @@ namespace PlatformerAI
             agent.isStopped = true;
 
             Vector3 startPos = enemy.transform.position;
-            float heightCurveTime = heightCurve.keys[^1].time;
+            float heightCurveTime = wolfSO.heightCurve.keys[^1].time;
 
             float t = 0f;
             // Move Wolf based on t from 0 to jumpTimeLength
-            while (t < jumpTimeLength) 
+            while (t < wolfSO.jumpTimeLength) 
             {
                 t += Time.deltaTime;
 
-                float percentageOfJump = t / jumpTimeLength;
+                float percentageOfJump = t / wolfSO.jumpTimeLength;
                 
                 // The time t along the height curve adjusted to account for how long the jump is.
                 float tHeight = percentageOfJump * heightCurveTime;
@@ -87,7 +82,7 @@ namespace PlatformerAI
                 // Move along the horizontal line plus the curve height
                 enemy.transform.position =
                     Vector3.Lerp(startPos, target, percentageOfJump) // Horizontal
-                    + Vector3.up * heightCurve.Evaluate(tHeight); // Vertical
+                    + Vector3.up * wolfSO.heightCurve.Evaluate(tHeight); // Vertical
                 yield return null;
             }
 
