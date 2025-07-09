@@ -5217,6 +5217,7 @@ GameObject:
   m_Component:
   - component: {fileID: 867092910808983309}
   - component: {fileID: 8145558707311313701}
+  - component: {fileID: 4760415978398997861}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -5258,6 +5259,30 @@ MonoBehaviour:
   curMusicPlayer: {fileID: 0}
   maxSFXPlayers: 100
   SFXPlayerPrefab: {fileID: 1918263033660387994, guid: 7bc0e2d58ef822a4a9d8c0ff68be8996, type: 3}
+--- !u!114 &4760415978398997861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5914770184137656199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac5849bdd8342d24aaada8064df49127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curTrack: 0
+  tracks:
+  - {fileID: 8300000, guid: ff4816df7d9095943b5dad0ec0e8f299, type: 3}
+  - {fileID: 8300000, guid: e2cb5f4894533d744a7271dfbcfc3927, type: 3}
+  - {fileID: 8300000, guid: 0f6fa7a5bb41ae84da3258922c6f79ea, type: 3}
+  - {fileID: 8300000, guid: e7e7c26774a2e884381b139f94b8ec76, type: 3}
+  - {fileID: 8300000, guid: 2f9e8253b1f7c9749839cf9bea993060, type: 3}
+  - {fileID: 8300000, guid: 85a6d003ee0f3b84ebaf73c573cbd183, type: 3}
+  - {fileID: 8300000, guid: 51d53ae201363df4785c4464ab139a6f, type: 3}
+  - {fileID: 8300000, guid: cd0799b03f952314abbd34ee620fcf74, type: 3}
+  - {fileID: 8300000, guid: d2bf69e9ae5c0a441a816e418fc7885b, type: 3}
+  - {fileID: 8300000, guid: cc064a21b3567d64288ebf3d197fa3d4, type: 3}
 --- !u!1 &6030661551056572100
 GameObject:
   m_ObjectHideFlags: 0
