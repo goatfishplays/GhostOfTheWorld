@@ -28,12 +28,14 @@ public class WaveManager : MonoBehaviour
 
     private void Start()
     {
+        startWaveEvent += pickupAllEnemyDrops;
         StartNextWave();
     }
 
     void HandleEnemyDead()
     {
         remainEnemy--;
+        enemyDie?.Invoke();
         if (remainEnemy == 0)
         {
             Debug.Log("All enemy are dead, start the next wave");
@@ -53,7 +55,12 @@ public class WaveManager : MonoBehaviour
         SpawnWave(plan);
 
     }
-   
+
+    void pickupAllEnemyDrops()
+    {
+        DropManager.instance.PickupAllDrops(PlayerManager.instance.entity);
+    }
+
     IEnumerator delayWave(float delayTime)
     {
 
@@ -78,7 +85,7 @@ public class WaveManager : MonoBehaviour
         for (int i = 0; i<totalEnemy;i++)
         {
 
-            GameObject randomEnemyType = introducedEnemies[Random.Range(0, introducedEnemies.Count)];
+            GameObject randomEnemyType = introducedEnemies[UnityEngine.Random.Range(0, introducedEnemies.Count)];
  
             if (!spawnPlan.ContainsKey(randomEnemyType))
                 spawnPlan[randomEnemyType] = 0;
