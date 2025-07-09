@@ -4,31 +4,32 @@ using UnityEngine.Rendering;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public float minXPos;
-    public float maxXPos;
-    public float minZPos;
-    public float maxZPos;
+    protected float xMaxSpawnDist = 1f;
+    protected float zMaxSpawnDist = 1f;
     
-    [Tooltip("The Vector3 that is the center of the spawn radius")]
-    public Transform center = null;
+    [Tooltip("The transform that determines the spawn radius based on it's scale")]
+    public Transform enemySpawnZone = null;
     [Tooltip("The transform that all enemies will be children of")]
     public Transform parent = null;
 
     public void Start()
     {
-        if (center == null)
+        if (enemySpawnZone == null)
         {
-            center = gameObject.transform;
+            enemySpawnZone = gameObject.transform;
         }
         if (parent == null)
         {
             parent = gameObject.transform;
         }
+
+        xMaxSpawnDist = enemySpawnZone.transform.localScale.x / 2;
+        zMaxSpawnDist = enemySpawnZone.transform.localScale.y / 2;
     }
 
     public EntityHealth SpawnEnemy(GameObject enemyType)
     {
-        Vector3 spawnPos = new Vector3(Random.Range(minXPos, maxXPos), 0, Random.Range(minZPos, maxZPos)) + center.position;
+        Vector3 spawnPos = new Vector3(Random.Range(-xMaxSpawnDist, xMaxSpawnDist), 0, Random.Range(-xMaxSpawnDist, xMaxSpawnDist)) + enemySpawnZone.position;
         GameObject enemy = Instantiate(enemyType, spawnPos, Quaternion.identity, parent);
         
         return enemy.GetComponent<EntityHealth>();

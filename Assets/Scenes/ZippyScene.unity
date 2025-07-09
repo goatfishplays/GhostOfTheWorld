@@ -423,7 +423,7 @@ GameObject:
   - component: {fileID: 775595757}
   - component: {fileID: 775595756}
   m_Layer: 6
-  m_Name: EnemySpawnPoint
+  m_Name: EnemySpawnZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -451,7 +451,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 775595754}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -758,11 +758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4339a9e3fa010b48aaa92e4372a4230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minXPos: -5
-  maxXPos: 5
-  minZPos: -5
-  maxZPos: 5
-  center: {fileID: 775595755}
+  enemySpawnZone: {fileID: 0}
   parent: {fileID: 1794399994}
 --- !u!114 &1014982516
 MonoBehaviour:

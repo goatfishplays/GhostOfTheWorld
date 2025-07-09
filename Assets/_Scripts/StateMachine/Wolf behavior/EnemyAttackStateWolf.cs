@@ -5,21 +5,21 @@ namespace PlatformerAI
 {
     public class EnemyAttackStateWolf : EnemyAttackState
     {
-        readonly NavMeshAgent agent;
-        readonly PlayerDectector playerDetector;
-        readonly float attackRange;
-        readonly GameObject attackHitbox;
+        readonly protected NavMeshAgent agent;
+        readonly protected PlayerDectector playerDetector;
+        readonly protected WolfSO wolfSO;
+        readonly protected GameObject attackHitbox;
 
         public EnemyAttackStateWolf(BaseEnemy enemy, 
             NavMeshAgent agent, 
             PlayerDectector playerDetector,
-            float attackRange, 
+            WolfSO wolfSO, 
             GameObject attackHitbox = null)
             : base(enemy)
         {
             this.agent = agent;
             this.playerDetector = playerDetector;
-            this.attackRange = attackRange;
+            this.wolfSO = wolfSO;
             this.attackHitbox = attackHitbox;
 
             // Call Attack when the hitbox hits a valid entity.
@@ -36,7 +36,7 @@ namespace PlatformerAI
             var player = playerDetector.GetPlayer();
             var distance = Vector3.Distance(player.position,enemy.transform.position);
 
-            if (distance <= attackRange)
+            if (distance <= wolfSO.attackRange)
             {
                 agent.isStopped = true;
 

@@ -6,13 +6,11 @@ namespace PlatformerAI
 {
     public class EnemyAttackStateSpirit : EnemyAttackState
     {
-        readonly NavMeshAgent agent;
-        readonly PlayerDectector playerDetector;
-        readonly float attackRange;
-        readonly float shootCooldown;
+        readonly protected NavMeshAgent agent;
+        readonly protected PlayerDectector playerDetector;
+        readonly protected SpiritSO spiritSO;
 
-
-        private CountdownTimer timer;
+        protected CountdownTimer timer;
         //private bool canDamage; // to prevent multiple hit
 
 
@@ -26,11 +24,9 @@ namespace PlatformerAI
         {
             this.agent = agent;
             this.playerDetector = playerDetector;
-            attackRange = spiritSO.attackRange;
-            shootCooldown = spiritSO.attackCooldown;
+            this.spiritSO = spiritSO;
 
-
-            timer = new CountdownTimer(shootCooldown);
+            timer = new CountdownTimer(spiritSO.attackCooldown);
         }
 
         public override void OnEnter()
@@ -52,8 +48,8 @@ namespace PlatformerAI
             RaycastHit hit;
             Vector3 directionToPlayer = (player.position - enemy.transform.position).normalized;
 
-            if (distance < attackRange && !timer.IsRunning &&
-                Physics.Raycast(enemy.transform.position, directionToPlayer, out hit, attackRange))
+            if (distance < spiritSO.attackRange && !timer.IsRunning &&
+                Physics.Raycast(enemy.transform.position, directionToPlayer, out hit, spiritSO.attackRange))
             {
                 agent.isStopped = false;
                 if (hit.collider.CompareTag("Player"))

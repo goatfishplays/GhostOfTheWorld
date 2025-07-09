@@ -24,7 +24,7 @@ namespace PlatformerAI
             }
 
             
-            attackState = new EnemyAttackStateWolf(this, agent, PlayerDectector, wolfSO.attackRange, attackHitbox);
+            attackState = new EnemyAttackStateWolf(this, agent, PlayerDectector, wolfSO, attackHitbox);
 
             // Run base Start function to prepare State machine.
             base.Start();
