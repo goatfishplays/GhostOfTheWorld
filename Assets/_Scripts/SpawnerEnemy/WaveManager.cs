@@ -72,7 +72,6 @@ public class WaveManager : MonoBehaviour
     
     void StartNextWave()
     {
-        startWaveEvent?.Invoke();
         currentWave++;
 
         Dictionary<GameObject, int> plan = GetSpawnPlan(currentWave);
