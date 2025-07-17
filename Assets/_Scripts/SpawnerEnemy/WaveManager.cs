@@ -2,13 +2,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using static EnemyEvent;
 using System.Linq;
+using System.Collections;
+using System;
+using Utilities;
 
 public class WaveManager : MonoBehaviour
 {
-    
+    public static WaveManager instance = null;
+
     public int currentWave = 0;
     public int remainEnemy;
+    public float timeBetweenWaves = 5f;
     public EnemySpawner enemySpawner;
+    public CountdownTimer waveDelayTimer;
+
+    public event Action<int> startWaveEvent;
+    public event Action enemyDie;// for whenever enemy die, 
+    public event Action endWaveEvent;
+
     [System.Serializable]
     struct EnemyInfo
     {
@@ -20,9 +31,30 @@ public class WaveManager : MonoBehaviour
 
     List<GameObject> introducedEnemies = new ();
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.LogWarning("Multiple WaveManagers Detected Deleting Second");
+            Destroy(gameObject);
+        }
+    }
     private void Start()
     {
+        waveDelayTimer = new CountdownTimer(timeBetweenWaves);
+        waveDelayTimer.OnTimerStop += StartNextWave;
+
+        startWaveEvent += pickupAllEnemyDrops;
         StartNextWave();
+    }
+
+    private void Update()
+    {
+        waveDelayTimer.Tick(Time.deltaTime);
     }
 
     void HandleEnemyDead()
@@ -31,7 +63,8 @@ public class WaveManager : MonoBehaviour
         if (remainEnemy == 0)
         {
             Debug.Log("All enemy are dead, start the next wave");
-            StartNextWave();
+            waveDelayTimer.Start();
+            endWaveEvent?.Invoke();
         }
 
     }
@@ -42,11 +75,20 @@ public class WaveManager : MonoBehaviour
     void StartNextWave()
     {
         currentWave++;
+
         Dictionary<GameObject, int> plan = GetSpawnPlan(currentWave);
+
         remainEnemy = plan.Values.Sum();
         SpawnWave(plan);
 
+        startWaveEvent?.Invoke(currentWave);
     }
+
+    void pickupAllEnemyDrops(int waveCount)
+    {
+        DropManager.instance.PickupAllDrops(PlayerManager.instance.entity);
+    }
+
     //make a random spawn
     //make a function that return a dictionary to determine which type of spawning enemy
     Dictionary<GameObject, int> GetSpawnPlan(int wave)
@@ -82,7 +124,6 @@ public class WaveManager : MonoBehaviour
             {
                 EntityHealth temp = enemySpawner.SpawnEnemy(entry.Key);
                 temp.OnDie += HandleEnemyDead;
-                
             }
         }
     }
