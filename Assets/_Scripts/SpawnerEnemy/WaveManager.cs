@@ -2,13 +2,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using static EnemyEvent;
 using System.Linq;
+using System.Collections;
+using System;
 
 public class WaveManager : MonoBehaviour
 {
     
     public int currentWave = 0;
     public int remainEnemy;
+    public int delayTime;
     public EnemySpawner enemySpawner;
+    public event Action startWaveEvent;
+    public event Action enemyDie;// for whenever enemy die, 
+    public event Action endWaveEvent;
     [System.Serializable]
     struct EnemyInfo
     {
@@ -22,30 +28,44 @@ public class WaveManager : MonoBehaviour
 
     private void Start()
     {
+        startWaveEvent += pickupAllEnemyDrops;
         StartNextWave();
     }
 
     void HandleEnemyDead()
     {
         remainEnemy--;
+        enemyDie?.Invoke();
         if (remainEnemy == 0)
         {
             Debug.Log("All enemy are dead, start the next wave");
-            StartNextWave();
+            endWaveEvent?.Invoke();
+            StartCoroutine(delayWave(delayTime));
+            
         }
 
     }
-    /*void HaddleEnemySpawn()
-    {
-        remainEnemy++;
-    }*/
+    
     void StartNextWave()
     {
+        startWaveEvent?.Invoke();
         currentWave++;
         Dictionary<GameObject, int> plan = GetSpawnPlan(currentWave);
         remainEnemy = plan.Values.Sum();
         SpawnWave(plan);
 
+    }
+
+    void pickupAllEnemyDrops()
+    {
+        DropManager.instance.PickupAllDrops(PlayerManager.instance.entity);
+    }
+
+    IEnumerator delayWave(float delayTime)
+    {
+
+        yield return new WaitForSeconds(delayTime);
+        StartNextWave();
     }
     //make a random spawn
     //make a function that return a dictionary to determine which type of spawning enemy
@@ -65,7 +85,7 @@ public class WaveManager : MonoBehaviour
         for (int i = 0; i<totalEnemy;i++)
         {
 
-            GameObject randomEnemyType = introducedEnemies[Random.Range(0, introducedEnemies.Count)];
+            GameObject randomEnemyType = introducedEnemies[UnityEngine.Random.Range(0, introducedEnemies.Count)];
  
             if (!spawnPlan.ContainsKey(randomEnemyType))
                 spawnPlan[randomEnemyType] = 0;

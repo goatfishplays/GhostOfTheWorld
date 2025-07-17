@@ -14,6 +14,7 @@ public class Drop : Interactable
         this.item = item;
         this.count = count;
         co_pickupLock = StartCoroutine(WaitForPickup(pickupLockTime));
+        DropManager.instance.CacheDrop(this);
     }
 
     private IEnumerator WaitForPickup(float pickupLockTime)
@@ -38,5 +39,10 @@ public class Drop : Interactable
         {
             Destroy(rootObject);
         }
+    }
+
+    void OnDestroy()
+    {
+        DropManager.instance.UnCacheDrop(this);
     }
 }
