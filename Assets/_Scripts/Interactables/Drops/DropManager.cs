@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DropManager : MonoBehaviour
@@ -6,6 +7,7 @@ public class DropManager : MonoBehaviour
     [SerializeField] private Transform holder;
     private static DropManager _instance;
     public static DropManager instance => _instance;
+    private HashSet<Drop> currentDrops = new HashSet<Drop>();
     [SerializeField] private GameObject dropBase;
 
     void Awake()
@@ -31,7 +33,8 @@ public class DropManager : MonoBehaviour
     public void CreateDrop(Vector3 pos, Quaternion rot, ItemSO item, int count = 1, float lockTime = 0.1f)
     {
         GameObject spawned = Instantiate(item.dropPrefab, pos, rot, holder);
-        spawned.GetComponentInChildren<Drop>().Initailize(item, count, lockTime);
+        Drop spawnedDrop = spawned.GetComponentInChildren<Drop>();
+        spawnedDrop.Initailize(item, count, lockTime);
     }
 
     /// <summary> //! if later get other types of drops with instant interacts than can do that instead of PillItemSO 
@@ -46,6 +49,35 @@ public class DropManager : MonoBehaviour
     public void CreateEctoplasmDrop(Vector3 pos, Quaternion rot, PillItemSO item, int count = 1, float lockTime = 0.1f)
     {
         GameObject spawned = Instantiate(item.dropPrefab, pos, rot, holder);
-        spawned.GetComponentInChildren<EctoplasmDrop>().Initailize(item, count, lockTime);
+        Drop spawnedDrop = spawned.GetComponentInChildren<EctoplasmDrop>();
+        spawnedDrop.Initailize(item, count, lockTime);
+    }
+
+    public void CacheDrop(Drop drop)
+    {
+        currentDrops.Add(drop);
+    }
+
+    public void UnCacheDrop(Drop drop)
+    {
+        currentDrops.Remove(drop);
+    }
+
+
+    public void PickupAllDrops(Entity entity)
+    {
+        foreach (Drop drop in currentDrops)
+        {
+            drop.Interact(entity);
+        }
+    }
+
+    public void DestoryAllDrops()
+    {
+        foreach (Drop drop in currentDrops)
+        {
+            Destroy(drop.gameObject);
+        }
+        currentDrops.Clear();
     }
 }

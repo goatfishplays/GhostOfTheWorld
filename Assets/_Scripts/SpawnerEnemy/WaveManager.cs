@@ -60,6 +60,7 @@ public class WaveManager : MonoBehaviour
     void HandleEnemyDead()
     {
         remainEnemy--;
+        enemyDie?.Invoke();
         if (remainEnemy == 0)
         {
             Debug.Log("All enemy are dead, start the next wave");
@@ -68,12 +69,10 @@ public class WaveManager : MonoBehaviour
         }
 
     }
-    /*void HaddleEnemySpawn()
-    {
-        remainEnemy++;
-    }*/
+    
     void StartNextWave()
     {
+        startWaveEvent?.Invoke();
         currentWave++;
 
         Dictionary<GameObject, int> plan = GetSpawnPlan(currentWave);
@@ -89,6 +88,12 @@ public class WaveManager : MonoBehaviour
         DropManager.instance.PickupAllDrops(PlayerManager.instance.entity);
     }
 
+    IEnumerator delayWave(float delayTime)
+    {
+
+        yield return new WaitForSeconds(delayTime);
+        StartNextWave();
+    }
     //make a random spawn
     //make a function that return a dictionary to determine which type of spawning enemy
     Dictionary<GameObject, int> GetSpawnPlan(int wave)
@@ -107,7 +112,7 @@ public class WaveManager : MonoBehaviour
         for (int i = 0; i<totalEnemy;i++)
         {
 
-            GameObject randomEnemyType = introducedEnemies[Random.Range(0, introducedEnemies.Count)];
+            GameObject randomEnemyType = introducedEnemies[UnityEngine.Random.Range(0, introducedEnemies.Count)];
  
             if (!spawnPlan.ContainsKey(randomEnemyType))
                 spawnPlan[randomEnemyType] = 0;
