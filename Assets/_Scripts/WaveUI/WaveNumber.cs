@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class WaveNumber : BaseTextUI
 {
@@ -13,12 +14,12 @@ public class WaveNumber : BaseTextUI
             Destroy(gameObject);
         }
 
-        
         waveManager.startWaveEvent += OnWaveStart;
     }
 
     public void OnWaveStart(int waveNumber)
     {
+        Debug.Log("Wavenumber = " + waveNumber);
         UpdateText(defaultText + waveNumber);
     }
 }

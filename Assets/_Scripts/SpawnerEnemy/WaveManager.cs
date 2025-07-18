@@ -49,13 +49,14 @@ public class WaveManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     private void Start()
     {
         waveDelayTimer = new CountdownTimer(timeBetweenWaves);
         waveDelayTimer.OnTimerStop += StartNextWave;
 
         startWaveEvent += pickupAllEnemyDrops;
-        StartNextWave();
+        StartCoroutine(delayWave(0.1f));
     }
 
     private void Update()

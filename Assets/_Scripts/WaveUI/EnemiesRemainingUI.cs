@@ -19,6 +19,7 @@ public class EnemiesRemainingUI : BaseTextUI
 
     public void OnWaveStart(int waveNumber)
     {
+        Debug.Log("enemies remaining =" + waveManager.remainEnemy);
         UpdateText(defaultText + waveManager.remainEnemy);
     }
     public void OnEnemyDie()
