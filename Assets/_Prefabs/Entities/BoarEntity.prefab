@@ -421,6 +421,7 @@ MonoBehaviour:
   agent: {fileID: 4598870429425695857}
   PlayerDectector: {fileID: 5966584908867010939}
   entityHealth: {fileID: 7170047295168127053}
+  attackEnemySO: {fileID: 0}
   attackHitbox: {fileID: 881407518851108816}
   boarSO: {fileID: 11400000, guid: 58c4861e449349c438a86d95caa9ad30, type: 2}
 --- !u!114 &5966584908867010939
@@ -436,8 +437,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionAngle: 180
-  detectionRadius: 25
-  innerDetectionRadius: 5
+  detectionRadius: 200
+  innerDetectionRadius: 50
   detectionCooldown: 1
 --- !u!65 &7553632027607648146
 BoxCollider:
