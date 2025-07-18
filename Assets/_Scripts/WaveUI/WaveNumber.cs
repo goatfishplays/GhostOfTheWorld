@@ -12,6 +12,7 @@ public class WaveNumber : BaseTextUI
         {
             Debug.LogWarning("WaveManager does not exist. Deleting WaveNumber");
             Destroy(gameObject);
+            return;
         }
 
         waveManager.startWaveEvent += OnWaveStart;
@@ -19,7 +20,7 @@ public class WaveNumber : BaseTextUI
 
     public void OnWaveStart(int waveNumber)
     {
-        Debug.Log("Wavenumber = " + waveNumber);
+        // Debug.Log("Wavenumber = " + waveNumber);
         UpdateText(defaultText + waveNumber);
     }
 }

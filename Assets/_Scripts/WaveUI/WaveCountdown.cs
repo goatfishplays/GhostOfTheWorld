@@ -13,6 +13,7 @@ public class WaveCountdown : BaseTextUI
         {
             Debug.LogWarning("WaveManager does not exist. Deleting WaveCountdown");
             Destroy(gameObject);
+            return;
         }
 
         waveManager.startWaveEvent += OnWaveStart;

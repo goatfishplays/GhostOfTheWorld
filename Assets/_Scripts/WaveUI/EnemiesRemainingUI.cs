@@ -10,6 +10,7 @@ public class EnemiesRemainingUI : BaseTextUI
         {
             Debug.LogWarning("WaveManager does not exist. Deleting EnemiesRemainingUI");
             Destroy(gameObject);
+            return;
         }
 
 
@@ -19,7 +20,7 @@ public class EnemiesRemainingUI : BaseTextUI
 
     public void OnWaveStart(int waveNumber)
     {
-        Debug.Log("enemies remaining =" + waveManager.remainEnemy);
+        // Debug.Log("enemies remaining =" + waveManager.remainEnemy);
         UpdateText(defaultText + waveManager.remainEnemy);
     }
     public void OnEnemyDie()
