@@ -29,9 +29,33 @@ public class EnemySpawner : MonoBehaviour
 
     public EntityHealth SpawnEnemy(GameObject enemyType)
     {
-        Vector3 spawnPos = new Vector3(Random.Range(-xMaxSpawnDist, xMaxSpawnDist), 0, Random.Range(-xMaxSpawnDist, xMaxSpawnDist)) + enemySpawnZone.position;
-        GameObject enemy = Instantiate(enemyType, spawnPos, Quaternion.identity, parent);
-        
+        const int maxAttempts = 100000000;
+        Vector3 spawnPos = Vector3.zero;
+        Quaternion rotation = Quaternion.identity;
+        Vector3 checkSize = new Vector3(0.8f, 1f, 0.8f); // Adjust based on enemy size
+        bool positionFound = false;
+
+        for (int attempt = 0; attempt < maxAttempts; attempt++)
+        {
+            float randX = Random.Range(-xMaxSpawnDist, xMaxSpawnDist);
+            float randZ = Random.Range(-zMaxSpawnDist, zMaxSpawnDist);
+            spawnPos = enemySpawnZone.position + new Vector3(randX, 0f, randZ);
+
+            // Check if area is clear (no colliders overlapping)
+            if (!Physics.CheckBox(spawnPos + Vector3.up, checkSize))
+            {
+                positionFound = true;
+                break;
+            }
+        }
+
+        if (!positionFound)
+        {
+            Debug.LogWarning("Could not find valid spawn location after multiple attempts.");
+            return null;
+        }
+
+        GameObject enemy = Instantiate(enemyType, spawnPos, rotation, parent);
         return enemy.GetComponent<EntityHealth>();
 
     }
