@@ -15,6 +15,7 @@ namespace PlatformerAI
         readonly int layerMask;
 
         private float defaultSpeed;
+        private float defaultAcceleration;
         private bool isCharging;
         private Vector3 chargeEndDistant;
         private Vector3 chargeDirection;
@@ -46,6 +47,7 @@ namespace PlatformerAI
         {
             Debug.Log("Entering attack state");
             defaultSpeed = agent.speed;
+            defaultAcceleration = agent.acceleration;
             isCharging = false;
             attackHitbox?.SetActive(false);
             if (timer.Progress <= 0)
@@ -73,6 +75,7 @@ namespace PlatformerAI
 
                 //agent setting
                 agent.speed = boarSO.chargeSpeed;
+                agent.acceleration = boarSO.chargeAcceleration;
                 agent.isStopped = false;
 
                 //Debug.DrawRay(enemy.transform.position, chargeDirection * boarSO.chargeDistance, Color.red, 3f);
@@ -121,6 +124,7 @@ namespace PlatformerAI
 
             timer.Start();
             agent.speed = defaultSpeed;
+            agent.acceleration = defaultAcceleration;
             agent.isStopped = true;
         }
 
@@ -128,6 +132,7 @@ namespace PlatformerAI
         {
             attackHitbox.SetActive(false);
             agent.speed = defaultSpeed;
+            agent.acceleration = defaultAcceleration;
             agent.isStopped = false;
         }
     }
