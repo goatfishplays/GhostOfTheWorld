@@ -14,6 +14,8 @@ public class WaveManager : MonoBehaviour
     [NonSerialized] public int remainEnemy = 0;
     [Tooltip("Time in seconds between waves. Countdown starts when last enemy in a wave dies.")] 
     public float timeBetweenWaves = 5f;
+    [Tooltip("Starting amount of enemies + wave number is amount of enemies per wave")] 
+    public int startingEnemyAmount = 3;
     public EnemySpawner enemySpawner;
     public CountdownTimer waveDelayTimer;
 
@@ -108,7 +110,7 @@ public class WaveManager : MonoBehaviour
         }
         
         Dictionary<GameObject, int> spawnPlan = new();
-        int totalEnemy = wave + 3;
+        int totalEnemy = wave + startingEnemyAmount;
         for (int i = 0; i<totalEnemy;i++)
         {
 
