@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WolfMeleeHitbox
       objectReference: {fileID: 0}
+    - target: {fileID: 4360389640145251493, guid: eee56542a6bb9f540ab9d3bc52ad6acd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7014412198335494093, guid: eee56542a6bb9f540ab9d3bc52ad6acd, type: 3}
       propertyPath: ownerId
       value: 2
@@ -71,6 +75,10 @@ PrefabInstance:
     - target: {fileID: 8668819556435199889, guid: eee56542a6bb9f540ab9d3bc52ad6acd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8968492022497755465, guid: eee56542a6bb9f540ab9d3bc52ad6acd, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
