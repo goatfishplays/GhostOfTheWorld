@@ -13,6 +13,7 @@ public class EnemySpawner : MonoBehaviour
     [Tooltip("The transform that all enemies will be children of")]
     public Transform parent = null;
 
+    // This causes a bug because the enemies spawn before spawn area gets set. This causes all the enemies to spawn in the same spot at the beginning. idk feature not a bug for now
     public void Start()
     {
         if (enemySpawnZone == null)
