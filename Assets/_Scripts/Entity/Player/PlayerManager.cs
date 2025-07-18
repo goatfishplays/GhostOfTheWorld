@@ -1,10 +1,6 @@
-using UnityEditor.Build.Player;
-using System.Collections;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using UnityEngine.Rendering.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -328,7 +324,6 @@ public class PlayerManager : MonoBehaviour
     public void StartInteract(InputAction.CallbackContext context)
     {
         playerInteracter.startInteract();
-        playerInteracter.TryInstantUse();
         //playerInteracter.areaToggle = shiftAction.IsPressed();
     }
 

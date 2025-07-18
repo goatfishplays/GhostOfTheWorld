@@ -1,7 +1,5 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
 using Utilities;
 
 namespace PlatformerAI
