@@ -2106,6 +2106,10 @@ PrefabInstance:
       propertyPath: m_ColorTemperature
       value: 15000
       objectReference: {fileID: 0}
+    - target: {fileID: 8309726043338488527, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
+      propertyPath: defaultText
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8878581428312803573, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
