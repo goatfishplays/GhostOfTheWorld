@@ -16,6 +16,9 @@ public class WaveManager : MonoBehaviour
     public float timeBetweenWaves = 5f;
     [Tooltip("Starting amount of enemies + wave number is amount of enemies per wave")] 
     public int startingEnemyAmount = 3;
+
+    public int deathWave = 10;
+
     public EnemySpawner enemySpawner;
     public CountdownTimer waveDelayTimer;
 
@@ -110,7 +113,16 @@ public class WaveManager : MonoBehaviour
         }
         
         Dictionary<GameObject, int> spawnPlan = new();
+
+        
+
         int totalEnemy = wave + startingEnemyAmount;
+        if (deathWave <= wave)
+        {
+            totalEnemy = (int)Math.Ceiling(totalEnemy * Math.Pow(1.5, wave - deathWave + 1));
+        }
+
+
         for (int i = 0; i<totalEnemy;i++)
         {
 

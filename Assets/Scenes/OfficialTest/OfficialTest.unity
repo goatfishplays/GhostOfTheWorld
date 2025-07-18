@@ -1579,7 +1579,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -40, y: 1.5, z: 8.4437}
-  m_LocalScale: {x: 140.22554, y: 1, z: 76.79416}
+  m_LocalScale: {x: 152.05, y: 1, z: 87.6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 297265335}
@@ -2061,6 +2061,26 @@ PrefabInstance:
     - target: {fileID: 5644383781074269130, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -144
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982343109425245059, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
+      propertyPath: accel
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982343109425245059, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
+      propertyPath: deccel
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982343109425245059, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
+      propertyPath: forwardMoveSpeed
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982343109425245059, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
+      propertyPath: backMoveSpeedMult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982343109425245059, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
+      propertyPath: sideMoveSpeedMult
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7471787245975927330, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
       propertyPath: m_Enabled
@@ -3077,6 +3097,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBetweenWaves: 5
+  startingEnemyAmount: 3
+  deathWave: 7
   enemySpawner: {fileID: 683376657}
   enemyInLevel:
   - wave: 1
