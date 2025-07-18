@@ -10,8 +10,9 @@ public class WaveManager : MonoBehaviour
 {
     public static WaveManager instance = null;
 
-    public int currentWave = 0;
-    public int remainEnemy;
+    [NonSerialized] public int currentWave = 0;
+    [NonSerialized] public int remainEnemy = 0;
+    [Tooltip("Time in seconds between waves. Countdown starts when last enemy in a wave dies.")] 
     public float timeBetweenWaves = 5f;
     public EnemySpawner enemySpawner;
     public CountdownTimer waveDelayTimer;
