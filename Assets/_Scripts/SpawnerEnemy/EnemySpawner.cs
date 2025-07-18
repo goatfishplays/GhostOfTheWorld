@@ -33,10 +33,10 @@ public class EnemySpawner : MonoBehaviour
     {
         Vector3 spawnPos = new Vector3(Random.Range(-xMaxSpawnDist, xMaxSpawnDist), Random.Range(-yMaxSpawnDist, yMaxSpawnDist), Random.Range(-zMaxSpawnDist, zMaxSpawnDist)) + enemySpawnZone.position;
         GameObject enemy = Instantiate(enemyType, spawnPos, Quaternion.identity, parent);
-        
-        return enemy.GetComponent<EntityHealth>();
 
+        return enemy.GetComponent<EntityHealth>();
     }
-    
+
+
 
 }
