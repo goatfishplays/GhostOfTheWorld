@@ -16,5 +16,5 @@ MonoBehaviour:
   attackCooldown: 1
   attackRange: 10
   chargeSpeed: 20
-  chargeAcceleration: 15
+  chargeAcceleration: 10
   chargeDistance: 10

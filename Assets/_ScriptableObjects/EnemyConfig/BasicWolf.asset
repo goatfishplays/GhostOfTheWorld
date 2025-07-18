@@ -16,7 +16,7 @@ MonoBehaviour:
   attackCooldown: 2
   attackRange: 2
   jumpRangeMin: 4
-  jumpRangeMax: 50
+  jumpRangeMax: 20
   jumpTimeLength: 0.75
   jumpCooldown: 1
   heightCurve:

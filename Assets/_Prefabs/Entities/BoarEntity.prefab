@@ -437,7 +437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionAngle: 180
-  detectionRadius: 200
+  detectionRadius: 400
   innerDetectionRadius: 50
   detectionCooldown: 1
 --- !u!65 &7553632027607648146
