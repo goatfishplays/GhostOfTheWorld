@@ -2160,11 +2160,11 @@ RectTransform:
   - {fileID: 8763394482094703116}
   - {fileID: 6204636252344022804}
   - {fileID: 2150698025658886495}
+  - {fileID: 7172931273116158308}
   - {fileID: 1126659040687544674}
   - {fileID: 1940851710548774861}
   - {fileID: 4575683939483750107}
   - {fileID: 1757286163789174455}
-  - {fileID: 7172931273116158308}
   m_Father: {fileID: 2824985006384637307}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4360,7 +4360,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 4740106956462075950}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.61685824
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
