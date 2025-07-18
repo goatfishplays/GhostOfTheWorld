@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: BoarPill
   m_EditorClassIdentifier: 
   tab: Items
-  description: This is a pill from a boar. Heals 20
+  description: This is a pill from a boar. Heals 30
   consumeOnUse: 1
   dropable: 1
   equipable: 1
   useTime: 1
   useMovementSpeedMult: 0.75
   dropPrefab: {fileID: 6914270188969550258, guid: ebb5659861de555498ea8273e28067b6, type: 3}
-  sprite: {fileID: 21300000, guid: c7f381483fb41f14e935b2d6d9fec62f, type: 3}
-  healAmount: 20
+  sprite: {fileID: 21300000, guid: 366b426a458e962498b3161f445b9e84, type: 3}
+  healAmount: 30
   toleranceAmount: 25

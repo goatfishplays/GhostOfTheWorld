@@ -211,11 +211,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8797792608303903724, guid: 127f4ffb360f7064b8b9c1f7e8a5ac8a, type: 3}
       propertyPath: ectoplasmDrops.Array.data[0].maxCount
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8797792608303903724, guid: 127f4ffb360f7064b8b9c1f7e8a5ac8a, type: 3}
       propertyPath: ectoplasmDrops.Array.data[0].excessDropChance
-      value: 0.25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8880053759967795834, guid: 127f4ffb360f7064b8b9c1f7e8a5ac8a, type: 3}
       propertyPath: m_LocalPosition.x
