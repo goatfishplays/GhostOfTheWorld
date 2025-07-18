@@ -20,6 +20,6 @@ public class MainMenuHelper : MonoBehaviour
     {
         MenuManager.instance.SetState(MenuManager.MenuState.None);
         PlayerManager.instance.LockInputs(false, false, false);
-        SceneSwitcher.SwitchScene("SampleScene");
+        SceneSwitcher.SwitchScene("OfficialTest");
     }
 }
