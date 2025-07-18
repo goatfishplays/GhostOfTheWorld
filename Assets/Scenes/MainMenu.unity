@@ -287,12 +287,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Play Button
       objectReference: {fileID: 0}
+    - target: {fileID: 4440584615474481490, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4740106956462075950, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4740106956462075950, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4769957402028956034, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4769957402028956034, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
@@ -528,6 +536,8 @@ PrefabInstance:
     - {fileID: 5719883031216842241, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
     - {fileID: 1583404462022158552, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
     - {fileID: 4001025592164237722, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
+    - {fileID: 4440584615474481490, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
+    - {fileID: 7351522300836937915, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4575683939483750107, guid: 2300c75487b2fbc408cadada5f5e5d24, type: 3}
       insertIndex: -1
