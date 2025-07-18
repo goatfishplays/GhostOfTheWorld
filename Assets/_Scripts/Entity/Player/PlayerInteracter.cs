@@ -18,7 +18,7 @@ public class PlayerInteracter : MonoBehaviour
 
     //[DoNotSerialize] public bool interactionHeld = false;
     //[DoNotSerialize] public bool areaToggle = false;
-    //[SerializeField] private InteracterIndicater interacterIndicater;
+    [SerializeField] private InteracterIndicater interacterIndicater;
 
     void Awake()
     {
@@ -112,13 +112,14 @@ public class PlayerInteracter : MonoBehaviour
     {
         if (Physics.Raycast(castPoint.position, castPoint.forward, out RaycastHit hit, maxCastDistance, layerMask, QueryTriggerInteraction.Collide))
         {
-            // Debug.Log($"{hit.collider.gameObject.name}");
-            // return hit.collider.gameObject;
-            hit.collider.TryGetComponent<EctoplasmDrop>(out var ectoplasmDrop);
-            Debug.Log("ectoplasm drop: " + ectoplasmDrop);
-
-            return ectoplasmDrop;
+            if (hit.collider.TryGetComponent<EctoplasmDrop>(out var ectoplasmDrop))
+            {
+                Debug.Log("ectoplasm drop: " + ectoplasmDrop);
+                interacterIndicater.fill.fillAmount = 1;
+                return ectoplasmDrop;
+            }
         }
+        interacterIndicater.fill.fillAmount = 0;
         return null;
     }
 
